@@ -71,10 +71,10 @@ body {
 .bar.bg { background:var(--bg); color:var(--dk2); }
 
 /* SCREENS */
-.sc { position:absolute; left:0; right:0; bottom:0; top:54px; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateX(22px); transition:opacity .2s ease, transform .2s cubic-bezier(.4,0,.2,1); }
+.sc { position:absolute; left:0; right:0; bottom:0; top:54px; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateX(22px); transition:opacity .2s ease, transform .2s cubic-bezier(.4,0,.2,1); overflow:hidden; max-height:100%; }
 .sc.on { opacity:1; pointer-events:all; transform:none; }
 .sc.out { opacity:0; transform:translateX(-22px); }
-.scr { flex:1; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+.scr { flex:1; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; min-height:0; }
 .scr::-webkit-scrollbar { display:none; }
 
 /* HEADERS */
