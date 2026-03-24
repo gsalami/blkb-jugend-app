@@ -71,10 +71,10 @@ body {
 .bar.bg { background:var(--bg); color:var(--dk2); }
 
 /* SCREENS */
-.sc { position:absolute; left:0; right:0; bottom:0; top:54px; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateX(22px); transition:opacity .2s ease, transform .2s cubic-bezier(.4,0,.2,1); overflow:hidden; max-height:100%; }
+.sc { position:absolute; left:0; right:0; bottom:0; top:54px; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateX(22px); transition:opacity .2s ease, transform .2s cubic-bezier(.4,0,.2,1); overflow:hidden; }
 .sc.on { opacity:1; pointer-events:all; transform:none; }
 .sc.out { opacity:0; transform:translateX(-22px); }
-.scr { flex:1; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; min-height:0; }
+.scr { flex:1; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; min-height:0; max-height:calc(852px - 54px - 84px - 60px); }
 .scr::-webkit-scrollbar { display:none; }
 
 /* HEADERS */
@@ -531,10 +531,10 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   </div>
   <div class="st fu d4">Letzte Transaktionen</div>
   <div class="card" style="padding:0;margin-bottom:12px">
-    <div class="txi"><div class="tx-i" style="background:#f5f5f5">🛒</div><div style="flex:1"><div class="tx-n">Migros</div><div class="tx-d">Heute, 11:34</div></div><div class="tx-a" style="color:var(--r)">−34.50</div></div>
-    <div class="txi"><div class="tx-i" style="background:var(--ok-l)">💳</div><div style="flex:1"><div class="tx-n">Lohneingang</div><div class="tx-d">01. März</div></div><div class="tx-a" style="color:var(--ok)">+3'200.–</div></div>
-    <div class="txi"><div class="tx-i" style="background:var(--r-p)">💰</div><div style="flex:1"><div class="tx-n">Sparziel Japan</div><div class="tx-d">28. Feb</div></div><div class="tx-a" style="color:var(--r)">−100.–</div></div>
-    <div class="txi"><div class="tx-i" style="background:#fff8f0">☕</div><div style="flex:1"><div class="tx-n">Starbucks</div><div class="tx-d">27. Feb</div></div><div class="tx-a" style="color:var(--r)">−6.50</div></div>
+    <div class="txi" onclick="showToast('Migros · Heute 11:34 · Lebensmittel')"><div class="tx-i" style="background:#f5f5f5">🛒</div><div style="flex:1"><div class="tx-n">Migros</div><div class="tx-d">Heute, 11:34</div></div><div class="tx-a" style="color:var(--r)">−34.50</div></div>
+    <div class="txi" onclick="showToast('Lohneingang · 01. März · Arbeitgeber')"><div class="tx-i" style="background:var(--ok-l)">💳</div><div style="flex:1"><div class="tx-n">Lohneingang</div><div class="tx-d">01. März</div></div><div class="tx-a" style="color:var(--ok)">+3'200.–</div></div>
+    <div class="txi" onclick="go('goals',document.getElementById('sb-goals'))"><div class="tx-i" style="background:var(--r-p)">💰</div><div style="flex:1"><div class="tx-n">Sparziel Japan</div><div class="tx-d">28. Feb</div></div><div class="tx-a" style="color:var(--r)">−100.–</div></div>
+    <div class="txi" onclick="showToast('Starbucks · 27. Feb · Café')"><div class="tx-i" style="background:#fff8f0">☕</div><div style="flex:1"><div class="tx-n">Starbucks</div><div class="tx-d">27. Feb</div></div><div class="tx-a" style="color:var(--r)">−6.50</div></div>
   </div>
   <div style="height:16px"></div>
 </div>
@@ -561,9 +561,9 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <div class="card red-t fu"><div class="clbl">Gespartes total</div><div class="cval r">CHF 2'230.–</div><div class="csub">3 aktive Ziele · Monatswachstum +CHF 420</div></div>
   <div class="st fu d1">Aktive Ziele</div>
   <div id="goals-list">
-  <div class="gc fu d1"><div class="gh"><span class="gn">✈️ Reise Japan</span><span class="gp" style="color:var(--r)">62%</span></div><div class="pt"><div class="pf" style="width:62%;background:var(--r)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 620 / CHF 1'000</span><span style="font-size:11px;color:var(--r);font-weight:700">Aug 2025</span></div></div>
-  <div class="gc fu d2"><div class="gh"><span class="gn">🚲 E-Bike</span><span class="gp" style="color:var(--olive)">38%</span></div><div class="pt"><div class="pf" style="width:38%;background:var(--olive)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 760 / CHF 2'000</span><span style="font-size:11px;color:var(--olive);font-weight:700">Okt 2025</span></div></div>
-  <div class="gc fu d3"><div class="gh"><span class="gn">🏠 Notfallreserve</span><span class="gp" style="color:var(--ok)">85%</span></div><div class="pt"><div class="pf" style="width:85%;background:var(--ok)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 850 / CHF 1'000</span><span style="font-size:11px;color:var(--ok);font-weight:700">Fast da! 🎉</span></div></div>
+  <div class="gc fu d1" onclick="showGoalDetail(0)"><div class="gh"><span class="gn">✈️ Reise Japan</span><span class="gp" style="color:var(--r)">62%</span></div><div class="pt"><div class="pf" style="width:62%;background:var(--r)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 620 / CHF 1'000</span><span style="font-size:11px;color:var(--r);font-weight:700">Aug 2025</span></div></div>
+  <div class="gc fu d2" onclick="showGoalDetail(1)"><div class="gh"><span class="gn">🚲 E-Bike</span><span class="gp" style="color:var(--olive)">38%</span></div><div class="pt"><div class="pf" style="width:38%;background:var(--olive)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 760 / CHF 2'000</span><span style="font-size:11px;color:var(--olive);font-weight:700">Okt 2025</span></div></div>
+  <div class="gc fu d3" onclick="showGoalDetail(2)"><div class="gh"><span class="gn">🏠 Notfallreserve</span><span class="gp" style="color:var(--ok)">85%</span></div><div class="pt"><div class="pf" style="width:85%;background:var(--ok)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 850 / CHF 1'000</span><span style="font-size:11px;color:var(--ok);font-weight:700">Fast da! 🎉</span></div></div>
   </div>
   <button class="cta fu d4" onclick="openNewGoal()">+ Neues Ziel erstellen</button>
   <div class="cta-n">Urlaubsziel, Gadget, Ausbildung, Wohnung...</div>
@@ -712,10 +712,10 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
     <div class="trow"><span class="tlbl">Fondsbasierter Plan</span><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
     <div class="trow"><span class="tlbl">Jahresziel-Benachrichtigung</span><button class="tog" onclick="this.classList.toggle('on')"></button></div>
   </div>
-  <button class="cta fu">3a erhöhen · Digital in 2 Min</button>
+  <button class="cta fu" onclick="showToast('3a erhöhen: Feature kommt im nächsten Release 🚀')">3a erhöhen · Digital in 2 Min</button>
   <div class="cta-n">Kein Filialbesuch · vollständig digital</div>
-  <button class="cta out fu">Beratungsgespräch buchen</button>
-  <div class="tip fu" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="tip-i">⚡</div><div><div class="tip-t">MoneyHaxx: Null-Schulden-Hack</div><div class="tip-s">Steuern in der Schweiz richtig planen</div><div class="tip-l">Video ansehen →</div></div></div>
+  <button class="cta out fu" onclick="showToast('Beratung buchen: blkb.ch/beratung oder 061 925 94 94')">Beratungsgespräch buchen</button>
+  <div class="tip fu" onclick="openHaxx(1)"><div class="tip-i">⚡</div><div><div class="tip-t">MoneyHaxx: Null-Schulden-Hack</div><div class="tip-s">Steuern in der Schweiz richtig planen</div><div class="tip-l">Video ansehen →</div></div></div>
   <div style="height:16px"></div>
 </div>
 <div class="bnav">
@@ -811,7 +811,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
         <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--wa-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🎓</div><div><div class="hn">Finanzkompetenz</div><div class="hs">Budgetieren, Sparen, Investieren lernen</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
-      <div class="acc-body"><p>Wer sich in Finanzdingen gut auskennt, geht erfolgreicher durchs Leben. Budgetieren, Ausgaben priorisieren und Sparen müssen zuerst gelernt sein.</p><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><span style="background:var(--r-l);color:var(--r-h);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">💰 Budgetieren</span><span style="background:var(--ok-l);color:#166534;font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🎯 Sparziele</span><span style="background:var(--bg);color:var(--dk2);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">📊 Ausgaben</span><span style="background:#f4f5ee;color:var(--olive);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🌱 Investieren</span></div><a class="acc-link" onclick="go('haxx',document.getElementById('sb-haxx'))">MoneyHaxx starten →</a></div>
+      <div class="acc-body"><p>Wer sich in Finanzdingen gut auskennt, geht erfolgreicher durchs Leben. Budgetieren, Ausgaben priorisieren und Sparen müssen zuerst gelernt sein.</p><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><span style="background:var(--r-l);color:var(--r-h);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">💰 Budgetieren</span><span style="background:var(--ok-l);color:#166534;font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🎯 Sparziele</span><span style="background:var(--bg);color:var(--dk2);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">📊 Ausgaben</span><span style="background:#f4f5ee;color:var(--olive);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🌱 Investieren</span></div><a class="acc-link" style="cursor:pointer" onclick="go('haxx',document.getElementById('sb-haxx'))">MoneyHaxx starten →</a></div>
     </div>
   </div>
   <div class="ban dk fu" style="margin-bottom:12px">
@@ -922,6 +922,30 @@ function calcH() {
 }
 
 calc(); calcH(); updateHaxxProgress();
+
+/* ── TOAST ──────────────────────────────────────────────────────────────── */
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toast';
+    t.style.cssText = 'position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:var(--dk);color:#fff;padding:10px 18px;border-radius:6px;font-size:13px;font-weight:600;z-index:999;max-width:280px;text-align:center;opacity:0;transition:opacity .2s;pointer-events:none;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = '1';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function() { t.style.opacity = '0'; }, 2800);
+}
+
+/* ── GOAL DETAIL TOAST ──────────────────────────────────────────────────── */
+function showGoalDetail(idx) {
+  var g = goals[idx];
+  if (!g) return;
+  var pct = g.amount > 0 ? Math.round(g.saved / g.amount * 100) : 0;
+  var monthly = g.months > 0 ? Math.ceil((g.amount - g.saved) / g.months) : 0;
+  showToast(g.emoji + ' ' + g.name + ': ' + pct + '% erreicht · noch CHF ' + (g.amount - g.saved).toLocaleString('de-CH') + ' · ~CHF ' + monthly.toLocaleString('de-CH') + '/Mt.');
+}
 
 /* ── ONBOARDING ─────────────────────────────────────────────────────────── */
 var obStep = 0;
