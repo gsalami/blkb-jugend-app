@@ -338,9 +338,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <button class="sb-btn" id="sb-budget" onclick="go('budget',this)"><span>📊</span>Budgetrechner</button>
   <button class="sb-btn" id="sb-vorsor" onclick="go('vorsor',this)"><span>🛡️</span>3a Vorsorge</button>
   <button class="sb-btn" id="sb-finlit" onclick="go('finlit',this)"><span>📚</span>Finanzkompetenz</button>
-  <div class="sb-s">25–30 & Familie</div>
-  <button class="sb-btn" id="sb-hypo" onclick="go('hypo',this)"><span>🏡</span>Hypothek</button>
-  <button class="sb-btn" id="sb-eltern" onclick="go('eltern',this)"><span>👨‍👩‍👧</span>Eltern-Ansicht</button>
+
 </div>
 
 <!-- PHONE -->
@@ -353,9 +351,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 <div class="bar dk2" id="bar-haxx-detail"><span>9:41</span><span>●●●● 5G 🔋</span></div>
 <div class="bar red" id="bar-budget"><span>9:41</span><span>●●●● 5G 🔋</span></div>
 <div class="bar dk"  id="bar-vorsor"><span>9:41</span><span>●●●● 5G 🔋</span></div>
-<div class="bar dk"  id="bar-hypo">  <span>9:41</span><span>●●●● 5G 🔋</span></div>
 <div class="bar dk"  id="bar-finlit"><span>9:41</span><span>●●●● 5G 🔋</span></div>
-<div class="bar wh"  id="bar-eltern"><span>9:41</span><span>●●●● 5G 🔋</span></div>
 
 <!-- SPLASH -->
 <div class="sc on" id="sc-splash">
@@ -439,11 +435,17 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <div style="height:16px"></div>
 </div>
 <div class="bnav">
-  <div class="ni on" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-dot"></div><div class="ni-l">Home</div></div>
-  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div><div class="ni-l">Ziele</div></div>
-  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
-  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
-  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+  <div class="ni on" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div>
+  <div class="ni-dot"></div>
+  <div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div>
+  <div class="ni-l">Ziele</div></div>
+  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div>
+  <div class="ni-l">Haxx</div></div>
+  <div class="ni" onclick="go('finlit',document.getElementById('sb-finlit'))"><div class="ni-i">📚</div>
+  <div class="ni-l">Wissen</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div>
+  <div class="ni-l">3a</div></div>
 </div>
 </div>
 
@@ -463,11 +465,17 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <div style="height:16px"></div>
 </div>
 <div class="bnav">
-  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
-  <div class="ni on"><div class="ni-i">🎯</div><div class="ni-dot"></div><div class="ni-l">Ziele</div></div>
-  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
-  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
-  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div>
+  <div class="ni-l">Home</div></div>
+  <div class="ni on" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div>
+  <div class="ni-dot"></div>
+  <div class="ni-l">Ziele</div></div>
+  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div>
+  <div class="ni-l">Haxx</div></div>
+  <div class="ni" onclick="go('finlit',document.getElementById('sb-finlit'))"><div class="ni-i">📚</div>
+  <div class="ni-l">Wissen</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div>
+  <div class="ni-l">3a</div></div>
 </div>
 </div>
 
@@ -499,11 +507,17 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <div style="height:16px"></div>
 </div>
 <div class="bnav">
-  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
-  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div><div class="ni-l">Ziele</div></div>
-  <div class="ni on"><div class="ni-i">⚡</div><div class="ni-dot"></div><div class="ni-l">Haxx</div></div>
-  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
-  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div>
+  <div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div>
+  <div class="ni-l">Ziele</div></div>
+  <div class="ni on" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div>
+  <div class="ni-dot"></div>
+  <div class="ni-l">Haxx</div></div>
+  <div class="ni" onclick="go('finlit',document.getElementById('sb-finlit'))"><div class="ni-i">📚</div>
+  <div class="ni-l">Wissen</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div>
+  <div class="ni-l">3a</div></div>
 </div>
 </div>
 
@@ -519,11 +533,17 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <!-- Wird dynamisch befüllt -->
 </div>
 <div class="bnav">
-  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
-  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
-  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
-  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
-  <div class="ni" onclick="prevNextHaxx(-1)"><div class="ni-i">‹</div><div class="ni-l">Zurück</div></div>
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div>
+  <div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div>
+  <div class="ni-l">Ziele</div></div>
+  <div class="ni on" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div>
+  <div class="ni-dot"></div>
+  <div class="ni-l">Haxx</div></div>
+  <div class="ni" onclick="go('finlit',document.getElementById('sb-finlit'))"><div class="ni-i">📚</div>
+  <div class="ni-l">Wissen</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div>
+  <div class="ni-l">3a</div></div>
 </div>
 </div>
 
@@ -547,11 +567,17 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <div style="height:16px"></div>
 </div>
 <div class="bnav">
-  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
-  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div><div class="ni-l">Ziele</div></div>
-  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
-  <div class="ni on"><div class="ni-i">📊</div><div class="ni-dot"></div><div class="ni-l">Budget</div></div>
-  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div>
+  <div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div>
+  <div class="ni-l">Ziele</div></div>
+  <div class="ni on" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div>
+  <div class="ni-dot"></div>
+  <div class="ni-l">Haxx</div></div>
+  <div class="ni" onclick="go('finlit',document.getElementById('sb-finlit'))"><div class="ni-i">📚</div>
+  <div class="ni-l">Wissen</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div>
+  <div class="ni-l">3a</div></div>
 </div>
 </div>
 
@@ -587,161 +613,81 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <div style="height:16px"></div>
 </div>
 <div class="bnav">
-  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
-  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div><div class="ni-l">Ziele</div></div>
-  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
-  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
-  <div class="ni on"><div class="ni-i">🛡️</div><div class="ni-dot"></div><div class="ni-l">3a</div></div>
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div>
+  <div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div>
+  <div class="ni-l">Ziele</div></div>
+  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div>
+  <div class="ni-l">Haxx</div></div>
+  <div class="ni" onclick="go('finlit',document.getElementById('sb-finlit'))"><div class="ni-i">📚</div>
+  <div class="ni-l">Wissen</div></div>
+  <div class="ni on" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div>
+  <div class="ni-dot"></div>
+  <div class="ni-l">3a</div></div>
 </div>
 </div>
 
-<!-- HYPOTHEK -->
-<div class="sc" id="sc-hypo">
-<div class="hd dk"><div class="hd-row"><div><div class="hd-eye wh-txt">Hypothek · Planung</div><div class="hd-ttl wh">Wohneigentum</div><div class="hd-sub wh">BLKB Erstjahresbonus für Junge</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
-<div class="scr">
-  <div class="sp"></div>
-  <div class="cb fu"><div class="cb-lbl">Kaufpreis Liegenschaft (CHF)</div><div class="cb-row"><div class="cb-big" id="prD">CHF 850'000</div><div class="cb-tag">Baselland</div></div><input type="range" id="prS" min="300000" max="2000000" value="850000" step="10000" oninput="calcH()"></div>
-  <div class="cb fu d1"><div class="cb-lbl">Eigenkapital (min. 20%)</div><div class="cb-row"><div class="cb-big" id="ekD">CHF 170'000</div><div class="cb-tag">20%</div></div><input type="range" id="ekS" min="10" max="50" value="20" step="1" oninput="calcH()"></div>
-  <div class="ban r-gr fu d2"><div class="b-lbl">Hypothekarbetrag</div><div class="b-val" id="hAmt">CHF 680'000.–</div><div class="b-sub" id="hRate">Monatliche Belastung: ca. CHF 2'380</div><div class="b-note">Richtzins 2025: 1,8% · BLKB Erstjahresbonus für Junge</div></div>
-  <div class="st fu">Tragbarkeitscheck</div>
-  <div class="card fu d1" style="margin-bottom:10px"><div style="font-size:13px;font-weight:600;color:var(--dk);margin-bottom:8px">Erforderliches Jahreseinkommen</div><div style="font-size:28px;font-weight:900;color:var(--r);font-family:var(--font-bold)" id="minInc">CHF 114'000</div><div style="font-size:12px;color:var(--md);margin-top:4px">Regel: max. 1/3 des Bruttoeinkommens für Hypothek</div><div class="aff-bar"><div class="aff-fill" id="affFill" style="width:65%;background:var(--ok)"></div></div><div style="font-size:11px;margin-top:4px" id="affTxt">Tragbarkeit: gut ✓</div></div>
-  <div class="card fu d2" style="padding:12px 16px;margin-bottom:10px">
-    <div class="hrow"><span class="hk">Kaufpreis</span><span class="hv" id="hr1">CHF 850'000</span></div>
-    <div class="hrow"><span class="hk">Eigenkapital</span><span class="hv" id="hr2">CHF 170'000</span></div>
-    <div class="hrow"><span class="hk">Hypothek</span><span class="hv" id="hr3">CHF 680'000</span></div>
-    <div class="hrow"><span class="hk">Zinsen (1,8% p.a.)</span><span class="hv" id="hr4">CHF 1'020/Mt.</span></div>
-    <div class="hrow"><span class="hk">Amortisation</span><span class="hv" id="hr5">CHF 850/Mt.</span></div>
-    <div class="hrow" style="border:none"><span class="hk">Nebenkosten (~1%)</span><span class="hv" id="hr6">CHF 708/Mt.</span></div>
-  </div>
-  <div class="ib wa fu d3"><span style="font-size:18px;flex-shrink:0">⚠️</span><p>Dies ist eine Schätzung. Für verbindliche Beratung buche ein Gespräch mit deiner BLKB-Beraterin.</p></div>
-  <button class="cta fu d3">Erstberatung Hypothek buchen</button>
-  <div class="cta-n">Kostenlos · BLKB Erstjahresbonus für Junge</div>
-  <div style="height:16px"></div>
-</div>
-<div class="bnav">
-  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
-  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
-  <div class="ni on"><div class="ni-i">🏡</div><div class="ni-dot"></div><div class="ni-l">Hypothek</div></div>
-  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
-  <div class="ni" onclick="go('eltern',document.getElementById('sb-eltern'))"><div class="ni-i">👨‍👩‍👧</div><div class="ni-l">Familie</div></div>
-</div>
-</div>
+</div></div>
 
 <!-- FINANZKOMPETENZ -->
 <div class="sc" id="sc-finlit">
 <div class="hd dk"><div class="hd-row"><div><div class="hd-eye wh-txt">BLKB Jugend</div><div class="hd-ttl wh">Finanzkompetenz</div><div class="hd-sub wh">Sicher ins Finanzleben starten</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
 <div class="scr">
   <div class="sp"></div>
-
   <div class="card red-t fu" style="margin-bottom:12px">
     <div style="font-size:13px;color:var(--dk);line-height:1.55">Die BLKB begleitet junge Menschen vom ersten Franken an. Mit kostenlosen Konten, Karten und Angeboten, die den Einstieg in die Finanzwelt leicht und verständlich machen.</div>
   </div>
-
   <div class="st fu">BLKB Angebote — tippe zum Erweitern</div>
-
-  <!-- Accordion Items -->
   <div class="card" style="padding:0;margin-bottom:12px">
-
     <div class="acc-item">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="hico" style="background:var(--r-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">💳</div>
-          <div><div class="hn">ProfitCard</div><div class="hs">Gratis Zolli & vergünstigte Freizeitangebote</div></div>
-        </div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--r-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">💳</div><div><div class="hn">ProfitCard</div><div class="hs">Gratis Zolli & vergünstigte Freizeitangebote</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
-      <div class="acc-body">
-        <p>Kostenlos in den Basler Zolli oder mit der Luftseilbahn auf die Wasserfallen? Mit der ProfitCard erhalten Kinder und Jugendliche viele Vorteile: Gratiseintritte, vergünstigte Theater- und Freizeitangebote und vieles mehr.</p>
-        <a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Mehr erfahren →</a>
-      </div>
+      <div class="acc-body"><p>Kostenlos in den Basler Zolli oder mit der Luftseilbahn auf die Wasserfallen? Mit der ProfitCard erhalten Kinder und Jugendliche viele Vorteile: Gratiseintritte, vergünstigte Theater- und Freizeitangebote und vieles mehr.</p><a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Mehr erfahren →</a></div>
     </div>
-
     <div class="acc-item">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="hico" style="background:var(--ok-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🏦</div>
-          <div><div class="hn">Jugendkonto</div><div class="hs">TWINT, E-Banking & Vorzugszins</div></div>
-        </div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--ok-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🏦</div><div><div class="hn">Jugendkonto</div><div class="hs">TWINT, E-Banking & Vorzugszins</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
-      <div class="acc-body">
-        <p>Jugendkonten eröffnen jungen Menschen den Weg zu TWINT, E-Banking und Mobile Banking — mit zahlreichen Vorteilen und attraktiven Vergünstigungen. Das Sparkonto Jugend mit Vorzugszins ist ideal, um kurz- und mittelfristige Sparziele clever zu erreichen.</p>
-        <a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Konto eröffnen →</a>
-      </div>
+      <div class="acc-body"><p>Jugendkonten eröffnen jungen Menschen den Weg zu TWINT, E-Banking und Mobile Banking — mit zahlreichen Vorteilen und attraktiven Vergünstigungen. Das Sparkonto Jugend mit Vorzugszins ist ideal, um kurz- und mittelfristige Sparziele clever zu erreichen.</p><a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Konto eröffnen →</a></div>
     </div>
-
     <div class="acc-item">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="hico" style="background:var(--bg);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🌍</div>
-          <div><div class="hn">Visa Debit Stu</div><div class="hs">Keine Jahresgebühr bis 30 · weltweit bezahlen</div></div>
-        </div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--bg);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🌍</div><div><div class="hn">Visa Debit Stu</div><div class="hs">Keine Jahresgebühr bis 30 · weltweit bezahlen</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
-      <div class="acc-body">
-        <p>Für Jugendliche, junge Erwachsene und Studierende: keine Jahresgebühr (bis 25 bzw. 30 Jahre) und weltweit kontaktlos bezahlen, Bargeld beziehen und online einkaufen. Mit der Stu App zudem von Cashback und attraktiven Partnervergünstigungen profitieren.</p>
-        <a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Karte beantragen →</a>
-      </div>
+      <div class="acc-body"><p>Für Jugendliche, junge Erwachsene und Studierende: keine Jahresgebühr (bis 25 bzw. 30 Jahre) und weltweit kontaktlos bezahlen, Bargeld beziehen und online einkaufen. Mit der Stu App zudem von Cashback und attraktiven Partnervergünstigungen profitieren.</p><a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Karte beantragen →</a></div>
     </div>
-
     <div class="acc-item">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="hico" style="background:var(--r-p);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">📱</div>
-          <div><div class="hn">BLKB TWINT</div><div class="hs">Die sichere Bezahl-App der Schweiz</div></div>
-        </div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--r-p);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">📱</div><div><div class="hn">BLKB TWINT</div><div class="hs">Die sichere Bezahl-App der Schweiz</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
-      <div class="acc-body">
-        <p>BLKB TWINT bietet in einer App alles, was man braucht, um sich durch den Tag zu bewegen. Mit BLKB TWINT wird digitales Bezahlen nahezu überall möglich: einfach einrichten und los geht's.</p>
-        <a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">TWINT einrichten →</a>
-      </div>
+      <div class="acc-body"><p>BLKB TWINT bietet in einer App alles, was man braucht, um sich durch den Tag zu bewegen. Mit BLKB TWINT wird digitales Bezahlen nahezu überall möglich: einfach einrichten und los geht's.</p><a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">TWINT einrichten →</a></div>
     </div>
-
     <div class="acc-item">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="hico" style="background:#f4f5ee;width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">📈</div>
-          <div><div class="hn">Fondssparplan</div><div class="hs">Schritt für Schritt Vermögen aufbauen</div></div>
-        </div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:#f4f5ee;width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">📈</div><div><div class="hn">Fondssparplan</div><div class="hs">Schritt für Schritt Vermögen aufbauen</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
-      <div class="acc-body">
-        <p>Mit dem BLKB-Fondssparplan lässt sich Schritt für Schritt Vermögen aufbauen, auch mit kleinen Beträgen. Es wird regelmässig Geld investiert, ohne Kontoführungsgebühren, und das angelegte Kapital bleibt jederzeit flexibel verfügbar.</p>
-        <p style="margin-top:6px;font-size:11px;color:var(--lt)">Für unter 18-Jährige: Eröffnung durch gesetzliche Vertretung.</p>
-        <a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Fondssparplan starten →</a>
-      </div>
+      <div class="acc-body"><p>Mit dem BLKB-Fondssparplan lässt sich Schritt für Schritt Vermögen aufbauen, auch mit kleinen Beträgen. Es wird regelmässig Geld investiert, ohne Kontoführungsgebühren, und das angelegte Kapital bleibt jederzeit flexibel verfügbar.</p><a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Fondssparplan starten →</a></div>
     </div>
-
     <div class="acc-item" style="border-bottom:none">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px">
-          <div class="hico" style="background:var(--wa-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🎓</div>
-          <div><div class="hn">Finanzkompetenz</div><div class="hs">Budgetieren, Sparen, Investieren lernen</div></div>
-        </div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--wa-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🎓</div><div><div class="hn">Finanzkompetenz</div><div class="hs">Budgetieren, Sparen, Investieren lernen</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
-      <div class="acc-body">
-        <p>Wer sich in Finanzdingen gut auskennt, geht erfolgreicher durchs Leben und gerät weniger schnell in eine finanzielle Schieflage. Budgetieren, Ausgaben priorisieren und Sparen müssen aber zuerst gelernt sein.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">
-          <span style="background:var(--r-l);color:var(--r-h);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">💰 Budgetieren</span>
-          <span style="background:var(--ok-l);color:#166534;font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🎯 Sparziele</span>
-          <span style="background:var(--bg);color:var(--dk2);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">📊 Ausgaben</span>
-          <span style="background:#f4f5ee;color:var(--olive);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🌱 Investieren</span>
-        </div>
-        <a class="acc-link" onclick="go('haxx',document.getElementById('sb-haxx'))">MoneyHaxx starten →</a>
-      </div>
+      <div class="acc-body"><p>Wer sich in Finanzdingen gut auskennt, geht erfolgreicher durchs Leben. Budgetieren, Ausgaben priorisieren und Sparen müssen zuerst gelernt sein.</p><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><span style="background:var(--r-l);color:var(--r-h);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">💰 Budgetieren</span><span style="background:var(--ok-l);color:#166534;font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🎯 Sparziele</span><span style="background:var(--bg);color:var(--dk2);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">📊 Ausgaben</span><span style="background:#f4f5ee;color:var(--olive);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🌱 Investieren</span></div><a class="acc-link" onclick="go('haxx',document.getElementById('sb-haxx'))">MoneyHaxx starten →</a></div>
     </div>
-
   </div>
-
   <div class="ban dk fu" style="margin-bottom:12px">
     <div class="b-lbl">💡 Schon gewusst?</div>
     <div style="font-size:14px;font-weight:700;margin-top:4px;line-height:1.4">Die BLKB druckt & bindet deine Bachelor- oder Masterarbeit kostenlos!</div>
     <div class="b-sub" style="margin-top:6px">Mit dem Privatkonto Studierende · Drahtkamm- oder Thermobindung</div>
     <div style="margin-top:10px;font-size:12px;color:rgba(255,255,255,.6)">📞 061 925 95 35 · druckerei@blkb.ch</div>
   </div>
-
   <button class="cta fu" onclick="go('haxx',document.getElementById('sb-haxx'))">MoneyHaxx starten →</button>
   <div style="height:16px"></div>
 </div>
@@ -753,56 +699,6 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
 </div>
 </div>
-
-<!-- ELTERN -->
-<div class="sc" id="sc-eltern">
-<div class="hd wh">
-  <div class="hd-row">
-    <div>
-      <div id="logo-eltern" style="width:100px;margin-bottom:4px"></div>
-      <div class="hd-sub lt">Eltern-Ansicht · Kinder-Konten</div>
-    </div>
-    <button class="back dk" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button>
-  </div>
-</div>
-<div class="scr">
-  <div class="sp"></div>
-  <div class="ban red fu"><div class="b-lbl">Gesamtvermögen Familie</div><div class="b-val">CHF 34'820.–</div><div class="b-sub">2 Kinderkonten · 1 Ausbildungssparplan</div></div>
-  <div class="st fu d1">Kinder-Konten</div>
-  <div class="child fu d1" onclick="go('goals',document.getElementById('sb-goals'))">
-    <div class="cav" style="background:var(--r)">LA</div>
-    <div style="flex:1"><div class="cn">Lara, 17</div><div class="cs">Jugendkonto · App aktiv</div><div class="pt" style="margin-top:6px;width:120px"><div class="pf" style="width:62%;background:var(--r)"></div></div><div style="font-size:10px;color:var(--lt);margin-top:3px">Sparziel Japan: 62%</div></div>
-    <div><div class="cb2" style="color:var(--r)">CHF 2'480</div><div class="cb2l">Kontostand</div></div>
-  </div>
-  <div class="child fu d2">
-    <div class="cav" style="background:var(--dk)">NO</div>
-    <div style="flex:1"><div class="cn">Noah, 12</div><div class="cs">Kindersparkonto · App ab 12 aktiv</div><div class="pt" style="margin-top:6px;width:120px"><div class="pf" style="width:45%;background:var(--dk)"></div></div><div style="font-size:10px;color:var(--lt);margin-top:3px">Sparziel Lego: 45%</div></div>
-    <div><div class="cb2" style="color:var(--dk)">CHF 840</div><div class="cb2l">Kontostand</div></div>
-  </div>
-  <div class="st fu d2">Ausbildungssparplan</div>
-  <div class="card olive-t fu d3"><div class="clbl">Ausbildungsrücklage</div><div class="cval" style="color:var(--olive)">CHF 31'500.–</div><div class="csub">CHF 300/Monat · Ziel CHF 60'000</div><div class="pt"><div class="pf" style="width:52%;background:var(--olive)"></div></div></div>
-  <div class="st fu d3">Meilensteine</div>
-  <div class="card" style="padding:4px 0;margin-bottom:12px">
-    <div class="ms"><div class="ms-i" style="background:var(--r-p)">🎂</div><div class="ms-t"><div class="ms-n">Laras 18. Geburtstag</div><div class="ms-d">In 4 Monaten · Aug 2025</div></div><div style="font-size:16px;color:var(--lt)">›</div></div>
-    <div class="ms"><div class="ms-i" style="background:var(--bg)">🎒</div><div class="ms-t"><div class="ms-n">Noah Schulstart Sek</div><div class="ms-d">Aug 2026</div></div><div style="font-size:16px;color:var(--lt)">›</div></div>
-    <div class="ms"><div class="ms-i" style="background:var(--ok-l)">✅</div><div class="ms-t"><div class="ms-n">Ausbildungssparplan Noah</div><div class="ms-d">Gestartet · Jan 2023</div></div><div style="font-size:18px;color:var(--ok)">✓</div></div>
-  </div>
-  <button class="cta fu">Weiteres Kinderkonto eröffnen</button>
-  <div class="cta-n">Kostenlos · Schenkungsfunktion für Paten & Verwandte</div>
-  <button class="cta out fu">Beratungsgespräch buchen</button>
-  <div class="ib pt fu"><span style="font-size:18px;flex-shrink:0">💡</span><p>Modell nach <strong>Nordea Bank</strong>: Kinder- & Eltern-App verknüpft. <strong>VSKB/Prognos 2023</strong>: 2/3 der CH-Lehrlinge wenden sich bei Geld an die Familie.</p></div>
-  <div style="height:16px"></div>
-</div>
-<div class="bnav">
-  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
-  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
-  <div class="ni" onclick="go('hypo',document.getElementById('sb-hypo'))"><div class="ni-i">🏡</div><div class="ni-l">Hypothek</div></div>
-  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
-  <div class="ni on"><div class="ni-i">👨‍👩‍👧</div><div class="ni-dot"></div><div class="ni-l">Familie</div></div>
-</div>
-</div>
-
-</div></div>
 
 <script>
 /* ── BLKB LOGO — FIX: icon-Farbe als Parameter ─────────────────────────────
@@ -829,7 +725,6 @@ logo('logo-splash', '#ffffff', '#ffffff'); /* auf Rot  → alles weiss */
 logo('logo-home',   '#ffffff', '#ffffff'); /* auf Dunkel → alles weiss */
 logo('logo-haxx',   '#ffffff', '#ffffff'); /* auf Dunkel-Alt → alles weiss */
 logo('logo-vorsor', '#ffffff', '#ffffff'); /* auf Dunkel → alles weiss */
-logo('logo-eltern', '#20242a', '#fd000d'); /* auf Hell → original Farben */
 
 /* ── NAVIGATION ─────────────────────────────────────────────────────────── */
 let cur = 'splash';
