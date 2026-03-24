@@ -328,7 +328,8 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 <div class="bar red v" id="bar-splash"><span>9:41</span><span>●●●● 5G 🔋</span></div>
 <div class="bar dk"  id="bar-home">  <span>9:41</span><span>●●●● 5G 🔋</span></div>
 <div class="bar red" id="bar-goals"> <span>9:41</span><span>●●●● 5G 🔋</span></div>
-<div class="bar dk2" id="bar-haxx">  <span>9:41</span><span>●●●● 5G 🔋</span></div>
+<div class="bar dk2" id="bar-haxx">        <span>9:41</span><span>●●●● 5G 🔋</span></div>
+<div class="bar dk2" id="bar-haxx-detail"><span>9:41</span><span>●●●● 5G 🔋</span></div>
 <div class="bar red" id="bar-budget"><span>9:41</span><span>●●●● 5G 🔋</span></div>
 <div class="bar dk"  id="bar-vorsor"><span>9:41</span><span>●●●● 5G 🔋</span></div>
 <div class="bar dk"  id="bar-hypo">  <span>9:41</span><span>●●●● 5G 🔋</span></div>
@@ -449,20 +450,25 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 </div>
 </div>
 
-<!-- HAXX -->
+<!-- HAXX LISTE -->
 <div class="sc" id="sc-haxx">
 <div class="hd dk2"><div class="hd-row"><div><div class="hd-eye" style="color:rgba(253,0,13,.75)">MoneyHaxx × BLKB</div><div class="hd-ttl wh">Finanzen ohne Stress</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
 <div class="scr">
   <div class="sp"></div>
-  <div class="card dk-t fu" style="border-color:#3a404a"><div style="font-size:11px;color:#888;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Dein Fortschritt</div><div style="font-size:17px;font-weight:700;color:#fff">3 von 6 Hacks abgeschlossen 🔥</div><div class="pt" style="margin-top:8px;background:#3a404a"><div class="pf" style="width:50%;background:var(--r)"></div></div><div style="font-size:11px;color:#888;margin-top:5px">Nächster: Fifty-Fifty-Hack</div></div>
-  <div class="st fu d1">Die 6 MoneyHaxx</div>
+  <div class="card dk-t fu" style="border-color:#3a404a">
+    <div style="font-size:11px;color:#888;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Dein Fortschritt</div>
+    <div style="font-size:17px;font-weight:700;color:#fff" id="haxx-prog-txt">3 von 6 Hacks abgeschlossen 🔥</div>
+    <div class="pt" style="margin-top:8px;background:#3a404a"><div class="pf" id="haxx-prog-bar" style="width:50%;background:var(--r)"></div></div>
+    <div style="font-size:11px;color:#888;margin-top:5px" id="haxx-prog-next">Nächster: Fifty-Fifty-Hack</div>
+  </div>
+  <div class="st fu d1">Die 6 MoneyHaxx — tippe zum Vertiefen</div>
   <div class="card" style="padding:4px 0;margin-bottom:12px">
-    <div class="hi"><div class="hico" style="background:var(--ok-l)">✅</div><div style="flex:1"><div class="hn">Easy 10%-Hack</div><div class="hs">10% vom Lohn sofort sparen</div></div><span class="hbadge b-done">Erledigt</span></div>
-    <div class="hi"><div class="hico" style="background:var(--ok-l)">✅</div><div style="flex:1"><div class="hn">Null-Schulden-Hack</div><div class="hs">Steuern richtig planen</div></div><span class="hbadge b-done">Erledigt</span></div>
-    <div class="hi"><div class="hico" style="background:var(--ok-l)">✅</div><div style="flex:1"><div class="hn">Dini Mieti-Hack</div><div class="hs">Max. 1/3 Lohn für Miete</div></div><span class="hbadge b-done">Erledigt</span></div>
-    <div class="hi" style="background:var(--r-p)"><div class="hico" style="background:var(--r-l)">⚡</div><div style="flex:1"><div class="hn">Fifty-Fifty-Hack</div><div class="hs">Lohnerhöhung smart nutzen</div></div><span class="hbadge b-next">Als nächstes</span></div>
-    <div class="hi"><div class="hico" style="background:var(--bg)">💡</div><div style="flex:1"><div class="hn">Ego-Hack</div><div class="hs">In dich selbst investieren</div></div><span class="hbadge b-lock">🔒</span></div>
-    <div class="hi"><div class="hico" style="background:var(--bg)">📈</div><div style="flex:1"><div class="hn">Get-Rich-Hack</div><div class="hs">Wie Warren Buffett denken</div></div><span class="hbadge b-lock">🔒</span></div>
+    <div class="hi" id="hrow-0" onclick="openHaxx(0)"><div class="hico hico-0" style="background:var(--ok-l)">✅</div><div style="flex:1"><div class="hn">Easy 10%-Hack</div><div class="hs">10% vom Lohn sofort sparen</div></div><span class="hbadge b-done" id="hbadge-0">Erledigt</span></div>
+    <div class="hi" id="hrow-1" onclick="openHaxx(1)"><div class="hico hico-1" style="background:var(--ok-l)">✅</div><div style="flex:1"><div class="hn">Null-Schulden-Hack</div><div class="hs">Steuern richtig planen</div></div><span class="hbadge b-done" id="hbadge-1">Erledigt</span></div>
+    <div class="hi" id="hrow-2" onclick="openHaxx(2)"><div class="hico hico-2" style="background:var(--ok-l)">✅</div><div style="flex:1"><div class="hn">Dini Mieti-Hack</div><div class="hs">Max. 1/3 Lohn für Miete</div></div><span class="hbadge b-done" id="hbadge-2">Erledigt</span></div>
+    <div class="hi" id="hrow-3" style="background:var(--r-p)" onclick="openHaxx(3)"><div class="hico hico-3" style="background:var(--r-l)">⚡</div><div style="flex:1"><div class="hn">Fifty-Fifty-Hack</div><div class="hs">Lohnerhöhung smart nutzen</div></div><span class="hbadge b-next" id="hbadge-3">Als nächstes</span></div>
+    <div class="hi" id="hrow-4" onclick="openHaxx(4)"><div class="hico hico-4" style="background:var(--bg)">💡</div><div style="flex:1"><div class="hn">Ego-Hack</div><div class="hs">In dich selbst investieren</div></div><span class="hbadge b-lock" id="hbadge-4">🔒</span></div>
+    <div class="hi" id="hrow-5" onclick="openHaxx(5)"><div class="hico hico-5" style="background:var(--bg)">📈</div><div style="flex:1"><div class="hn">Get-Rich-Hack</div><div class="hs">Wie Warren Buffett denken</div></div><span class="hbadge b-lock" id="hbadge-5">🔒</span></div>
   </div>
   <div class="tip fu d2">
     <div id="logo-haxx" style="width:48px;flex-shrink:0"></div>
@@ -477,6 +483,26 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <div class="ni on"><div class="ni-i">⚡</div><div class="ni-dot"></div><div class="ni-l">Haxx</div></div>
   <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
   <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+</div>
+</div>
+
+<!-- HAXX DETAIL -->
+<div class="sc" id="sc-haxx-detail">
+<div class="hd dk2" id="hd-haxx-detail">
+  <div class="hd-row">
+    <div><div class="hd-eye" style="color:rgba(253,0,13,.75)" id="hd-haxx-nr">Hack #1</div><div class="hd-ttl wh" id="hd-haxx-title">Easy 10%-Hack</div></div>
+    <button class="back wh" onclick="go('haxx',document.getElementById('sb-haxx'))">← Zurück</button>
+  </div>
+</div>
+<div class="scr" id="haxx-detail-scr">
+  <!-- Wird dynamisch befüllt -->
+</div>
+<div class="bnav">
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
+  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+  <div class="ni" onclick="prevNextHaxx(-1)"><div class="ni-i">‹</div><div class="ni-l">Zurück</div></div>
 </div>
 </div>
 
@@ -847,7 +873,214 @@ function calcH() {
   else { f.style.background='var(--r)'; f.style.width='25%'; t.textContent='Tragbarkeit: knapp ✗'; t.style.color='var(--r)'; }
 }
 
-calc(); calcH();
+calc(); calcH(); updateHaxxProgress();
+
+/* ── HAXX DETAIL ────────────────────────────────────────────────────────── */
+.haxx-hero { padding:20px 16px 16px; }
+.haxx-emoji { font-size:48px; text-align:center; margin-bottom:12px; }
+.haxx-regel { background:var(--r); color:#fff; border-radius:var(--rb); padding:14px 16px; margin:0 16px 14px; font-size:15px; font-weight:700; line-height:1.4; text-align:center; }
+.haxx-body { padding:0 16px; font-size:13.5px; color:var(--dk2); line-height:1.7; margin-bottom:14px; }
+.haxx-example { background:var(--bg); border-radius:var(--rb); border:1px solid var(--pa); padding:14px; margin:0 16px 14px; }
+.haxx-example-t { font-size:11px; font-weight:700; color:var(--lt); letter-spacing:.5px; text-transform:uppercase; margin-bottom:8px; }
+.haxx-example-row { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid var(--pa); font-size:13px; }
+.haxx-example-row:last-child { border-bottom:none; font-weight:700; }
+.haxx-steps { margin:0 16px 14px; }
+.haxx-step { display:flex; gap:12px; margin-bottom:12px; align-items:flex-start; }
+.haxx-step-nr { width:28px; height:28px; border-radius:50%; background:var(--r); color:#fff; font-size:13px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.haxx-step-t { font-size:13px; color:var(--dk); font-weight:600; }
+.haxx-step-s { font-size:11.5px; color:var(--md); margin-top:2px; }
+.haxx-done-btn { background:var(--ok); color:#fff; border:none; border-radius:var(--btn-r); padding:15px 20px; font-size:15px; font-weight:700; cursor:pointer; width:calc(100% - 32px); margin:0 16px 10px; display:block; text-align:center; transition:all .12s; }
+.haxx-done-btn:active { background:#15803d; transform:scale(.98); }
+.haxx-done-btn.done { background:var(--pa); color:var(--lt); cursor:default; }
+.haxx-nav { display:flex; gap:10px; padding:0 16px 16px; }
+.haxx-nav-btn { flex:1; background:var(--bg); border:1px solid var(--pa); border-radius:var(--btn-r); padding:12px; font-size:13px; font-weight:700; color:var(--dk2); cursor:pointer; text-align:center; }
+.haxx-nav-btn:active { background:var(--pa); }
+
+/* ── MONEYHAX DATA & LOGIC ──────────────────────────────────────────────── */
+const haxxData = [
+  {
+    nr: 1, icon: '💰', title: 'Easy 10%-Hack',
+    regel: '10% von jedem Lohn sofort sparen — bevor du irgendetwas anderes ausgibst.',
+    body: 'Der einfachste und wirkungsvollste Hack überhaupt: Sobald dein Lohn eingeht, überweist du automatisch 10% auf ein separates Sparkonto. Du lebst von 90% — und merkst es nach 2 Wochen kaum noch.\n\nWarum funktioniert es? Weil du das Geld nie siehst. Was nicht da ist, gibt man nicht aus.',
+    beispiel: [
+      ['Monatslohn', 'CHF 3\'200'],
+      ['10% automatisch sparen', 'CHF 320'],
+      ['Zum Leben bleiben', 'CHF 2\'880'],
+      ['Nach 1 Jahr gespart', 'CHF 3\'840 🎉'],
+    ],
+    steps: [
+      { t: 'Sparkonto eröffnen', s: 'BLKB Sparkonto Jugend mit Vorzugszins — kostenlos' },
+      { t: 'Dauerauftrag einrichten', s: 'Am Zahltag automatisch 10% überweisen' },
+      { t: 'Nicht anfassen', s: 'Das Geld ist für Sparziele — nicht für Spontankäufe' },
+    ],
+    done: true
+  },
+  {
+    nr: 2, icon: '📋', title: 'Null-Schulden-Hack',
+    regel: 'Zahle Steuern immer pünktlich und plane sie voraus — nie in Schulden geraten.',
+    body: 'In der Schweiz zahlen viele Junge ihre Steuern zu spät oder gar nicht — und landen dann in einer Schuldenspirale. Der Null-Schulden-Hack sorgt dafür, dass du nie überrascht wirst.\n\nRegel: Jeden Monat einen fixen Betrag für Steuern zur Seite legen. So hast du das Geld wenn die Rechnung kommt.',
+    beispiel: [
+      ['Jahressteuern ca.', 'CHF 2\'400'],
+      ['Pro Monat zurücklegen', 'CHF 200'],
+      ['Steuern zahlen', 'Kein Stress ✅'],
+      ['Zinsen auf Schulden', 'CHF 0.– 🎯'],
+    ],
+    steps: [
+      { t: 'Steuern schätzen', s: 'Letzjährige Rechnung ÷ 12 = monatlicher Betrag' },
+      { t: 'Steuer-Sparkonto anlegen', s: 'Separates Konto — nur für Steuern' },
+      { t: 'Frühzahler-Rabatt nutzen', s: 'BLKB: Steuern voraus zahlen spart Zinsen' },
+    ],
+    done: true
+  },
+  {
+    nr: 3, icon: '🏠', title: 'Dini Mieti-Hack',
+    regel: 'Deine Miete soll maximal 1/3 deines Nettolohns betragen — nicht mehr.',
+    body: 'Wer zu viel für Miete ausgibt, hat am Ende des Monats nichts mehr übrig. Die 1/3-Regel ist eine der wichtigsten Faustregeln der persönlichen Finanzen.\n\nBeispiel: Bei CHF 3\'200 Lohn = max. CHF 1\'067 Miete. Klingt wenig? In Basel ist das knapp — aber machbar mit WG oder Zimmer.',
+    beispiel: [
+      ['Nettolohn', 'CHF 3\'200'],
+      ['Max. Miete (1/3)', 'CHF 1\'067'],
+      ['Typische WG Basel', 'CHF 800–950 ✅'],
+      ['Eigene 2.5-Zi Whg', 'CHF 1\'400 ⚠️'],
+    ],
+    steps: [
+      { t: '1/3 Regel berechnen', s: 'Nettolohn ÷ 3 = maximale Miete' },
+      { t: 'Wohnsituation prüfen', s: 'WG, Zimmer oder Eltern — was passt?' },
+      { t: 'Mehrkosten kompensieren', s: 'Falls Miete höher: anderswo sparen' },
+    ],
+    done: true
+  },
+  {
+    nr: 4, icon: '⚡', title: 'Fifty-Fifty-Hack',
+    regel: 'Bei jeder Lohnerhöhung: 50% mehr sparen/investieren, 50% mehr geniessen.',
+    body: 'Die meisten Menschen geben nach einer Lohnerhöhung alles aus — und leben nach 2 Monaten genau gleich wie vorher. Der Fifty-Fifty-Hack bricht diesen Kreislauf.\n\nBeispiel: +CHF 200 Lohn? CHF 100 automatisch in die 3a oder den Fondssparplan, CHF 100 für dich. So wird Sparen mit dem Gehalt grösser — ohne Verzicht.',
+    beispiel: [
+      ['Lohnerhöhung', '+CHF 200/Mt.'],
+      ['50% mehr sparen', 'CHF 100 → 3a/Fonds'],
+      ['50% mehr geniessen', 'CHF 100 für dich 🎉'],
+      ['In 10 Jahren zusätzlich', 'CHF 18\'000+ 🚀'],
+    ],
+    steps: [
+      { t: 'Nächste Lohnerhöhung abwarten', s: 'Oder jetzt schon vorbereiten' },
+      { t: 'Hälfte automatisieren', s: 'Dauerauftrag auf 3a oder Fondssparplan erhöhen' },
+      { t: 'Rest bewusst geniessen', s: 'Ohne schlechtes Gewissen!' },
+    ],
+    done: false
+  },
+  {
+    nr: 5, icon: '💡', title: 'Ego-Hack',
+    regel: 'Investiere jedes Jahr mindestens 1 Monatslohn in dich selbst — Kurse, Bücher, Netzwerk.',
+    body: 'Die beste Investition ist die in dich selbst. Wer sich weiterbildet, verdient langfristig mehr — das ist die höchste Rendite die es gibt.\n\nEin Kurs, ein Sprachkurs, ein Buch pro Monat: Diese Investitionen zahlen sich über Jahre aus. Der CAS den du gerade machst? Das ist Ego-Hack in Reinform.',
+    beispiel: [
+      ['1 Kurs pro Jahr', 'CHF 500–2\'000'],
+      ['Gehaltserhöhung danach', '+5–15%'],
+      ['Bei CHF 60k Lohn', '+CHF 3\'000–9\'000/J.'],
+      ['ROI', '500–1\'000% 🤯'],
+    ],
+    steps: [
+      { t: 'Weiterbildungs-Budget festlegen', s: 'Mindestens 1 Monatslohn pro Jahr' },
+      { t: 'Lernziel definieren', s: 'Was bringt dir beruflich am meisten?' },
+      { t: 'Kurs buchen & umsetzen', s: 'Wissen nur nützt wenn man es anwendet' },
+    ],
+    done: false
+  },
+  {
+    nr: 6, icon: '📈', title: 'Get-Rich-Hack',
+    regel: 'Investiere langfristig in breit gestreute Indexfonds — wie Warren Buffett empfiehlt.',
+    body: 'Warren Buffett sagt: Die meisten Privatanleger fahren besser mit günstigen Indexfonds als mit aktivem Trading. Der Schweizer Aktienmarkt hat seit 1969 durchschnittlich 5.3% pro Jahr gebracht.\n\nDer Trick: Früh anfangen, regelmässig investieren, nie verkaufen in Panik. Zeit ist dein grösster Vorteil.',
+    beispiel: [
+      ['CHF 200/Monat ab 25', '→ mit 65'],
+      ['Ohne Rendite', 'CHF 96\'000'],
+      ['Mit 5% p.a.', 'CHF 290\'000+ 🚀'],
+      ['Mit 7% p.a.', 'CHF 480\'000+ 🤯'],
+    ],
+    steps: [
+      { t: 'BLKB Fondssparplan öffnen', s: 'Ab CHF 50/Monat, ohne Kontogebühren' },
+      { t: 'Breit gestreuten Fonds wählen', s: 'Schweiz + Welt = weniger Risiko' },
+      { t: 'Dauerauftrag einrichten & vergessen', s: 'Nicht täglich schauen — einfach laufen lassen' },
+    ],
+    done: false
+  }
+];
+
+// Status: welche Hacks sind abgeschlossen?
+const haxxDone = [true, true, true, false, false, false];
+let currentHaxx = 0;
+
+function updateHaxxProgress() {
+  const done = haxxDone.filter(Boolean).length;
+  const pct = Math.round(done / 6 * 100);
+  document.getElementById('haxx-prog-txt').textContent = done + ' von 6 Hacks abgeschlossen ' + (done >= 6 ? '🏆' : done >= 4 ? '🔥' : '⚡');
+  document.getElementById('haxx-prog-bar').style.width = pct + '%';
+  const next = haxxData.find((h, i) => !haxxDone[i]);
+  document.getElementById('haxx-prog-next').textContent = next ? 'Nächster: ' + next.title : 'Alle Hacks abgeschlossen! 🏆';
+  haxxData.forEach((h, i) => {
+    const badge = document.getElementById('hbadge-' + i);
+    const row = document.getElementById('hrow-' + i);
+    const ico = document.querySelector('.hico-' + i);
+    if (haxxDone[i]) {
+      badge.textContent = 'Erledigt'; badge.className = 'hbadge b-done';
+      if (ico) { ico.textContent = '✅'; ico.style.background = 'var(--ok-l)'; }
+      row.style.background = '';
+    } else {
+      const isNext = haxxData.findIndex((_, j) => !haxxDone[j]) === i;
+      if (isNext) {
+        badge.textContent = 'Als nächstes'; badge.className = 'hbadge b-next';
+        if (ico) { ico.textContent = '⚡'; ico.style.background = 'var(--r-l)'; }
+        row.style.background = 'var(--r-p)';
+      } else {
+        badge.textContent = '🔒'; badge.className = 'hbadge b-lock';
+        row.style.background = '';
+      }
+    }
+  });
+}
+
+function openHaxx(idx) {
+  currentHaxx = idx;
+  const h = haxxData[idx];
+  document.getElementById('hd-haxx-nr').textContent = 'Hack #' + h.nr + ' von 6';
+  document.getElementById('hd-haxx-title').textContent = h.title;
+  const doneAll = haxxDone[idx];
+  const scr = document.getElementById('haxx-detail-scr');
+  scr.innerHTML = `
+    <div class="sp"></div>
+    <div class="haxx-emoji fu">${h.icon}</div>
+    <div class="haxx-regel fu d1">${h.regel}</div>
+    <div class="haxx-body fu d2">${h.body.replace(/\n\n/g,'</p><p style="margin-top:10px">')}</div>
+    <div class="haxx-example fu d2">
+      <div class="haxx-example-t">Rechenbeispiel</div>
+      ${h.beispiel.map(r => `<div class="haxx-example-row"><span>${r[0]}</span><span style="font-weight:700;color:var(--dk)">${r[1]}</span></div>`).join('')}
+    </div>
+    <div class="st" style="margin-top:4px">So umsetzt du es</div>
+    <div class="haxx-steps fu d3">
+      ${h.steps.map((s,i) => `<div class="haxx-step"><div class="haxx-step-nr">${i+1}</div><div><div class="haxx-step-t">${s.t}</div><div class="haxx-step-s">${s.s}</div></div></div>`).join('')}
+    </div>
+    <button class="haxx-done-btn${doneAll ? ' done' : ''} fu d4" id="btn-complete-haxx" onclick="completeHaxx(${idx})">${doneAll ? '✅ Bereits abgeschlossen' : '✅ Hack abschliessen'}</button>
+    <div class="haxx-nav fu d5">
+      ${idx > 0 ? `<button class="haxx-nav-btn" onclick="openHaxx(${idx-1})">‹ Hack ${idx}</button>` : '<div></div>'}
+      ${idx < 5 ? `<button class="haxx-nav-btn" onclick="openHaxx(${idx+1})">Hack ${idx+2} ›</button>` : '<div></div>'}
+    </div>
+    <div style="height:16px"></div>
+  `;
+  go('haxx-detail', null);
+}
+
+function completeHaxx(idx) {
+  if (haxxDone[idx]) return;
+  haxxDone[idx] = true;
+  updateHaxxProgress();
+  // Button updaten
+  const btn = document.getElementById('btn-complete-haxx');
+  if (btn) { btn.textContent = '✅ Abgeschlossen! 🎉'; btn.classList.add('done'); }
+  // Konfetti-Effekt
+  setTimeout(() => { if (haxxDone.every(Boolean)) alert('🏆 Alle 6 MoneyHaxx abgeschlossen! Du bist ein Finanzheld!'); }, 300);
+}
+
+function prevNextHaxx(dir) {
+  const next = currentHaxx + dir;
+  if (next >= 0 && next < 6) openHaxx(next);
+  else go('haxx', document.getElementById('sb-haxx'));
+}
 
 /* ── ACCORDION ──────────────────────────────────────────────────────────── */
 function toggleAcc(hd) {
