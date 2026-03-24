@@ -75,7 +75,7 @@ body {
 .sc { position:absolute; left:0; right:0; bottom:0; top:54px; width:100%; max-width:100%; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateX(22px); transition:opacity .2s ease, transform .2s cubic-bezier(.4,0,.2,1); overflow:hidden; box-sizing:border-box; }
 .sc.on { opacity:1; pointer-events:all; transform:none; }
 .sc.out { opacity:0; transform:translateX(-22px); }
-.scr { flex:1; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; min-height:0; height:0; }
+.scr { flex:1; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; min-height:0; height:0; width:100%; max-width:100%; }
 .scr::-webkit-scrollbar { display:none; }
 
 /* HEADERS */
@@ -290,15 +290,19 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 .goal-month-hint { font-size:12px; color:var(--ok); font-weight:700; margin-top:8px; }
 
 /* ACCORDION */
-.acc-item { border-bottom:1px solid var(--pa); }
-.acc-hd { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; cursor:pointer; transition:background .12s; gap:8px; }
+.acc-item { border-bottom:1px solid var(--pa); width:100%; overflow:hidden; }
+.acc-hd { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; cursor:pointer; transition:background .12s; gap:8px; width:100%; overflow:hidden; box-sizing:border-box; }
+.acc-hd > div:first-child { flex:1; min-width:0; overflow:hidden; display:flex; align-items:center; gap:10px; }
+.acc-hd > div:first-child > div:last-child { flex:1; min-width:0; overflow:hidden; }
+.acc-hd .hn { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.acc-hd .hs { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .acc-hd:active { background:var(--bg); }
 .acc-arrow { font-size:18px; color:var(--lt); transition:transform .2s; flex-shrink:0; }
 .acc-item.open .acc-arrow { transform:rotate(90deg); color:var(--r); }
-.acc-body { display:none; padding:0 16px 14px; overflow:hidden; max-width:100%; box-sizing:border-box; word-wrap:break-word; }
+.acc-body { display:none; padding:0 16px 14px; overflow:hidden; width:100%; max-width:100%; box-sizing:border-box; word-wrap:break-word; overflow-wrap:break-word; }
 .acc-item.open .acc-body { display:block; }
-.acc-body p { font-size:12.5px; color:var(--sl); line-height:1.6; word-wrap:break-word; overflow-wrap:break-word; }
-.acc-link { display:inline-block; margin-top:10px; font-size:12px; font-weight:700; color:var(--r); cursor:pointer; word-break:break-all; }
+.acc-body p { font-size:12.5px; color:var(--sl); line-height:1.6; word-wrap:break-word; overflow-wrap:break-word; max-width:100%; }
+.acc-link { display:inline-block; margin-top:10px; font-size:12px; font-weight:700; color:var(--r); cursor:pointer; word-break:break-all; max-width:100%; }
 
 /* ANIMATIONS */
 @keyframes fU { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
@@ -804,42 +808,42 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <div class="card" style="padding:0;margin-bottom:12px">
     <div class="acc-item">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--r-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">💳</div><div><div class="hn">ProfitCard</div><div class="hs">Gratis Zolli & vergünstigte Freizeitangebote</div></div></div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--r-l);flex-shrink:0">💳</div><div><div class="hn">ProfitCard</div><div class="hs">Gratis Zolli & vergünstigte Freizeitangebote</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
       <div class="acc-body"><p>Kostenlos in den Basler Zolli oder mit der Luftseilbahn auf die Wasserfallen? Mit der ProfitCard erhalten Kinder und Jugendliche viele Vorteile: Gratiseintritte, vergünstigte Theater- und Freizeitangebote und vieles mehr.</p><a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Mehr erfahren →</a></div>
     </div>
     <div class="acc-item">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--ok-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🏦</div><div><div class="hn">Jugendkonto</div><div class="hs">TWINT, E-Banking & Vorzugszins</div></div></div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--ok-l);flex-shrink:0">🏦</div><div><div class="hn">Jugendkonto</div><div class="hs">TWINT, E-Banking & Vorzugszins</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
       <div class="acc-body"><p>Jugendkonten eröffnen jungen Menschen den Weg zu TWINT, E-Banking und Mobile Banking — mit zahlreichen Vorteilen und attraktiven Vergünstigungen. Das Sparkonto Jugend mit Vorzugszins ist ideal, um kurz- und mittelfristige Sparziele clever zu erreichen.</p><a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Konto eröffnen →</a></div>
     </div>
     <div class="acc-item">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--bg);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🌍</div><div><div class="hn">Visa Debit Stu</div><div class="hs">Keine Jahresgebühr bis 30 · weltweit bezahlen</div></div></div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--bg);flex-shrink:0">🌍</div><div><div class="hn">Visa Debit Stu</div><div class="hs">Keine Jahresgebühr bis 30 · weltweit bezahlen</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
       <div class="acc-body"><p>Für Jugendliche, junge Erwachsene und Studierende: keine Jahresgebühr (bis 25 bzw. 30 Jahre) und weltweit kontaktlos bezahlen, Bargeld beziehen und online einkaufen. Mit der Stu App zudem von Cashback und attraktiven Partnervergünstigungen profitieren.</p><a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Karte beantragen →</a></div>
     </div>
     <div class="acc-item">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--r-p);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">📱</div><div><div class="hn">BLKB TWINT</div><div class="hs">Die sichere Bezahl-App der Schweiz</div></div></div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--r-p);flex-shrink:0">📱</div><div><div class="hn">BLKB TWINT</div><div class="hs">Die sichere Bezahl-App der Schweiz</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
       <div class="acc-body"><p>BLKB TWINT bietet in einer App alles, was man braucht, um sich durch den Tag zu bewegen. Mit BLKB TWINT wird digitales Bezahlen nahezu überall möglich: einfach einrichten und los geht's.</p><a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">TWINT einrichten →</a></div>
     </div>
     <div class="acc-item">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:#f4f5ee;width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">📈</div><div><div class="hn">Fondssparplan</div><div class="hs">Schritt für Schritt Vermögen aufbauen</div></div></div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:#f4f5ee;flex-shrink:0">📈</div><div><div class="hn">Fondssparplan</div><div class="hs">Schritt für Schritt Vermögen aufbauen</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
       <div class="acc-body"><p>Mit dem BLKB-Fondssparplan lässt sich Schritt für Schritt Vermögen aufbauen, auch mit kleinen Beträgen. Es wird regelmässig Geld investiert, ohne Kontoführungsgebühren, und das angelegte Kapital bleibt jederzeit flexibel verfügbar.</p><a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Fondssparplan starten →</a></div>
     </div>
     <div class="acc-item" style="border-bottom:none">
       <div class="acc-hd" onclick="toggleAcc(this)">
-        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--wa-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🎓</div><div><div class="hn">Finanzkompetenz</div><div class="hs">Budgetieren, Sparen, Investieren lernen</div></div></div>
+        <div style="display:flex;align-items:center;gap:12px"><div class="hico" style="background:var(--wa-l);flex-shrink:0">🎓</div><div><div class="hn">Finanzkompetenz</div><div class="hs">Budgetieren, Sparen, Investieren lernen</div></div></div>
         <span class="acc-arrow">›</span>
       </div>
       <div class="acc-body"><p>Wer sich in Finanzdingen gut auskennt, geht erfolgreicher durchs Leben. Budgetieren, Ausgaben priorisieren und Sparen müssen zuerst gelernt sein.</p><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><span style="background:var(--r-l);color:var(--r-h);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">💰 Budgetieren</span><span style="background:var(--ok-l);color:#166534;font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🎯 Sparziele</span><span style="background:var(--bg);color:var(--dk2);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">📊 Ausgaben</span><span style="background:#f4f5ee;color:var(--olive);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🌱 Investieren</span></div><a class="acc-link" style="cursor:pointer" onclick="go('haxx',document.getElementById('sb-haxx'))">MoneyHaxx starten →</a></div>
