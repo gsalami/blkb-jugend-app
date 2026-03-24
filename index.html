@@ -306,19 +306,43 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 .d3 { animation-delay:.15s; } .d4 { animation-delay:.2s; }
 .d5 { animation-delay:.25s; }
 
-/* SPLASH */
+/* SPLASH / ONBOARDING */
 .splash { background:var(--wh); height:100%; display:flex; flex-direction:column; }
-.sp-hero { background:var(--r); padding:32px 24px 28px; flex-shrink:0; }
-.sp-body { flex:1; padding:20px; display:flex; flex-direction:column; gap:9px; overflow:auto; }
-.sp-feat { display:flex; align-items:center; gap:12px; background:var(--bg); border-radius:var(--rb); padding:12px 14px; border:1px solid var(--pa); }
-.sp-fi { width:36px; height:36px; border-radius:var(--rb); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
-.sp-ft { font-size:13.5px; font-weight:600; color:var(--dk); font-family:var(--font-book); }
-.sp-fs { font-size:11.5px; color:var(--md); }
-.sp-act { padding:0 20px 24px; flex-shrink:0; }
 .sp-cta { background:var(--r); color:#fff; border:none; border-radius:var(--btn-r); padding:17px; font-size:16px; font-weight:700; font-family:var(--font-book); cursor:pointer; width:100%; letter-spacing:.2px; transition:background .15s; }
 .sp-cta:active { background:var(--r-h); }
-.sp-login { font-size:13px; color:var(--md); text-align:center; margin-top:14px; cursor:pointer; font-family:var(--font-book); }
-.sp-login span { color:var(--r); font-weight:700; }
+.sp-login { font-size:13px; color:rgba(255,255,255,.65); text-align:center; margin-top:12px; cursor:pointer; font-family:var(--font-book); }
+.sp-login span { color:#fff; font-weight:700; text-decoration:underline; }
+
+/* ONBOARDING SLIDES */
+.ob-slides { flex:1; overflow:hidden; display:flex; flex-direction:column; }
+.ob-slide { display:flex; flex-direction:column; height:100%; }
+.ob-hero { padding:28px 22px 22px; flex-shrink:0; }
+.ob-kicker { font-size:11px; font-weight:700; color:rgba(255,255,255,.6); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+.ob-headline { font-size:34px; font-weight:900; color:#fff; line-height:1.1; font-family:var(--font-bold); margin-bottom:10px; }
+.ob-sub { font-size:12px; color:rgba(255,255,255,.7); line-height:1.5; }
+.ob-stat-row { display:flex; align-items:center; gap:12px; margin:14px 0 10px; }
+.ob-stat { text-align:center; }
+.ob-stat-val { font-size:20px; font-weight:900; color:#fff; font-family:var(--font-bold); }
+.ob-stat-lbl { font-size:10px; color:rgba(255,255,255,.6); margin-top:2px; }
+.ob-stat-arrow { font-size:22px; color:rgba(255,255,255,.5); }
+.ob-body { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; scrollbar-width:none; }
+.ob-body::-webkit-scrollbar { display:none; }
+.ob-point { display:flex; gap:12px; align-items:flex-start; background:var(--bg); border-radius:var(--rb); padding:12px; border:1px solid var(--pa); }
+.ob-point-ico { width:38px; height:38px; border-radius:var(--rb); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.ob-point b { font-size:13px; color:var(--dk); display:block; margin-bottom:2px; }
+.ob-point span { font-size:11.5px; color:var(--md); line-height:1.4; }
+.ob-numcard { background:var(--bg); border-radius:var(--rb); border:1px solid var(--pa); padding:14px 16px; }
+.ob-num { font-size:28px; font-weight:900; font-family:var(--font-bold); line-height:1; }
+.ob-numlbl { font-size:12px; color:var(--md); margin-top:4px; line-height:1.4; }
+.ob-source { font-size:10px; color:var(--lt); text-align:center; padding:4px; }
+.ob-check { display:flex; gap:8px; font-size:13px; color:var(--dk); padding:7px 0; border-bottom:1px solid var(--pa); line-height:1.4; }
+.ob-check:last-of-type { border-bottom:none; }
+.ob-nav { display:flex; align-items:center; justify-content:space-between; padding:12px 20px 20px; background:var(--wh); flex-shrink:0; border-top:1px solid var(--pa); }
+.ob-dots { display:flex; gap:6px; }
+.ob-dot { width:8px; height:8px; border-radius:50%; background:var(--pa); transition:all .2s; }
+.ob-dot.on { background:var(--r); width:22px; border-radius:4px; }
+.ob-next { background:var(--r); color:#fff; border:none; border-radius:var(--btn-r); padding:12px 24px; font-size:14px; font-weight:700; cursor:pointer; font-family:var(--font-book); transition:background .12s; }
+.ob-next:active { background:var(--r-h); }
 
 /* ── HAXX DETAIL ────────────────────────────────────────────────────────── */
 .haxx-hero { padding:20px 16px 16px; }
@@ -374,25 +398,87 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 <!-- SPLASH -->
 <div class="sc on" id="sc-splash">
 <div class="splash">
-  <div class="sp-hero">
-    <div class="fu" style="margin-bottom:20px" id="logo-splash"></div>
-    <div class="fu d1" style="font-size:28px;font-weight:900;color:#fff;line-height:1.15;font-family:var(--font-bold)">
-      Was morgen zählt —<br>fängt heute an.
+
+  <!-- Onboarding Slides -->
+  <div class="ob-slides" id="ob-slides">
+
+    <!-- Slide 1: Hook -->
+    <div class="ob-slide" id="ob-slide-0">
+      <div class="ob-hero" style="background:var(--r)">
+        <div id="logo-splash" style="margin-bottom:24px"></div>
+        <div class="ob-kicker">Dein Wegbegleiter für</div>
+        <div class="ob-headline">Vermögens-<br>aufbau.</div>
+        <div class="ob-stat-row">
+          <div class="ob-stat"><div class="ob-stat-val">CHF 0</div><div class="ob-stat-lbl">heute</div></div>
+          <div class="ob-stat-arrow">→</div>
+          <div class="ob-stat"><div class="ob-stat-val" style="color:#ffd700">CHF 290k+</div><div class="ob-stat-lbl">mit 65</div></div>
+        </div>
+        <div class="ob-sub">CHF 200/Monat ab heute · 5% p.a. · kein Zauber, nur Konstanz.</div>
+      </div>
+      <div class="ob-body">
+        <div class="ob-point"><span class="ob-point-ico" style="background:var(--r-l)">🎯</span><div><b>Sparziele setzen & erreichen</b><br><span>Visualisiere deine Träume. Japanreise, E-Bike, eigene Wohnung.</span></div></div>
+        <div class="ob-point"><span class="ob-point-ico" style="background:#f4f5ee">⚡</span><div><b>6 MoneyHaxx für dein Leben</b><br><span>Die wichtigsten Finanz-Regeln — einfach erklärt & direkt umsetzbar.</span></div></div>
+        <div class="ob-point"><span class="ob-point-ico" style="background:var(--ok-l)">🛡️</span><div><b>Vorsorge startet heute</b><br><span>3a digital eröffnen. CHF 95'000 Steuerersparnis über dein Leben.</span></div></div>
+      </div>
     </div>
-    <div class="fu d2" style="font-size:13px;color:rgba(255,255,255,.78);margin-top:10px;line-height:1.5">
-      Die BLKB-Jugend-App. Kostenlos bis 30. Für Finanzen, die mit dir wachsen.
+
+    <!-- Slide 2: Zahlen die überzeugen -->
+    <div class="ob-slide" id="ob-slide-1" style="display:none">
+      <div class="ob-hero" style="background:var(--dk)">
+        <div class="ob-kicker">Wusstest du?</div>
+        <div class="ob-headline">Zeit ist<br>dein Kapital.</div>
+        <div class="ob-sub">Wer früh anfängt, gewinnt. Immer.</div>
+      </div>
+      <div class="ob-body">
+        <div class="ob-numcard">
+          <div class="ob-num" style="color:var(--r)">CHF 290'000</div>
+          <div class="ob-numlbl">wenn du <b>heute</b> mit CHF 200/Mt. startest</div>
+        </div>
+        <div class="ob-numcard">
+          <div class="ob-num" style="color:var(--lt)">CHF 140'000</div>
+          <div class="ob-numlbl">wenn du <b>10 Jahre</b> wartest</div>
+        </div>
+        <div class="ob-numcard" style="background:var(--ok-l);border-color:rgba(22,163,74,.2)">
+          <div class="ob-num" style="color:var(--ok)">CHF 150'000</div>
+          <div class="ob-numlbl" style="color:#166534">Differenz — nur weil du <b>heute</b> anfängst ✅</div>
+        </div>
+        <div class="ob-source">Ø CH-Aktienmarkt 5.3% p.a. seit 1969 · Quelle: MoneyHaxx</div>
+      </div>
     </div>
+
+    <!-- Slide 3: BLKB Versprechen -->
+    <div class="ob-slide" id="ob-slide-2" style="display:none">
+      <div class="ob-hero" style="background:var(--dk2)">
+        <div class="ob-kicker">BLKB für dich</div>
+        <div class="ob-headline">Kostenlos.<br>Digital.<br>Lokal.</div>
+        <div class="ob-sub">Die Kantonalbank Baselland — seit 150 Jahren an deiner Seite.</div>
+      </div>
+      <div class="ob-body">
+        <div class="ob-check">✅ <b>Kostenlos bis 30</b> — Konto, Karte, App</div>
+        <div class="ob-check">✅ <b>ProfitCard</b> — Gratis Zolli, vergünstigte Freizeit</div>
+        <div class="ob-check">✅ <b>TWINT inklusive</b> — überall bezahlen</div>
+        <div class="ob-check">✅ <b>3a in 3 Minuten</b> — kein Filialbesuch nötig</div>
+        <div class="ob-check">✅ <b>Fondssparplan ab CHF 50/Mt.</b> — Vermögen aufbauen</div>
+        <div class="ob-check">✅ <b>MoneyHaxx</b> — Financial Literacy made in CH</div>
+        <div style="margin-top:16px">
+          <button class="sp-cta" onclick="go('home',document.getElementById('sb-home'))">Jetzt loslegen — kostenlos →</button>
+          <div class="sp-login" style="margin-top:12px">Bereits Konto? <span onclick="go('home',document.getElementById('sb-home'))">Einloggen</span></div>
+        </div>
+      </div>
+    </div>
+
   </div>
-  <div class="sp-body">
-    <div class="sp-feat fu d2"><div class="sp-fi" style="background:var(--r-l)">💰</div><div><div class="sp-ft">Sparen mit Ziel</div><div class="sp-fs">Träume visualisieren & erreichen</div></div></div>
-    <div class="sp-feat fu d3"><div class="sp-fi" style="background:var(--bg)">⚡</div><div><div class="sp-ft">MoneyHaxx × BLKB</div><div class="sp-fs">Financial Literacy direkt in der App</div></div></div>
-    <div class="sp-feat fu d4"><div class="sp-fi" style="background:var(--bg)">🛡️</div><div><div class="sp-ft">3a digital starten</div><div class="sp-fs">Vorsorge in 3 Minuten — kein Schalter</div></div></div>
-    <div class="sp-feat fu d4"><div class="sp-fi" style="background:var(--bg)">🏡</div><div><div class="sp-ft">Hypothekenrechner</div><div class="sp-fs">Wohneigentum im Baselbiet planen</div></div></div>
+
+  <!-- Dots + Nav -->
+  <div class="ob-nav">
+    <div class="ob-dots">
+      <div class="ob-dot on" id="ob-dot-0"></div>
+      <div class="ob-dot" id="ob-dot-1"></div>
+      <div class="ob-dot" id="ob-dot-2"></div>
+    </div>
+    <button class="ob-next" id="ob-next-btn" onclick="obNext()">Weiter →</button>
   </div>
-  <div class="sp-act">
-    <button class="sp-cta fu d5" onclick="go('home',document.getElementById('sb-home'))">Jetzt loslegen →</button>
-    <div class="sp-login fu d5">Bereits Konto? <span onclick="go('home',document.getElementById('sb-home'))">Einloggen</span></div>
-  </div>
+
 </div>
 </div>
 
@@ -836,6 +922,25 @@ function calcH() {
 }
 
 calc(); calcH(); updateHaxxProgress();
+
+/* ── ONBOARDING ─────────────────────────────────────────────────────────── */
+var obStep = 0;
+function obNext() {
+  if (obStep < 2) {
+    document.getElementById('ob-slide-' + obStep).style.display = 'none';
+    obStep++;
+    document.getElementById('ob-slide-' + obStep).style.display = 'flex';
+    for (var i=0; i<3; i++) {
+      var d = document.getElementById('ob-dot-' + i);
+      if (d) d.className = 'ob-dot' + (i === obStep ? ' on' : '');
+    }
+    if (obStep === 2) {
+      document.getElementById('ob-next-btn').style.display = 'none';
+    }
+  } else {
+    go('home', document.getElementById('sb-home'));
+  }
+}
 
 /* ── MONEYHAX DATA & LOGIC ──────────────────────────────────────────────── */
 const haxxData = [
