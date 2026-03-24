@@ -657,71 +657,69 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 
 <!-- BUDGET -->
 <div class="sc" id="sc-budget">
-<div class="hd red"><div class="hd-row"><div><div class="hd-eye wh-txt">MoneyHaxx Budgetrechner</div><div class="hd-ttl wh">Dein Geld für dich</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
+<div class="hd red">
+  <div class="hd-row">
+    <div>
+      <div class="hd-eye wh-txt">MoneyHaxx × BLKB</div>
+      <div class="hd-ttl wh">Budgetrechner</div>
+    </div>
+    <button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button>
+  </div>
+</div>
 <div class="scr">
   <div class="sp"></div>
-  <div class="cb fu"><div class="cb-lbl">Monatslohn (CHF)</div><div class="cb-row"><div class="cb-big" id="lD">CHF 3'200</div><div class="cb-tag">10% = <span id="tP">CHF 320</span></div></div><input type="range" id="lS" min="500" max="8000" value="3200" step="100" oninput="calc()"></div>
-  <div class="cb fu d1"><div class="cb-lbl">Geburtsjahr</div><div class="cb-row"><div class="cb-big" id="yD">2002</div><div class="cb-tag">Noch <span id="yL">38</span> J.</div></div><input type="range" id="yS" min="1996" max="2012" value="2002" step="1" oninput="calc()"></div>
-  <div class="ban r-gr fu d2"><div class="b-lbl">Bei Pension (65) · 5% p.a.</div><div class="b-val" id="pR">CHF 406'000.–</div><div class="b-sub" id="rT">davon CHF 270'000 reine Rendite 🚀</div><div class="b-note">Ø CH-Aktienmarkt 5.3% p.a. seit 1969 · Quelle: MoneyHaxx</div></div>
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 20px 6px">
-    <div class="st" style="padding:0;margin:0">Budgetaufteilung</div>
-    <button onclick="resetBudget()" style="font-size:11px;font-weight:700;color:var(--r);background:var(--r-l);border:none;border-radius:2px;padding:4px 10px;cursor:pointer">↺ Reset</button>
+
+  <!-- Lohn Input -->
+  <div style="padding:0 16px 12px">
+    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Dein Monatslohn (netto, CHF)</div>
+    <input type="number" id="bud-lohn" value="3200" min="500" max="20000" step="100"
+      style="width:100%;border:2px solid var(--pa);border-radius:6px;padding:12px 14px;font-size:22px;font-weight:900;color:var(--r);outline:none;font-family:inherit;box-sizing:border-box"
+      oninput="calcBudget()">
   </div>
-  <div class="card fu d1" style="padding:12px 16px">
-    <div class="br">
-      <div class="bd" style="background:var(--r)"></div>
-      <div class="bl">Sparen & Investieren</div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <input type="number" id="bp1" value="10" min="0" max="100" style="width:48px;border:1px solid var(--pa);border-radius:4px;padding:3px 6px;font-size:13px;font-weight:700;text-align:center" oninput="calcBudgetPcts()">
-        <span style="font-size:11px;color:var(--lt)">%</span>
-        <div class="bc" id="b1"></div>
-      </div>
+
+  <!-- Geburtsjahr -->
+  <div style="padding:0 16px 12px">
+    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Dein Geburtsjahr</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <input type="range" id="bud-year" min="1975" max="2010" value="2000" step="1" oninput="calcBudget()" style="flex:1">
+      <span id="bud-year-lbl" style="font-size:16px;font-weight:900;color:var(--dk);min-width:48px;text-align:right">2000</span>
     </div>
-    <div class="br">
-      <div class="bd" style="background:var(--dk)"></div>
-      <div class="bl">Wohnen (max.)</div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <input type="number" id="bp2" value="30" min="0" max="100" style="width:48px;border:1px solid var(--pa);border-radius:4px;padding:3px 6px;font-size:13px;font-weight:700;text-align:center" oninput="calcBudgetPcts()">
-        <span style="font-size:11px;color:var(--lt)">%</span>
-        <div class="bc" id="b2"></div>
-      </div>
-    </div>
-    <div class="br">
-      <div class="bd" style="background:var(--olive)"></div>
-      <div class="bl">Essen & Freizeit</div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <input type="number" id="bp3" value="15" min="0" max="100" style="width:48px;border:1px solid var(--pa);border-radius:4px;padding:3px 6px;font-size:13px;font-weight:700;text-align:center" oninput="calcBudgetPcts()">
-        <span style="font-size:11px;color:var(--lt)">%</span>
-        <div class="bc" id="b3"></div>
-      </div>
-    </div>
-    <div class="br">
-      <div class="bd" style="background:var(--pa)"></div>
-      <div class="bl">Steuern & Versicherungen</div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <input type="number" id="bp4" value="45" min="0" max="100" style="width:48px;border:1px solid var(--pa);border-radius:4px;padding:3px 6px;font-size:13px;font-weight:700;text-align:center" oninput="calcBudgetPcts()">
-        <span style="font-size:11px;color:var(--lt)">%</span>
-        <div class="bc" id="b4"></div>
-      </div>
-    </div>
-    <div id="budget-sum-warn" style="display:none;margin-top:8px;font-size:11px;font-weight:700;color:var(--wa);text-align:center">⚠️ Summe: <span id="budget-sum-val">100</span>% — sollte 100% ergeben</div>
   </div>
-  <div class="src">Quelle: MoneyHaxx × Dachverband Budgetberatung Schweiz</div>
-  <button class="cta fu" onclick="go('vorsor',document.getElementById('sb-vorsor'))">3a Vorsorge starten →</button>
+
+  <!-- Ergebnis Banner -->
+  <div style="margin:0 16px 14px;background:linear-gradient(135deg,var(--r),#b80009);border-radius:10px;padding:18px;color:#fff">
+    <div style="font-size:10px;opacity:.75;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px">10% investiert · 5% p.a. · Pension mit 65</div>
+    <div id="bud-result" style="font-size:36px;font-weight:900;line-height:1">CHF 0.–</div>
+    <div id="bud-rendite" style="font-size:12px;opacity:.8;margin-top:6px">davon CHF 0.– Rendite 🚀</div>
+    <div id="bud-monat" style="font-size:12px;opacity:.65;margin-top:4px">= CHF 0 / Monat zurücklegen</div>
+    <div style="font-size:10px;opacity:.45;margin-top:8px">Ø CH-Aktienmarkt 5.3% p.a. seit 1969 · Quelle: MoneyHaxx</div>
+  </div>
+
+  <!-- Budget Aufteilung -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 20px 6px">
+    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.5px;text-transform:uppercase">Empfohlenes Budget</div>
+    <button onclick="resetBudgetCats()" style="font-size:11px;font-weight:700;color:var(--r);background:var(--r-l);border:none;border-radius:3px;padding:4px 10px;cursor:pointer">↺ Reset</button>
+  </div>
+
+  <div id="bud-cats" style="margin:0 16px 12px;background:#fff;border-radius:10px;border:1px solid var(--pa);overflow:hidden"></div>
+
+  <div style="font-size:10px;color:var(--lt);text-align:center;padding:0 16px 12px;line-height:1.5">Basierend auf CH-Bundesstatistiken & Dachverband Budgetberatung Schweiz</div>
+
+  <!-- Sparziele Section -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 20px 6px">
+    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.5px;text-transform:uppercase">Meine Sparziele</div>
+    <button onclick="openNewGoal()" style="font-size:11px;font-weight:700;color:var(--r);background:var(--r-l);border:none;border-radius:3px;padding:4px 10px;cursor:pointer">+ Neu</button>
+  </div>
+  <div id="bud-goals" style="margin:0 16px 14px"></div>
+
   <div style="height:16px"></div>
 </div>
 <div class="bnav">
-  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div>
-  <div class="ni-l">Home</div></div>
-  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div>
-  <div class="ni-l">Ziele</div></div>
-  <div class="ni on" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div>
-  <div class="ni-dot"></div>
-  <div class="ni-l">Haxx</div></div>
-  <div class="ni" onclick="go('finlit',document.getElementById('sb-finlit'))"><div class="ni-i">📚</div>
-  <div class="ni-l">Wissen</div></div>
-  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div>
-  <div class="ni-l">3a</div></div>
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div><div class="ni-l">Ziele</div></div>
+  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
+  <div class="ni on"><div class="ni-i">📊</div><div class="ni-dot"></div><div class="ni-l">Budget</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
 </div>
 </div>
 
@@ -925,7 +923,7 @@ function calcH() {
   else { f.style.background='var(--r)'; f.style.width='25%'; t.textContent='Tragbarkeit: knapp ✗'; t.style.color='var(--r)'; }
 }
 
-calc(); calcH(); updateHaxxProgress(); renderGoalsList(); renderFinlit();
+calcBudget(); calcH(); updateHaxxProgress(); renderGoalsList(); renderFinlit();
 
 /* ── FINANZKOMPETENZ ACCORDION ──────────────────────────────────────────── */
 var finItems = [
@@ -962,31 +960,103 @@ function toggleFin(i) {
   renderFinlit();
 }
 
-/* ── BUDGET MUTIERBAR + RESET ────────────────────────────────────────────── */
-var budgetDefaults = [10, 30, 15, 45];
-function calcBudgetPcts() {
-  var l = +document.getElementById('lS').value;
-  var sum = 0;
-  for (var i=1; i<=4; i++) {
-    var inp = document.getElementById('bp'+i);
-    var pct = inp ? (parseInt(inp.value)||0) : budgetDefaults[i-1];
-    sum += pct;
-    var bc = document.getElementById('b'+i);
-    if (bc) bc.textContent = 'CHF ' + Math.round(l*pct/100).toLocaleString('de-CH');
-  }
-  var warn = document.getElementById('budget-sum-warn');
-  var sumVal = document.getElementById('budget-sum-val');
-  if (warn) warn.style.display = sum !== 100 ? 'block' : 'none';
-  if (sumVal) sumVal.textContent = sum;
+/* ── MONEYHAXX BUDGETRECHNER ─────────────────────────────────────────────── */
+var budCats = [
+  { label:'💰 Sparen & Investieren', color:'var(--r)',    pct:10, hint:'10%-Hack: sofort investieren!' },
+  { label:'🏠 Wohnen & Nebenkosten',  color:'var(--dk)',   pct:30, hint:'Max. 1/3 deines Lohns' },
+  { label:'🍕 Essen & Lebensmittel',  color:'var(--olive)',pct:12, hint:'CH-Ø: ~CHF 400/Mt.' },
+  { label:'🚗 Mobilität & Transport', color:'var(--petrol)',pct:10, hint:'ÖV + Auto-Anteil' },
+  { label:'🎉 Freizeit & Hobby',       color:'var(--amber)', pct:8, hint:'Geniessen ohne Reue' },
+  { label:'📋 Steuern & Abgaben',      color:'#6b7280',    pct:20, hint:'Je nach Kanton & Lohn' },
+  { label:'🛡️ Versicherungen',         color:'var(--sl)',   pct:10, hint:'KK, Haftpflicht, etc.' }
+];
+var budCatDefaults = budCats.map(function(c){ return c.pct; });
+
+function calcBudget() {
+  var lEl = document.getElementById('bud-lohn');
+  var yEl = document.getElementById('bud-year');
+  if (!lEl) return;
+  var l = parseInt(lEl.value) || 3200;
+  var y = yEl ? parseInt(yEl.value) : 2000;
+  var yLbl = document.getElementById('bud-year-lbl');
+  if (yLbl) yLbl.textContent = y;
+  var yrs = Math.max(0, 65 - (2025 - y));
+  var mo = l * 0.1;
+  var tot = yrs > 0 ? mo * 12 * ((Math.pow(1.05, yrs) - 1) / 0.05) : 0;
+  var rend = tot - mo * 12 * yrs;
+  var rEl = document.getElementById('bud-result');
+  var rdEl = document.getElementById('bud-rendite');
+  var moEl = document.getElementById('bud-monat');
+  if (rEl) rEl.textContent = 'CHF ' + Math.round(tot).toLocaleString('de-CH') + '.–';
+  if (rdEl) rdEl.textContent = 'davon CHF ' + Math.round(rend).toLocaleString('de-CH') + ' Rendite 🚀';
+  if (moEl) moEl.textContent = '= CHF ' + Math.round(mo).toLocaleString('de-CH') + ' / Monat zurücklegen';
+  renderBudgetCats(l);
+  renderBudgetGoals(l);
 }
-function resetBudget() {
-  budgetDefaults.forEach(function(v, i) {
-    var inp = document.getElementById('bp'+(i+1));
-    if (inp) inp.value = v;
-  });
-  calcBudgetPcts();
+
+function renderBudgetCats(l) {
+  var el = document.getElementById('bud-cats');
+  if (!el) return;
+  var total = budCats.reduce(function(s,c){ return s+c.pct; }, 0);
+  el.innerHTML = budCats.map(function(cat, i) {
+    var amt = Math.round(l * cat.pct / 100);
+    return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--pa);box-sizing:border-box">' +
+      '<div style="width:10px;height:10px;border-radius:2px;background:' + cat.color + ';flex-shrink:0"></div>' +
+      '<div style="flex:1;min-width:0">' +
+        '<div style="font-size:13px;color:var(--dk);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + cat.label + '</div>' +
+        '<div style="font-size:10px;color:var(--lt)">' + cat.hint + '</div>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;gap:6px;flex-shrink:0">' +
+        '<input type="number" value="' + cat.pct + '" min="0" max="100" ' +
+          'style="width:44px;border:1px solid var(--pa);border-radius:4px;padding:3px 4px;font-size:12px;font-weight:700;text-align:center;box-sizing:border-box" ' +
+          'oninput="budCats[' + i + '].pct=parseInt(this.value)||0;renderBudgetCats(' + l + ')">' +
+        '<span style="font-size:10px;color:var(--lt)">%</span>' +
+        '<span style="font-size:12px;font-weight:700;color:var(--dk);min-width:60px;text-align:right">CHF ' + amt.toLocaleString('de-CH') + '</span>' +
+      '</div>' +
+    '</div>';
+  }).join('') +
+  '<div style="padding:10px 14px;display:flex;justify-content:space-between;align-items:center;background:var(--bg)">' +
+    '<span style="font-size:12px;font-weight:700;color:' + (total===100?'var(--ok)':'var(--wa)') + '">' + (total===100?'✅ 100%':'⚠️ '+total+'% (soll 100%)') + '</span>' +
+    '<span style="font-size:12px;font-weight:700;color:var(--dk)">Total: CHF ' + Math.round(l).toLocaleString('de-CH') + '</span>' +
+  '</div>';
+}
+
+function resetBudgetCats() {
+  budCats.forEach(function(c,i){ c.pct = budCatDefaults[i]; });
+  calcBudget();
   showToast('Standardwerte wiederhergestellt ✅');
-} renderGoalsList();
+}
+
+function renderBudgetGoals(l) {
+  var el = document.getElementById('bud-goals');
+  if (!el) return;
+  if (!goals || goals.length === 0) {
+    el.innerHTML = '<div style="text-align:center;padding:16px;color:var(--lt);font-size:12px;background:#fff;border-radius:8px;border:1px solid var(--pa)">Noch keine Ziele. Tippe + Neu!</div>';
+    return;
+  }
+  el.innerHTML = goals.map(function(g, i) {
+    var pct = g.amount > 0 ? Math.round(g.saved / g.amount * 100) : 0;
+    var color = pct >= 80 ? 'var(--ok)' : pct >= 50 ? 'var(--r)' : 'var(--olive)';
+    var monatlich = g.months > 0 ? Math.ceil((g.amount - g.saved) / g.months) : 0;
+    return '<div style="background:#fff;border-radius:8px;border:1px solid var(--pa);padding:12px 14px;margin-bottom:8px;position:relative;box-sizing:border-box">' +
+      '<button onclick="deleteGoal(' + i + ')" style="position:absolute;top:8px;right:8px;background:var(--r-l);border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;color:var(--r)">✕</button>' +
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-right:28px">' +
+        '<span style="font-size:22px">' + g.emoji + '</span>' +
+        '<div style="min-width:0;flex:1">' +
+          '<div style="font-size:14px;font-weight:700;color:var(--dk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + g.name + '</div>' +
+          '<div style="font-size:11px;color:var(--md)">CHF ' + g.saved.toLocaleString('de-CH') + ' / ' + g.amount.toLocaleString('de-CH') + (monatlich > 0 ? ' · CHF '+monatlich.toLocaleString('de-CH')+'/Mt.' : '') + '</div>' +
+        '</div>' +
+        '<span style="font-size:14px;font-weight:900;color:' + color + '">' + pct + '%</span>' +
+      '</div>' +
+      '<div style="height:5px;background:var(--pa);border-radius:2px;overflow:hidden">' +
+        '<div style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:2px"></div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function calcBudgetPcts() { calcBudget(); }
+function resetBudget() { resetBudgetCats(); } renderGoalsList();
 
 /* ── BUDGET: MUTIERBAR + RESET ──────────────────────────────────────────── */
 var budgetDefaults = [10, 30, 15, 45];
@@ -1375,6 +1445,7 @@ function goalNext() {
     // Ziel erstellen und zurück zur Liste
     goals.push({ emoji: newGoal.emoji, name: newGoal.name, amount: newGoal.amount, saved: 0, months: newGoal.months });
     renderGoalsList();
+    calcBudget();
     go('goals', document.getElementById('sb-goals'));
   }
 }
