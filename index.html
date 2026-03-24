@@ -302,6 +302,27 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 .sp-cta:active { background:var(--r-h); }
 .sp-login { font-size:13px; color:var(--md); text-align:center; margin-top:14px; cursor:pointer; font-family:var(--font-book); }
 .sp-login span { color:var(--r); font-weight:700; }
+
+/* ── HAXX DETAIL ────────────────────────────────────────────────────────── */
+.haxx-hero { padding:20px 16px 16px; }
+.haxx-emoji { font-size:48px; text-align:center; margin-bottom:12px; }
+.haxx-regel { background:var(--r); color:#fff; border-radius:var(--rb); padding:14px 16px; margin:0 16px 14px; font-size:15px; font-weight:700; line-height:1.4; text-align:center; }
+.haxx-body { padding:0 16px; font-size:13.5px; color:var(--dk2); line-height:1.7; margin-bottom:14px; }
+.haxx-example { background:var(--bg); border-radius:var(--rb); border:1px solid var(--pa); padding:14px; margin:0 16px 14px; }
+.haxx-example-t { font-size:11px; font-weight:700; color:var(--lt); letter-spacing:.5px; text-transform:uppercase; margin-bottom:8px; }
+.haxx-example-row { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid var(--pa); font-size:13px; }
+.haxx-example-row:last-child { border-bottom:none; font-weight:700; }
+.haxx-steps { margin:0 16px 14px; }
+.haxx-step { display:flex; gap:12px; margin-bottom:12px; align-items:flex-start; }
+.haxx-step-nr { width:28px; height:28px; border-radius:50%; background:var(--r); color:#fff; font-size:13px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.haxx-step-t { font-size:13px; color:var(--dk); font-weight:600; }
+.haxx-step-s { font-size:11.5px; color:var(--md); margin-top:2px; }
+.haxx-done-btn { background:var(--ok); color:#fff; border:none; border-radius:var(--btn-r); padding:15px 20px; font-size:15px; font-weight:700; cursor:pointer; width:calc(100% - 32px); margin:0 16px 10px; display:block; text-align:center; transition:all .12s; }
+.haxx-done-btn:active { background:#15803d; transform:scale(.98); }
+.haxx-done-btn.done { background:var(--pa); color:var(--lt); cursor:default; }
+.haxx-nav { display:flex; gap:10px; padding:0 16px 16px; }
+.haxx-nav-btn { flex:1; background:var(--bg); border:1px solid var(--pa); border-radius:var(--btn-r); padding:12px; font-size:13px; font-weight:700; color:var(--dk2); cursor:pointer; text-align:center; }
+.haxx-nav-btn:active { background:var(--pa); }
 </style>
 </head>
 <body>
@@ -874,27 +895,6 @@ function calcH() {
 }
 
 calc(); calcH(); updateHaxxProgress();
-
-/* ── HAXX DETAIL ────────────────────────────────────────────────────────── */
-.haxx-hero { padding:20px 16px 16px; }
-.haxx-emoji { font-size:48px; text-align:center; margin-bottom:12px; }
-.haxx-regel { background:var(--r); color:#fff; border-radius:var(--rb); padding:14px 16px; margin:0 16px 14px; font-size:15px; font-weight:700; line-height:1.4; text-align:center; }
-.haxx-body { padding:0 16px; font-size:13.5px; color:var(--dk2); line-height:1.7; margin-bottom:14px; }
-.haxx-example { background:var(--bg); border-radius:var(--rb); border:1px solid var(--pa); padding:14px; margin:0 16px 14px; }
-.haxx-example-t { font-size:11px; font-weight:700; color:var(--lt); letter-spacing:.5px; text-transform:uppercase; margin-bottom:8px; }
-.haxx-example-row { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid var(--pa); font-size:13px; }
-.haxx-example-row:last-child { border-bottom:none; font-weight:700; }
-.haxx-steps { margin:0 16px 14px; }
-.haxx-step { display:flex; gap:12px; margin-bottom:12px; align-items:flex-start; }
-.haxx-step-nr { width:28px; height:28px; border-radius:50%; background:var(--r); color:#fff; font-size:13px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.haxx-step-t { font-size:13px; color:var(--dk); font-weight:600; }
-.haxx-step-s { font-size:11.5px; color:var(--md); margin-top:2px; }
-.haxx-done-btn { background:var(--ok); color:#fff; border:none; border-radius:var(--btn-r); padding:15px 20px; font-size:15px; font-weight:700; cursor:pointer; width:calc(100% - 32px); margin:0 16px 10px; display:block; text-align:center; transition:all .12s; }
-.haxx-done-btn:active { background:#15803d; transform:scale(.98); }
-.haxx-done-btn.done { background:var(--pa); color:var(--lt); cursor:default; }
-.haxx-nav { display:flex; gap:10px; padding:0 16px 16px; }
-.haxx-nav-btn { flex:1; background:var(--bg); border:1px solid var(--pa); border-radius:var(--btn-r); padding:12px; font-size:13px; font-weight:700; color:var(--dk2); cursor:pointer; text-align:center; }
-.haxx-nav-btn:active { background:var(--pa); }
 
 /* ── MONEYHAX DATA & LOGIC ──────────────────────────────────────────────── */
 const haxxData = [
