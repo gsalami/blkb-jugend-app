@@ -271,6 +271,23 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 
 .src { font-size:10px; color:var(--lt); text-align:center; padding:8px 16px 4px; font-family:var(--font-book); }
 
+/* NEUES ZIEL WIZARD */
+.goal-dot { width:28px; height:4px; border-radius:2px; background:rgba(255,255,255,.3); transition:background .2s; }
+.goal-dot.on { background:#fff; }
+.goal-emoji-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; padding:16px; }
+.goal-emoji-btn { font-size:28px; width:52px; height:52px; border-radius:var(--rb); border:2px solid var(--pa); background:var(--wh); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .15s; }
+.goal-emoji-btn.sel { border-color:var(--r); background:var(--r-l); transform:scale(1.1); }
+.goal-input-wrap { padding:16px; }
+.goal-input-lbl { font-size:11px; font-weight:700; color:var(--lt); letter-spacing:.5px; text-transform:uppercase; margin-bottom:6px; }
+.goal-input { width:100%; border:2px solid var(--pa); border-radius:var(--rb); padding:13px 14px; font-size:15px; font-family:var(--font-book); color:var(--dk); outline:none; transition:border .15s; background:var(--wh); }
+.goal-input:focus { border-color:var(--r); }
+.goal-preview { margin:0 16px; background:var(--wh); border-radius:var(--ra); border:2px solid var(--r); padding:18px; text-align:center; }
+.goal-prev-emoji { font-size:44px; margin-bottom:8px; }
+.goal-prev-name { font-size:18px; font-weight:900; color:var(--dk); }
+.goal-prev-amt { font-size:28px; font-weight:900; color:var(--r); margin-top:4px; }
+.goal-prev-date { font-size:12px; color:var(--md); margin-top:4px; }
+.goal-month-hint { font-size:12px; color:var(--ok); font-weight:700; margin-top:8px; }
+
 /* ACCORDION */
 .acc-item { border-bottom:1px solid var(--pa); }
 .acc-hd { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; cursor:pointer; transition:background .12s; gap:8px; }
@@ -351,6 +368,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 <div class="bar dk2" id="bar-haxx-detail"><span>9:41</span><span>●●●● 5G 🔋</span></div>
 <div class="bar red" id="bar-budget"><span>9:41</span><span>●●●● 5G 🔋</span></div>
 <div class="bar dk"  id="bar-vorsor"><span>9:41</span><span>●●●● 5G 🔋</span></div>
+<div class="bar red"  id="bar-goal-new"><span>9:41</span><span>●●●● 5G 🔋</span></div>
 <div class="bar dk"  id="bar-finlit"><span>9:41</span><span>●●●● 5G 🔋</span></div>
 
 <!-- SPLASH -->
@@ -456,10 +474,12 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
   <div class="sp"></div>
   <div class="card red-t fu"><div class="clbl">Gespartes total</div><div class="cval r">CHF 2'230.–</div><div class="csub">3 aktive Ziele · Monatswachstum +CHF 420</div></div>
   <div class="st fu d1">Aktive Ziele</div>
+  <div id="goals-list">
   <div class="gc fu d1"><div class="gh"><span class="gn">✈️ Reise Japan</span><span class="gp" style="color:var(--r)">62%</span></div><div class="pt"><div class="pf" style="width:62%;background:var(--r)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 620 / CHF 1'000</span><span style="font-size:11px;color:var(--r);font-weight:700">Aug 2025</span></div></div>
   <div class="gc fu d2"><div class="gh"><span class="gn">🚲 E-Bike</span><span class="gp" style="color:var(--olive)">38%</span></div><div class="pt"><div class="pf" style="width:38%;background:var(--olive)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 760 / CHF 2'000</span><span style="font-size:11px;color:var(--olive);font-weight:700">Okt 2025</span></div></div>
   <div class="gc fu d3"><div class="gh"><span class="gn">🏠 Notfallreserve</span><span class="gp" style="color:var(--ok)">85%</span></div><div class="pt"><div class="pf" style="width:85%;background:var(--ok)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 850 / CHF 1'000</span><span style="font-size:11px;color:var(--ok);font-weight:700">Fast da! 🎉</span></div></div>
-  <button class="cta fu d4">+ Neues Ziel erstellen</button>
+  </div>
+  <button class="cta fu d4" onclick="openNewGoal()">+ Neues Ziel erstellen</button>
   <div class="cta-n">Urlaubsziel, Gadget, Ausbildung, Wohnung...</div>
   <div class="ib fu d4"><span style="font-size:18px;flex-shrink:0">💡</span><p><strong>10%-Hack:</strong> Automatisch 10% vom Lohn sparen. CHF 320/Monat → bei der Pension über CHF 490'000.</p></div>
   <div style="height:16px"></div>
@@ -628,6 +648,32 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 </div>
 
 </div></div>
+
+<!-- NEUES ZIEL -->
+<div class="sc" id="sc-goal-new">
+<div class="hd red">
+  <div class="hd-row">
+    <div>
+      <div class="hd-eye wh-txt" id="goal-step-label">Schritt 1 von 4</div>
+      <div class="hd-ttl wh" id="goal-step-title">Wähle ein Emoji</div>
+    </div>
+    <button class="back wh" onclick="go('goals',document.getElementById('sb-goals'))">✕</button>
+  </div>
+  <!-- Step-Dots -->
+  <div style="display:flex;gap:6px;margin-top:10px">
+    <div class="goal-dot" id="gdot-0"></div>
+    <div class="goal-dot" id="gdot-1"></div>
+    <div class="goal-dot" id="gdot-2"></div>
+    <div class="goal-dot" id="gdot-3"></div>
+  </div>
+</div>
+<div class="scr" id="goal-new-scr">
+  <!-- Wird dynamisch befüllt -->
+</div>
+<div style="padding:0 16px 24px;background:var(--wh);flex-shrink:0">
+  <button class="cta" style="width:100%;margin:0" id="goal-next-btn" onclick="goalNext()">Weiter →</button>
+</div>
+</div>
 
 <!-- FINANZKOMPETENZ -->
 <div class="sc" id="sc-finlit">
@@ -978,6 +1024,148 @@ function prevNextHaxx(dir) {
   const next = currentHaxx + dir;
   if (next >= 0 && next < 6) openHaxx(next);
   else go('haxx', document.getElementById('sb-haxx'));
+}
+
+/* ── NEUES ZIEL WIZARD ──────────────────────────────────────────────────── */
+var newGoal = { emoji: '🎯', name: '', amount: 0, months: 6 };
+var goalStep = 0;
+var goals = [
+  { emoji: '✈️', name: 'Reise Japan', amount: 1000, saved: 620, months: 3 },
+  { emoji: '🚲', name: 'E-Bike', amount: 2000, saved: 760, months: 7 },
+  { emoji: '🏠', name: 'Notfallreserve', amount: 1000, saved: 850, months: 0 }
+];
+
+var goalEmojis = ['✈️','🚲','🏠','💻','🎮','🎓','🎵','🏋️','🌍','🛋️','📱','🎁','🐾','🚗','👗','🏄','🍕','💍','🎨','🎤'];
+
+function openNewGoal() {
+  newGoal = { emoji: '🎯', name: '', amount: 1000, months: 6 };
+  goalStep = 0;
+  renderGoalStep();
+  go('goal-new', null);
+}
+
+function renderGoalStep() {
+  // Update header
+  var titles = ['Wähle ein Emoji', 'Ziel & Betrag', 'Zeitplan', 'Alles bereit!'];
+  document.getElementById('goal-step-label').textContent = 'Schritt ' + (goalStep+1) + ' von 4';
+  document.getElementById('goal-step-title').textContent = titles[goalStep];
+  // Dots
+  for (var i=0; i<4; i++) {
+    var d = document.getElementById('gdot-'+i);
+    if (d) d.className = 'goal-dot' + (i <= goalStep ? ' on' : '');
+  }
+  // Button label
+  var btn = document.getElementById('goal-next-btn');
+  if (btn) btn.textContent = goalStep < 3 ? 'Weiter →' : '🎯 Ziel erstellen!';
+
+  var scr = document.getElementById('goal-new-scr');
+  if (!scr) return;
+
+  if (goalStep === 0) {
+    // Emoji picker
+    var html = '<div class="sp"></div><div class="card red-t" style="margin:0 16px 16px;text-align:center"><div style="font-size:13px;color:var(--dk)">Wofür sparst du? Wähle ein passendes Emoji für dein Ziel.</div></div><div class="goal-emoji-grid">';
+    goalEmojis.forEach(function(e) {
+      html += '<button class="goal-emoji-btn' + (newGoal.emoji === e ? ' sel' : '') + '" onclick="selectGoalEmoji(\'' + e + '\')">' + e + '</button>';
+    });
+    html += '</div>';
+    scr.innerHTML = html;
+
+  } else if (goalStep === 1) {
+    // Name + Betrag
+    scr.innerHTML =
+      '<div class="sp"></div>' +
+      '<div style="font-size:48px;text-align:center;margin:8px 0 16px">' + newGoal.emoji + '</div>' +
+      '<div class="goal-input-wrap">' +
+        '<div class="goal-input-lbl">Name des Ziels</div>' +
+        '<input class="goal-input" id="gi-name" type="text" placeholder="z.B. Japan-Reise, MacBook..." value="' + (newGoal.name||'') + '" oninput="newGoal.name=this.value">' +
+      '</div>' +
+      '<div class="goal-input-wrap" style="padding-top:0">' +
+        '<div class="goal-input-lbl">Zielbetrag (CHF)</div>' +
+        '<input class="goal-input" id="gi-amt" type="number" placeholder="1000" value="' + (newGoal.amount||'') + '" oninput="newGoal.amount=parseInt(this.value)||0">' +
+      '</div>';
+
+  } else if (goalStep === 2) {
+    // Zeitplan
+    var monatlich = newGoal.months > 0 ? Math.ceil(newGoal.amount / newGoal.months) : newGoal.amount;
+    scr.innerHTML =
+      '<div class="sp"></div>' +
+      '<div style="font-size:48px;text-align:center;margin:8px 0 4px">' + newGoal.emoji + '</div>' +
+      '<div style="text-align:center;font-size:16px;font-weight:700;color:var(--dk);margin-bottom:16px">' + (newGoal.name||'Mein Ziel') + ' · CHF ' + (newGoal.amount||0).toLocaleString('de-CH') + '</div>' +
+      '<div class="goal-input-wrap">' +
+        '<div class="goal-input-lbl">In wie vielen Monaten?</div>' +
+        '<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px">' +
+          '<span style="font-size:26px;font-weight:900;color:var(--r)" id="gi-months-lbl">' + newGoal.months + ' Monate</span>' +
+          '<span style="font-size:12px;font-weight:700;background:var(--r-l);color:var(--r-h);padding:3px 10px;border-radius:2px" id="gi-monthly-lbl">CHF ' + monatlich.toLocaleString('de-CH') + '/Mt.</span>' +
+        '</div>' +
+        '<input type="range" min="1" max="36" value="' + newGoal.months + '" oninput="updateGoalMonths(this.value)">' +
+      '</div>' +
+      '<div class="ib ok" style="margin:0 16px"><p id="gi-hint">Bei CHF ' + monatlich.toLocaleString('de-CH') + ' pro Monat erreichst du dein Ziel in ' + newGoal.months + ' Monaten. 💪</p></div>';
+
+  } else if (goalStep === 3) {
+    // Bestätigung
+    var monatlich2 = newGoal.months > 0 ? Math.ceil(newGoal.amount / newGoal.months) : newGoal.amount;
+    var now = new Date();
+    now.setMonth(now.getMonth() + newGoal.months);
+    var dateStr = now.toLocaleDateString('de-CH', {month:'long', year:'numeric'});
+    scr.innerHTML =
+      '<div class="sp"></div>' +
+      '<div class="goal-preview fu">' +
+        '<div class="goal-prev-emoji">' + newGoal.emoji + '</div>' +
+        '<div class="goal-prev-name">' + (newGoal.name||'Mein Ziel') + '</div>' +
+        '<div class="goal-prev-amt">CHF ' + (newGoal.amount||0).toLocaleString('de-CH') + '</div>' +
+        '<div class="goal-prev-date">Ziel: ' + dateStr + ' · ' + newGoal.months + ' Monate</div>' +
+        '<div class="goal-month-hint">✅ Monatlich CHF ' + monatlich2.toLocaleString('de-CH') + ' sparen</div>' +
+      '</div>' +
+      '<div class="ib ok" style="margin:16px 16px 0"><p>Wir richten einen automatischen Dauerauftrag von <strong>CHF ' + monatlich2.toLocaleString('de-CH') + '/Monat</strong> auf dein Sparkonto ein. Du wirst benachrichtigt wenn du Meilensteine erreichst! 🎉</p></div>';
+  }
+}
+
+function selectGoalEmoji(e) {
+  newGoal.emoji = e;
+  document.querySelectorAll('.goal-emoji-btn').forEach(function(b) {
+    b.classList.toggle('sel', b.textContent === e);
+  });
+}
+
+function updateGoalMonths(val) {
+  newGoal.months = parseInt(val);
+  var m = Math.ceil(newGoal.amount / newGoal.months);
+  var lbl = document.getElementById('gi-months-lbl');
+  var mlbl = document.getElementById('gi-monthly-lbl');
+  var hint = document.getElementById('gi-hint');
+  if (lbl) lbl.textContent = newGoal.months + ' Monate';
+  if (mlbl) mlbl.textContent = 'CHF ' + m.toLocaleString('de-CH') + '/Mt.';
+  if (hint) hint.textContent = 'Bei CHF ' + m.toLocaleString('de-CH') + ' pro Monat erreichst du dein Ziel in ' + newGoal.months + ' Monaten. 💪';
+}
+
+function goalNext() {
+  if (goalStep === 1 && !newGoal.name) {
+    var inp = document.getElementById('gi-name');
+    if (inp) { inp.focus(); inp.style.borderColor='var(--r)'; }
+    return;
+  }
+  if (goalStep < 3) {
+    goalStep++;
+    renderGoalStep();
+  } else {
+    // Ziel erstellen und zurück zur Liste
+    goals.push({ emoji: newGoal.emoji, name: newGoal.name, amount: newGoal.amount, saved: 0, months: newGoal.months });
+    renderGoalsList();
+    go('goals', document.getElementById('sb-goals'));
+  }
+}
+
+function renderGoalsList() {
+  var container = document.getElementById('goals-list');
+  if (!container) return;
+  container.innerHTML = goals.map(function(g, i) {
+    var pct = g.amount > 0 ? Math.round(g.saved / g.amount * 100) : 0;
+    var color = pct >= 80 ? 'var(--ok)' : pct >= 50 ? 'var(--r)' : 'var(--olive)';
+    var dateStr = g.months > 0 ? (function(){ var d=new Date(); d.setMonth(d.getMonth()+g.months); return d.toLocaleDateString('de-CH',{month:'short',year:'numeric'}); })() : 'Erreicht! 🎉';
+    return '<div class="gc fu" onclick=""><div class="gh"><span class="gn">' + g.emoji + ' ' + g.name + '</span><span class="gp" style="color:' + color + '">' + pct + '%</span></div>' +
+      '<div class="pt"><div class="pf" style="width:' + pct + '%;background:' + color + '"></div></div>' +
+      '<div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF ' + g.saved.toLocaleString('de-CH') + ' / CHF ' + g.amount.toLocaleString('de-CH') + '</span><span style="font-size:11px;color:' + color + ';font-weight:700">' + dateStr + '</span></div></div>';
+  }).join('');
 }
 
 /* ── ACCORDION ──────────────────────────────────────────────────────────── */
