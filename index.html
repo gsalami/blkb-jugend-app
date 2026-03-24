@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>BLKB Jugend – Was morgen zählt</title>
+<style>
+:root {
+  --r: #fd000d;
+  --r-h: #b80009;
+  --r-l: #fff0f0;
+  --r-p: #fff8f8;
+  --dk: #20242a;
+  --dk2: #2a373f;
+  --sl: #4a5060;
+  --md: #6b7280;
+  --lt: #9ca3af;
+  --pa: #e5e7eb;
+  --bg: #f7f8fa;
+  --bg2: #f8f8f8;
+  --wh: #ffffff;
+  --olive: #7c8947;
+  --coral: #e87c78;
+  --petrol: #2c5969;
+  --amber: #e38121;
+  --ok: #16a34a;
+  --ok-l: #f0fdf4;
+  --wa: #e38121;
+  --wa-l: #fff8ee;
+  --font-book: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-bold: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --btn-r: 0px;
+  --ra: 10px;
+  --rb: 6px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box; margin: 0; padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: #111;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px; gap: 20px; flex-wrap: wrap;
+  font-family: var(--font-book);
+}
+
+/* SIDEBAR */
+.sb { display:flex; flex-direction:column; gap:4px; width:158px; flex-shrink:0; }
+.sb-s { font-size:10px; font-weight:700; color:rgba(255,255,255,.28); letter-spacing:.7px; text-transform:uppercase; padding:10px 2px 4px; }
+.sb-s:first-child { padding-top:0; }
+.sb-btn { padding:9px 12px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:6px; color:rgba(255,255,255,.5); font-size:12px; cursor:pointer; text-align:left; transition:all .15s; display:flex; align-items:center; gap:8px; width:100%; font-family:var(--font-book); }
+.sb-btn:hover { background:rgba(255,255,255,.1); color:rgba(255,255,255,.8); }
+.sb-btn.on { background:rgba(253,0,13,.18); border-color:rgba(253,0,13,.38); color:#ff8080; font-weight:700; }
+
+/* PHONE */
+.phone { width:393px; height:852px; background:#1C1C1E; border-radius:55px; padding:14px; box-shadow:0 50px 100px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.07); position:relative; flex-shrink:0; }
+.phone::before { content:''; position:absolute; top:14px; left:50%; transform:translateX(-50%); width:126px; height:37px; background:#1C1C1E; border-radius:0 0 24px 24px; z-index:10; }
+.phone::after { content:''; position:absolute; top:25px; left:50%; transform:translateX(-50%); width:10px; height:10px; background:#2A2A2C; border-radius:50%; z-index:11; }
+.ps { width:100%; height:100%; background:var(--bg); border-radius:43px; overflow:hidden; position:relative; }
+
+/* STATUS BAR */
+.bar { height:54px; display:none; align-items:flex-end; justify-content:space-between; padding:0 28px 10px; position:absolute; top:0; left:0; right:0; z-index:20; font-size:13px; font-weight:600; font-family:var(--font-book); }
+.bar.v { display:flex; }
+.bar.red { background:var(--r); color:#fff; }
+.bar.dk { background:var(--dk); color:rgba(255,255,255,.9); }
+.bar.dk2 { background:var(--dk2); color:rgba(255,255,255,.9); }
+.bar.wh { background:var(--wh); color:var(--dk2); }
+.bar.bg { background:var(--bg); color:var(--dk2); }
+
+/* SCREENS */
+.sc { position:absolute; left:0; right:0; bottom:0; top:54px; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateX(22px); transition:opacity .2s ease, transform .2s cubic-bezier(.4,0,.2,1); }
+.sc.on { opacity:1; pointer-events:all; transform:none; }
+.sc.out { opacity:0; transform:translateX(-22px); }
+.scr { flex:1; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+.scr::-webkit-scrollbar { display:none; }
+
+/* HEADERS */
+.hd { padding:16px 20px 14px; flex-shrink:0; }
+.hd.red { background:var(--r); }
+.hd.dk { background:var(--dk); }
+.hd.dk2 { background:var(--dk2); }
+.hd.pt { background:var(--petrol); }
+.hd.wh { background:var(--wh); border-bottom:2px solid var(--r); }
+.hd-eye { font-size:11px; margin-bottom:2px; letter-spacing:.4px; font-family:var(--font-book); font-weight:400; }
+.wh-txt { color:rgba(255,255,255,.72); }
+.lt-txt { color:var(--md); }
+.hd-ttl { font-size:22px; font-weight:900; line-height:1.15; font-family:var(--font-bold); }
+.hd-ttl.wh { color:#fff; }
+.hd-ttl.dk { color:var(--dk); }
+.hd-sub { font-size:12px; margin-top:3px; font-family:var(--font-book); }
+.hd-sub.wh { color:rgba(255,255,255,.75); }
+.hd-sub.lt { color:var(--md); }
+.hd-row { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.back { font-size:12px; font-weight:600; padding:7px 14px; border-radius:var(--btn-r); cursor:pointer; flex-shrink:0; border:none; white-space:nowrap; transition:background .12s; font-family:var(--font-book); }
+.back.wh { background:rgba(255,255,255,.18); color:#fff; }
+.back.wh:active { background:rgba(255,255,255,.28); }
+.back.dk { background:rgba(0,0,0,.07); color:var(--dk2); }
+
+/* WMZ BADGE */
+.wmz { display:inline-flex; align-items:center; gap:7px; background:var(--r-l); border:1px solid rgba(253,0,13,.15); border-radius:2px; padding:5px 12px 5px 8px; font-size:11px; font-weight:700; color:var(--r-h); margin:0 16px 12px; font-family:var(--font-book); }
+.wmz-dot { width:8px; height:8px; background:var(--r); border-radius:50%; flex-shrink:0; }
+
+/* CARDS */
+.card { background:var(--wh); border-radius:var(--ra); border:1px solid var(--pa); padding:16px; margin:0 16px 12px; }
+.red-t { background:var(--r-p); border-color:rgba(253,0,13,.12); }
+.ok-t { background:var(--ok-l); border-color:rgba(22,163,74,.18); }
+.bg-t { background:var(--bg); border-color:var(--pa); }
+.dk-t { background:var(--dk2); border-color:#3a404a; }
+.olive-t { background:#f4f5ee; border-color:rgba(124,137,71,.25); }
+.clbl { font-size:10px; font-weight:700; letter-spacing:.8px; color:var(--lt); margin-bottom:4px; text-transform:uppercase; font-family:var(--font-book); }
+.cval { font-size:30px; font-weight:900; color:var(--dk); line-height:1; font-family:var(--font-bold); }
+.cval.r { color:var(--r); }
+.cval.ok { color:var(--ok); }
+.cval.wh { color:#fff; }
+.cval.pt { color:var(--petrol); }
+.csub { font-size:12px; color:var(--md); margin-top:5px; font-family:var(--font-book); }
+
+/* PROGRESS */
+.pt { height:5px; background:var(--pa); border-radius:2px; overflow:hidden; margin-top:8px; }
+.pf { height:100%; border-radius:2px; transition:width .5s ease; }
+
+/* SECTION TITLE */
+.st { font-size:11px; font-weight:700; color:var(--lt); letter-spacing:.6px; text-transform:uppercase; padding:8px 20px 6px; font-family:var(--font-book); }
+.sp { height:12px; }
+
+/* GOAL CARD */
+.gc { padding:14px 16px; margin:0 16px 10px; background:var(--wh); border-radius:var(--ra); border:1px solid var(--pa); cursor:pointer; transition:background .12s; }
+.gc:active { background:var(--bg); }
+.gh { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+.gn { font-size:14px; font-weight:600; color:var(--dk); font-family:var(--font-book); }
+.gp { font-size:12px; font-weight:700; font-family:var(--font-bold); }
+.gm { font-size:11px; color:var(--md); margin-top:6px; }
+
+/* HACK ITEMS */
+.hi { display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--pa); cursor:pointer; transition:background .12s; }
+.hi:last-child { border-bottom:none; }
+.hi:active { background:var(--bg); }
+.hico { width:38px; height:38px; border-radius:var(--rb); display:flex; align-items:center; justify-content:center; font-size:19px; flex-shrink:0; }
+.hn { font-size:14px; font-weight:600; color:var(--dk); font-family:var(--font-book); }
+.hs { font-size:11.5px; color:var(--md); margin-top:1px; }
+.hbadge { font-size:10px; font-weight:700; padding:3px 9px; border-radius:2px; white-space:nowrap; }
+.b-done { background:var(--ok-l); color:#15803d; }
+.b-next { background:var(--r-l); color:var(--r-h); }
+.b-lock { background:var(--bg); color:var(--lt); }
+
+/* RANGE */
+input[type=range] { -webkit-appearance:none; appearance:none; width:100%; height:4px; background:var(--pa); border-radius:2px; outline:none; margin:10px 0 6px; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; height:22px; border-radius:50%; background:var(--r); cursor:pointer; box-shadow:0 2px 8px rgba(253,0,13,.3); }
+
+/* BANNERS */
+.ban { border-radius:var(--ra); padding:18px; margin:0 16px 12px; color:#fff; }
+.ban.red { background:var(--r); }
+.ban.dk { background:var(--dk); }
+.ban.dk2 { background:var(--dk2); }
+.ban.pt { background:var(--petrol); }
+.ban.r-gr { background:linear-gradient(135deg,var(--r),var(--r-h)); }
+.b-lbl { font-size:10px; opacity:.8; letter-spacing:.6px; text-transform:uppercase; margin-bottom:4px; font-family:var(--font-book); }
+.b-val { font-size:34px; font-weight:900; font-family:var(--font-bold); }
+.b-sub { font-size:12px; opacity:.75; margin-top:4px; }
+.b-note { font-size:10px; opacity:.5; margin-top:6px; }
+
+/* CALC */
+.cb { padding:0 16px; margin-bottom:14px; }
+.cb-lbl { font-size:11px; font-weight:700; color:var(--lt); letter-spacing:.5px; text-transform:uppercase; margin-bottom:4px; font-family:var(--font-book); }
+.cb-row { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:2px; }
+.cb-big { font-size:26px; font-weight:900; color:var(--r); font-family:var(--font-bold); }
+.cb-tag { font-size:12px; padding:3px 10px; border-radius:2px; font-weight:700; background:var(--r-l); color:var(--r-h); font-family:var(--font-book); }
+
+/* BUDGET ROWS */
+.br { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--pa); }
+.br:last-child { border-bottom:none; }
+.bd { width:10px; height:10px; border-radius:2px; flex-shrink:0; }
+.bl { flex:1; font-size:13px; color:var(--dk2); }
+.bp { font-size:13px; font-weight:700; color:var(--dk); }
+.bc { font-size:12px; color:var(--md); }
+
+/* CTAs */
+.cta { background:var(--r); color:#fff; border:none; border-radius:var(--btn-r); padding:15px 20px; font-size:15px; font-weight:700; font-family:var(--font-book); cursor:pointer; width:calc(100% - 32px); margin:0 16px 10px; display:block; text-align:center; transition:all .12s; letter-spacing:.2px; }
+.cta:active { background:var(--r-h); transform:scale(.98); }
+.cta.dk2 { background:var(--dk2); }
+.cta.pt { background:var(--petrol); }
+.cta.out { background:transparent; color:var(--r); border:2px solid var(--r); }
+.cta.out-dk { background:transparent; color:var(--dk2); border:2px solid var(--dk2); }
+.cta-n { text-align:center; font-size:11px; color:var(--lt); margin:-4px 0 12px; }
+
+/* TIP CARD */
+.tip { background:var(--dk); border-radius:var(--rb); padding:13px 15px; margin:0 16px 12px; display:flex; align-items:flex-start; gap:10px; cursor:pointer; transition:background .12s; }
+.tip:active { background:var(--dk2); }
+.tip-i { font-size:20px; flex-shrink:0; margin-top:1px; }
+.tip-t { font-size:13px; font-weight:700; color:#fff; font-family:var(--font-book); }
+.tip-s { font-size:11.5px; color:rgba(255,255,255,.5); margin-top:2px; }
+.tip-l { font-size:11px; color:var(--r-l); margin-top:5px; font-weight:700; }
+
+/* FLOW */
+.flow { display:flex; gap:10px; margin:0 16px 12px; }
+.fi { flex:1; background:var(--wh); border-radius:var(--rb); border:1px solid var(--pa); padding:12px; }
+.fl { font-size:10px; color:var(--lt); font-weight:700; letter-spacing:.5px; text-transform:uppercase; margin-bottom:3px; font-family:var(--font-book); }
+.fv { font-size:20px; font-weight:900; font-family:var(--font-bold); }
+.fv.g { color:var(--ok); }
+.fv.r { color:var(--r); }
+
+/* TRANSACTIONS */
+.txi { display:flex; align-items:center; gap:12px; padding:11px 16px; border-bottom:1px solid var(--pa); cursor:pointer; transition:background .12s; }
+.txi:last-child { border-bottom:none; }
+.txi:active { background:var(--bg); }
+.tx-i { width:38px; height:38px; border-radius:var(--rb); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.tx-n { font-size:13.5px; font-weight:600; color:var(--dk); font-family:var(--font-book); }
+.tx-d { font-size:11px; color:var(--lt); }
+.tx-a { font-size:14px; font-weight:700; font-family:var(--font-bold); }
+
+/* BOTTOM NAV */
+.bnav { height:84px; background:var(--wh); border-top:1px solid var(--pa); display:flex; align-items:center; justify-content:space-around; padding:0 4px 18px; flex-shrink:0; }
+.ni { display:flex; flex-direction:column; align-items:center; gap:3px; cursor:pointer; padding:6px 10px; border-radius:var(--rb); min-width:52px; transition:background .12s; }
+.ni:hover { background:var(--r-l); }
+.ni-i { font-size:22px; line-height:1; }
+.ni-l { font-size:10px; font-weight:600; color:var(--lt); letter-spacing:.2px; font-family:var(--font-book); }
+.ni.on .ni-l { color:var(--r); font-weight:700; }
+.ni-dot { width:4px; height:4px; border-radius:50%; background:var(--r); margin:0 auto; }
+
+/* INFO BOX */
+.ib { background:var(--r-p); border-radius:var(--rb); padding:13px 15px; margin:0 16px 12px; display:flex; gap:9px; }
+.ib.ok { background:var(--ok-l); }
+.ib.wa { background:var(--wa-l); }
+.ib.pt { background:#edf3f5; }
+.ib p { font-size:12px; color:var(--r-h); line-height:1.55; font-family:var(--font-book); }
+.ib.ok p { color:#166534; }
+.ib.wa p { color:#92400e; }
+.ib.pt p { color:var(--petrol); }
+
+/* TOGGLE */
+.trow { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:var(--wh); border-bottom:1px solid var(--pa); }
+.tlbl { font-size:13.5px; color:var(--dk); font-weight:600; font-family:var(--font-book); }
+.tog { width:46px; height:26px; background:var(--pa); border-radius:13px; position:relative; cursor:pointer; transition:background .2s; border:none; outline:none; flex-shrink:0; }
+.tog.on { background:var(--r); }
+.tog::after { content:''; position:absolute; width:20px; height:20px; background:#fff; border-radius:50%; top:3px; left:3px; transition:transform .2s; box-shadow:0 1px 4px rgba(0,0,0,.2); }
+.tog.on::after { transform:translateX(20px); }
+
+/* HYPO */
+.hrow { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--pa); }
+.hrow:last-child { border-bottom:none; }
+.hk { font-size:13px; color:var(--md); font-family:var(--font-book); }
+.hv { font-size:14px; font-weight:700; color:var(--dk); font-family:var(--font-bold); }
+.aff-bar { height:10px; background:var(--pa); border-radius:2px; overflow:hidden; margin:8px 0; }
+.aff-fill { height:100%; border-radius:2px; transition:width .4s; }
+
+/* CHILD CARD */
+.child { background:var(--wh); border-radius:var(--ra); border:1px solid var(--pa); padding:16px; margin:0 16px 12px; display:flex; gap:14px; align-items:center; cursor:pointer; transition:background .12s; }
+.child:active { background:var(--bg); }
+.cav { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:900; color:#fff; flex-shrink:0; font-family:var(--font-bold); }
+.cn { font-size:15px; font-weight:700; color:var(--dk); font-family:var(--font-book); }
+.cs { font-size:12px; color:var(--md); margin-top:2px; }
+.cb2 { font-size:18px; font-weight:900; text-align:right; font-family:var(--font-bold); }
+.cb2l { font-size:11px; color:var(--md); text-align:right; }
+
+/* STAT GRID */
+.sgrid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 16px 12px; }
+.sg { background:var(--wh); border:1px solid var(--pa); border-radius:var(--rb); padding:12px; text-align:center; }
+.sg-v { font-size:20px; font-weight:900; font-family:var(--font-bold); }
+.sg-l { font-size:11px; color:var(--md); margin-top:3px; }
+
+/* MILESTONES */
+.ms { display:flex; align-items:center; gap:12px; padding:11px 16px; border-bottom:1px solid var(--pa); }
+.ms:last-child { border-bottom:none; }
+.ms-i { width:34px; height:34px; border-radius:var(--rb); display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+.ms-t { flex:1; }
+.ms-n { font-size:13.5px; font-weight:600; color:var(--dk); font-family:var(--font-book); }
+.ms-d { font-size:11px; color:var(--lt); }
+
+.src { font-size:10px; color:var(--lt); text-align:center; padding:8px 16px 4px; font-family:var(--font-book); }
+
+/* ANIMATIONS */
+@keyframes fU { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+.fu { animation:fU .3s ease both; }
+.d1 { animation-delay:.05s; } .d2 { animation-delay:.1s; }
+.d3 { animation-delay:.15s; } .d4 { animation-delay:.2s; }
+.d5 { animation-delay:.25s; }
+
+/* SPLASH */
+.splash { background:var(--wh); height:100%; display:flex; flex-direction:column; }
+.sp-hero { background:var(--r); padding:32px 24px 28px; flex-shrink:0; }
+.sp-body { flex:1; padding:20px; display:flex; flex-direction:column; gap:9px; overflow:auto; }
+.sp-feat { display:flex; align-items:center; gap:12px; background:var(--bg); border-radius:var(--rb); padding:12px 14px; border:1px solid var(--pa); }
+.sp-fi { width:36px; height:36px; border-radius:var(--rb); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.sp-ft { font-size:13.5px; font-weight:600; color:var(--dk); font-family:var(--font-book); }
+.sp-fs { font-size:11.5px; color:var(--md); }
+.sp-act { padding:0 20px 24px; flex-shrink:0; }
+.sp-cta { background:var(--r); color:#fff; border:none; border-radius:var(--btn-r); padding:17px; font-size:16px; font-weight:700; font-family:var(--font-book); cursor:pointer; width:100%; letter-spacing:.2px; transition:background .15s; }
+.sp-cta:active { background:var(--r-h); }
+.sp-login { font-size:13px; color:var(--md); text-align:center; margin-top:14px; cursor:pointer; font-family:var(--font-book); }
+.sp-login span { color:var(--r); font-weight:700; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sb">
+  <div class="sb-s">Start</div>
+  <button class="sb-btn on" id="sb-splash" onclick="go('splash',this)"><span>✨</span>Onboarding</button>
+  <div class="sb-s">Jugend 18–24</div>
+  <button class="sb-btn" id="sb-home" onclick="go('home',this)"><span>🏠</span>Dashboard</button>
+  <button class="sb-btn" id="sb-goals" onclick="go('goals',this)"><span>🎯</span>Sparziele</button>
+  <button class="sb-btn" id="sb-haxx" onclick="go('haxx',this)"><span>⚡</span>MoneyHaxx</button>
+  <button class="sb-btn" id="sb-budget" onclick="go('budget',this)"><span>📊</span>Budgetrechner</button>
+  <button class="sb-btn" id="sb-vorsor" onclick="go('vorsor',this)"><span>🛡️</span>3a Vorsorge</button>
+  <button class="sb-btn" id="sb-finlit" onclick="go('finlit',this)"><span>📚</span>Finanzkompetenz</button>
+  <div class="sb-s">25–30 & Familie</div>
+  <button class="sb-btn" id="sb-hypo" onclick="go('hypo',this)"><span>🏡</span>Hypothek</button>
+  <button class="sb-btn" id="sb-eltern" onclick="go('eltern',this)"><span>👨‍👩‍👧</span>Eltern-Ansicht</button>
+</div>
+
+<!-- PHONE -->
+<div class="phone"><div class="ps">
+
+<div class="bar red v" id="bar-splash"><span>9:41</span><span>●●●● 5G 🔋</span></div>
+<div class="bar dk"  id="bar-home">  <span>9:41</span><span>●●●● 5G 🔋</span></div>
+<div class="bar red" id="bar-goals"> <span>9:41</span><span>●●●● 5G 🔋</span></div>
+<div class="bar dk2" id="bar-haxx">  <span>9:41</span><span>●●●● 5G 🔋</span></div>
+<div class="bar red" id="bar-budget"><span>9:41</span><span>●●●● 5G 🔋</span></div>
+<div class="bar dk"  id="bar-vorsor"><span>9:41</span><span>●●●● 5G 🔋</span></div>
+<div class="bar dk"  id="bar-hypo">  <span>9:41</span><span>●●●● 5G 🔋</span></div>
+<div class="bar dk"  id="bar-finlit"><span>9:41</span><span>●●●● 5G 🔋</span></div>
+<div class="bar wh"  id="bar-eltern"><span>9:41</span><span>●●●● 5G 🔋</span></div>
+
+<!-- SPLASH -->
+<div class="sc on" id="sc-splash">
+<div class="splash">
+  <div class="sp-hero">
+    <div class="fu" style="margin-bottom:20px" id="logo-splash"></div>
+    <div class="fu d1" style="font-size:28px;font-weight:900;color:#fff;line-height:1.15;font-family:var(--font-bold)">
+      Was morgen zählt —<br>fängt heute an.
+    </div>
+    <div class="fu d2" style="font-size:13px;color:rgba(255,255,255,.78);margin-top:10px;line-height:1.5">
+      Die BLKB-Jugend-App. Kostenlos bis 30. Für Finanzen, die mit dir wachsen.
+    </div>
+  </div>
+  <div class="sp-body">
+    <div class="sp-feat fu d2"><div class="sp-fi" style="background:var(--r-l)">💰</div><div><div class="sp-ft">Sparen mit Ziel</div><div class="sp-fs">Träume visualisieren & erreichen</div></div></div>
+    <div class="sp-feat fu d3"><div class="sp-fi" style="background:var(--bg)">⚡</div><div><div class="sp-ft">MoneyHaxx × BLKB</div><div class="sp-fs">Financial Literacy direkt in der App</div></div></div>
+    <div class="sp-feat fu d4"><div class="sp-fi" style="background:var(--bg)">🛡️</div><div><div class="sp-ft">3a digital starten</div><div class="sp-fs">Vorsorge in 3 Minuten — kein Schalter</div></div></div>
+    <div class="sp-feat fu d4"><div class="sp-fi" style="background:var(--bg)">🏡</div><div><div class="sp-ft">Hypothekenrechner</div><div class="sp-fs">Wohneigentum im Baselbiet planen</div></div></div>
+  </div>
+  <div class="sp-act">
+    <button class="sp-cta fu d5" onclick="go('home',document.getElementById('sb-home'))">Jetzt loslegen →</button>
+    <div class="sp-login fu d5">Bereits Konto? <span onclick="go('home',document.getElementById('sb-home'))">Einloggen</span></div>
+  </div>
+</div>
+</div>
+
+<!-- HOME -->
+<div class="sc" id="sc-home">
+<div class="hd dk">
+  <div class="hd-row">
+    <div>
+      <div class="hd-eye wh-txt">Guten Morgen</div>
+      <div class="hd-ttl wh">Lara ✨</div>
+      <div class="hd-sub wh">Jugendkonto · kostenlos bis 30</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div id="logo-home" style="width:56px"></div>
+      <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff">LA</div>
+    </div>
+  </div>
+</div>
+<div class="scr">
+  <div class="sp"></div>
+  <div class="wmz fu"><div class="wmz-dot"></div>Was morgen zählt · BLKB</div>
+  <div class="card red-t fu">
+    <div class="clbl">Kontostand</div>
+    <div class="cval r">CHF 2'480.–</div>
+    <div class="csub">Jugendkonto · IBAN CH56 0077 0016 0416 0344 9</div>
+    <div class="pt" style="margin-top:12px"><div class="pf" style="width:62%;background:var(--r)"></div></div>
+    <div style="display:flex;justify-content:space-between;margin-top:6px">
+      <span style="font-size:11px;color:var(--r-h)">Sparziel März: CHF 4'000</span>
+      <span style="font-size:11px;font-weight:700;color:var(--r-h)">62%</span>
+    </div>
+  </div>
+  <div class="flow fu d1">
+    <div class="fi"><div class="fl">Einnahmen</div><div class="fv g">+3'200</div><div style="font-size:11px;color:var(--lt)">März 2026</div></div>
+    <div class="fi"><div class="fl">Ausgaben</div><div class="fv r">−1'840</div><div style="font-size:11px;color:var(--lt)">März 2026</div></div>
+  </div>
+  <div class="tip fu d2" onclick="go('haxx',document.getElementById('sb-haxx'))">
+    <div class="tip-i">⚡</div>
+    <div><div class="tip-t">MoneyHaxx × BLKB</div><div class="tip-s">10%-Hack: Leg CHF 320 zurück — automatisch!</div><div class="tip-l">Jetzt einrichten →</div></div>
+  </div>
+  <div class="st fu d2">Meine Sparziele</div>
+  <div class="gc fu d3" onclick="go('goals',document.getElementById('sb-goals'))">
+    <div class="gh"><span class="gn">✈️ Reise Japan</span><span class="gp" style="color:var(--r)">62%</span></div>
+    <div class="pt"><div class="pf" style="width:62%;background:var(--r)"></div></div>
+    <div class="gm">CHF 620 von CHF 1'000 · noch 3 Monate</div>
+  </div>
+  <div class="gc fu d3" onclick="go('goals',document.getElementById('sb-goals'))">
+    <div class="gh"><span class="gn">🚲 E-Bike</span><span class="gp" style="color:var(--olive)">38%</span></div>
+    <div class="pt"><div class="pf" style="width:38%;background:var(--olive)"></div></div>
+    <div class="gm">CHF 760 von CHF 2'000 · noch 7 Monate</div>
+  </div>
+  <div class="st fu d4">Letzte Transaktionen</div>
+  <div class="card" style="padding:0;margin-bottom:12px">
+    <div class="txi"><div class="tx-i" style="background:#f5f5f5">🛒</div><div style="flex:1"><div class="tx-n">Migros</div><div class="tx-d">Heute, 11:34</div></div><div class="tx-a" style="color:var(--r)">−34.50</div></div>
+    <div class="txi"><div class="tx-i" style="background:var(--ok-l)">💳</div><div style="flex:1"><div class="tx-n">Lohneingang</div><div class="tx-d">01. März</div></div><div class="tx-a" style="color:var(--ok)">+3'200.–</div></div>
+    <div class="txi"><div class="tx-i" style="background:var(--r-p)">💰</div><div style="flex:1"><div class="tx-n">Sparziel Japan</div><div class="tx-d">28. Feb</div></div><div class="tx-a" style="color:var(--r)">−100.–</div></div>
+    <div class="txi"><div class="tx-i" style="background:#fff8f0">☕</div><div style="flex:1"><div class="tx-n">Starbucks</div><div class="tx-d">27. Feb</div></div><div class="tx-a" style="color:var(--r)">−6.50</div></div>
+  </div>
+  <div style="height:16px"></div>
+</div>
+<div class="bnav">
+  <div class="ni on" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-dot"></div><div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div><div class="ni-l">Ziele</div></div>
+  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
+  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+</div>
+</div>
+
+<!-- GOALS -->
+<div class="sc" id="sc-goals">
+<div class="hd red"><div class="hd-row"><div><div class="hd-eye wh-txt">Meine Sparziele</div><div class="hd-ttl wh">Träume erreichen</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
+<div class="scr">
+  <div class="sp"></div>
+  <div class="card red-t fu"><div class="clbl">Gespartes total</div><div class="cval r">CHF 2'230.–</div><div class="csub">3 aktive Ziele · Monatswachstum +CHF 420</div></div>
+  <div class="st fu d1">Aktive Ziele</div>
+  <div class="gc fu d1"><div class="gh"><span class="gn">✈️ Reise Japan</span><span class="gp" style="color:var(--r)">62%</span></div><div class="pt"><div class="pf" style="width:62%;background:var(--r)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 620 / CHF 1'000</span><span style="font-size:11px;color:var(--r);font-weight:700">Aug 2025</span></div></div>
+  <div class="gc fu d2"><div class="gh"><span class="gn">🚲 E-Bike</span><span class="gp" style="color:var(--olive)">38%</span></div><div class="pt"><div class="pf" style="width:38%;background:var(--olive)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 760 / CHF 2'000</span><span style="font-size:11px;color:var(--olive);font-weight:700">Okt 2025</span></div></div>
+  <div class="gc fu d3"><div class="gh"><span class="gn">🏠 Notfallreserve</span><span class="gp" style="color:var(--ok)">85%</span></div><div class="pt"><div class="pf" style="width:85%;background:var(--ok)"></div></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span class="gm">CHF 850 / CHF 1'000</span><span style="font-size:11px;color:var(--ok);font-weight:700">Fast da! 🎉</span></div></div>
+  <button class="cta fu d4">+ Neues Ziel erstellen</button>
+  <div class="cta-n">Urlaubsziel, Gadget, Ausbildung, Wohnung...</div>
+  <div class="ib fu d4"><span style="font-size:18px;flex-shrink:0">💡</span><p><strong>10%-Hack:</strong> Automatisch 10% vom Lohn sparen. CHF 320/Monat → bei der Pension über CHF 490'000.</p></div>
+  <div style="height:16px"></div>
+</div>
+<div class="bnav">
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
+  <div class="ni on"><div class="ni-i">🎯</div><div class="ni-dot"></div><div class="ni-l">Ziele</div></div>
+  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
+  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+</div>
+</div>
+
+<!-- HAXX -->
+<div class="sc" id="sc-haxx">
+<div class="hd dk2"><div class="hd-row"><div><div class="hd-eye" style="color:rgba(253,0,13,.75)">MoneyHaxx × BLKB</div><div class="hd-ttl wh">Finanzen ohne Stress</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
+<div class="scr">
+  <div class="sp"></div>
+  <div class="card dk-t fu" style="border-color:#3a404a"><div style="font-size:11px;color:#888;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Dein Fortschritt</div><div style="font-size:17px;font-weight:700;color:#fff">3 von 6 Hacks abgeschlossen 🔥</div><div class="pt" style="margin-top:8px;background:#3a404a"><div class="pf" style="width:50%;background:var(--r)"></div></div><div style="font-size:11px;color:#888;margin-top:5px">Nächster: Fifty-Fifty-Hack</div></div>
+  <div class="st fu d1">Die 6 MoneyHaxx</div>
+  <div class="card" style="padding:4px 0;margin-bottom:12px">
+    <div class="hi"><div class="hico" style="background:var(--ok-l)">✅</div><div style="flex:1"><div class="hn">Easy 10%-Hack</div><div class="hs">10% vom Lohn sofort sparen</div></div><span class="hbadge b-done">Erledigt</span></div>
+    <div class="hi"><div class="hico" style="background:var(--ok-l)">✅</div><div style="flex:1"><div class="hn">Null-Schulden-Hack</div><div class="hs">Steuern richtig planen</div></div><span class="hbadge b-done">Erledigt</span></div>
+    <div class="hi"><div class="hico" style="background:var(--ok-l)">✅</div><div style="flex:1"><div class="hn">Dini Mieti-Hack</div><div class="hs">Max. 1/3 Lohn für Miete</div></div><span class="hbadge b-done">Erledigt</span></div>
+    <div class="hi" style="background:var(--r-p)"><div class="hico" style="background:var(--r-l)">⚡</div><div style="flex:1"><div class="hn">Fifty-Fifty-Hack</div><div class="hs">Lohnerhöhung smart nutzen</div></div><span class="hbadge b-next">Als nächstes</span></div>
+    <div class="hi"><div class="hico" style="background:var(--bg)">💡</div><div style="flex:1"><div class="hn">Ego-Hack</div><div class="hs">In dich selbst investieren</div></div><span class="hbadge b-lock">🔒</span></div>
+    <div class="hi"><div class="hico" style="background:var(--bg)">📈</div><div style="flex:1"><div class="hn">Get-Rich-Hack</div><div class="hs">Wie Warren Buffett denken</div></div><span class="hbadge b-lock">🔒</span></div>
+  </div>
+  <div class="tip fu d2">
+    <div id="logo-haxx" style="width:48px;flex-shrink:0"></div>
+    <div><div class="tip-t">BLKB × MoneyHaxx</div><div class="tip-s">Inhalte DE/FR/IT · Kantonalbanken Schweiz</div></div>
+  </div>
+  <button class="cta fu d3" onclick="go('budget',document.getElementById('sb-budget'))">Budgetrechner öffnen →</button>
+  <div style="height:16px"></div>
+</div>
+<div class="bnav">
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div><div class="ni-l">Ziele</div></div>
+  <div class="ni on"><div class="ni-i">⚡</div><div class="ni-dot"></div><div class="ni-l">Haxx</div></div>
+  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+</div>
+</div>
+
+<!-- BUDGET -->
+<div class="sc" id="sc-budget">
+<div class="hd red"><div class="hd-row"><div><div class="hd-eye wh-txt">MoneyHaxx Budgetrechner</div><div class="hd-ttl wh">Dein Geld für dich</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
+<div class="scr">
+  <div class="sp"></div>
+  <div class="cb fu"><div class="cb-lbl">Monatslohn (CHF)</div><div class="cb-row"><div class="cb-big" id="lD">CHF 3'200</div><div class="cb-tag">10% = <span id="tP">CHF 320</span></div></div><input type="range" id="lS" min="500" max="8000" value="3200" step="100" oninput="calc()"></div>
+  <div class="cb fu d1"><div class="cb-lbl">Geburtsjahr</div><div class="cb-row"><div class="cb-big" id="yD">2002</div><div class="cb-tag">Noch <span id="yL">38</span> J.</div></div><input type="range" id="yS" min="1996" max="2012" value="2002" step="1" oninput="calc()"></div>
+  <div class="ban r-gr fu d2"><div class="b-lbl">Bei Pension (65) · 5% p.a.</div><div class="b-val" id="pR">CHF 406'000.–</div><div class="b-sub" id="rT">davon CHF 270'000 reine Rendite 🚀</div><div class="b-note">Ø CH-Aktienmarkt 5.3% p.a. seit 1969 · Quelle: MoneyHaxx</div></div>
+  <div class="st fu">Empfohlene Budgetaufteilung</div>
+  <div class="card fu d1" style="padding:12px 16px">
+    <div class="br"><div class="bd" style="background:var(--r)"></div><div class="bl">Sparen & Investieren</div><div class="bp">10%</div><div class="bc" id="b1"></div></div>
+    <div class="br"><div class="bd" style="background:var(--dk)"></div><div class="bl">Wohnen (max.)</div><div class="bp">30%</div><div class="bc" id="b2"></div></div>
+    <div class="br"><div class="bd" style="background:var(--olive)"></div><div class="bl">Essen & Freizeit</div><div class="bp">15%</div><div class="bc" id="b3"></div></div>
+    <div class="br"><div class="bd" style="background:var(--pa)"></div><div class="bl">Steuern, Versicherungen</div><div class="bp">45%</div><div class="bc" id="b4"></div></div>
+  </div>
+  <div class="src">Quelle: MoneyHaxx × Dachverband Budgetberatung Schweiz</div>
+  <button class="cta fu" onclick="go('vorsor',document.getElementById('sb-vorsor'))">3a Vorsorge starten →</button>
+  <div style="height:16px"></div>
+</div>
+<div class="bnav">
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div><div class="ni-l">Ziele</div></div>
+  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
+  <div class="ni on"><div class="ni-i">📊</div><div class="ni-dot"></div><div class="ni-l">Budget</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+</div>
+</div>
+
+<!-- VORSORGE -->
+<div class="sc" id="sc-vorsor">
+<div class="hd dk"><div class="hd-row"><div><div class="hd-eye wh-txt">Vorsorge · Säule 3a</div><div class="hd-ttl wh">Was morgen zählt</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
+<div class="scr">
+  <div class="sp"></div>
+  <div class="ban dk fu">
+    <div style="margin-bottom:14px" id="logo-vorsor"></div>
+    <div class="b-lbl">Dein 3a-Guthaben</div>
+    <div class="b-val">CHF 4'320.–</div>
+    <div style="font-size:12px;opacity:.65;margin-top:2px">Fondssparplan · 80% Aktien · YTD +6.2%</div>
+    <div class="pt" style="background:rgba(255,255,255,.15);margin-top:12px"><div class="pf" style="width:60%;background:var(--r)"></div></div>
+    <div style="font-size:11px;opacity:.7;margin-top:5px">CHF 4'320 von CHF 7'258 Jahresziel · 60%</div>
+    <div style="display:inline-block;background:rgba(253,0,13,.25);border-radius:2px;padding:5px 12px;font-size:12px;margin-top:10px;color:#fff;border:1px solid rgba(253,0,13,.3)">💰 Steuerersparnis 2024: CHF 780</div>
+  </div>
+  <div class="sgrid fu d1">
+    <div class="sg"><div class="sg-v" style="color:var(--r)">CHF 320k</div><div class="sg-l">Bei Pension (65)</div></div>
+    <div class="sg"><div class="sg-v" style="color:var(--ok)">CHF 95k</div><div class="sg-l">Steuerersparnis total</div></div>
+  </div>
+  <div class="ib fu d2"><span style="font-size:18px;flex-shrink:0">💡</span><p><strong>Null-Schulden-Hack:</strong> 3a-Einzahlungen senken dein steuerbares Einkommen. Jetzt starten = max. Steuervorteil.</p></div>
+  <div class="st fu">Einstellungen</div>
+  <div class="card" style="padding:0;margin-bottom:12px">
+    <div class="trow"><span class="tlbl">Automatische Einzahlung</span><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="trow"><span class="tlbl">Fondsbasierter Plan</span><button class="tog on" onclick="this.classList.toggle('on')"></button></div>
+    <div class="trow"><span class="tlbl">Jahresziel-Benachrichtigung</span><button class="tog" onclick="this.classList.toggle('on')"></button></div>
+  </div>
+  <button class="cta fu">3a erhöhen · Digital in 2 Min</button>
+  <div class="cta-n">Kein Filialbesuch · vollständig digital</div>
+  <button class="cta out fu">Beratungsgespräch buchen</button>
+  <div class="tip fu" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="tip-i">⚡</div><div><div class="tip-t">MoneyHaxx: Null-Schulden-Hack</div><div class="tip-s">Steuern in der Schweiz richtig planen</div><div class="tip-l">Video ansehen →</div></div></div>
+  <div style="height:16px"></div>
+</div>
+<div class="bnav">
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div><div class="ni-l">Ziele</div></div>
+  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
+  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
+  <div class="ni on"><div class="ni-i">🛡️</div><div class="ni-dot"></div><div class="ni-l">3a</div></div>
+</div>
+</div>
+
+<!-- HYPOTHEK -->
+<div class="sc" id="sc-hypo">
+<div class="hd dk"><div class="hd-row"><div><div class="hd-eye wh-txt">Hypothek · Planung</div><div class="hd-ttl wh">Wohneigentum</div><div class="hd-sub wh">BLKB Erstjahresbonus für Junge</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
+<div class="scr">
+  <div class="sp"></div>
+  <div class="cb fu"><div class="cb-lbl">Kaufpreis Liegenschaft (CHF)</div><div class="cb-row"><div class="cb-big" id="prD">CHF 850'000</div><div class="cb-tag">Baselland</div></div><input type="range" id="prS" min="300000" max="2000000" value="850000" step="10000" oninput="calcH()"></div>
+  <div class="cb fu d1"><div class="cb-lbl">Eigenkapital (min. 20%)</div><div class="cb-row"><div class="cb-big" id="ekD">CHF 170'000</div><div class="cb-tag">20%</div></div><input type="range" id="ekS" min="10" max="50" value="20" step="1" oninput="calcH()"></div>
+  <div class="ban r-gr fu d2"><div class="b-lbl">Hypothekarbetrag</div><div class="b-val" id="hAmt">CHF 680'000.–</div><div class="b-sub" id="hRate">Monatliche Belastung: ca. CHF 2'380</div><div class="b-note">Richtzins 2025: 1,8% · BLKB Erstjahresbonus für Junge</div></div>
+  <div class="st fu">Tragbarkeitscheck</div>
+  <div class="card fu d1" style="margin-bottom:10px"><div style="font-size:13px;font-weight:600;color:var(--dk);margin-bottom:8px">Erforderliches Jahreseinkommen</div><div style="font-size:28px;font-weight:900;color:var(--r);font-family:var(--font-bold)" id="minInc">CHF 114'000</div><div style="font-size:12px;color:var(--md);margin-top:4px">Regel: max. 1/3 des Bruttoeinkommens für Hypothek</div><div class="aff-bar"><div class="aff-fill" id="affFill" style="width:65%;background:var(--ok)"></div></div><div style="font-size:11px;margin-top:4px" id="affTxt">Tragbarkeit: gut ✓</div></div>
+  <div class="card fu d2" style="padding:12px 16px;margin-bottom:10px">
+    <div class="hrow"><span class="hk">Kaufpreis</span><span class="hv" id="hr1">CHF 850'000</span></div>
+    <div class="hrow"><span class="hk">Eigenkapital</span><span class="hv" id="hr2">CHF 170'000</span></div>
+    <div class="hrow"><span class="hk">Hypothek</span><span class="hv" id="hr3">CHF 680'000</span></div>
+    <div class="hrow"><span class="hk">Zinsen (1,8% p.a.)</span><span class="hv" id="hr4">CHF 1'020/Mt.</span></div>
+    <div class="hrow"><span class="hk">Amortisation</span><span class="hv" id="hr5">CHF 850/Mt.</span></div>
+    <div class="hrow" style="border:none"><span class="hk">Nebenkosten (~1%)</span><span class="hv" id="hr6">CHF 708/Mt.</span></div>
+  </div>
+  <div class="ib wa fu d3"><span style="font-size:18px;flex-shrink:0">⚠️</span><p>Dies ist eine Schätzung. Für verbindliche Beratung buche ein Gespräch mit deiner BLKB-Beraterin.</p></div>
+  <button class="cta fu d3">Erstberatung Hypothek buchen</button>
+  <div class="cta-n">Kostenlos · BLKB Erstjahresbonus für Junge</div>
+  <div style="height:16px"></div>
+</div>
+<div class="bnav">
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+  <div class="ni on"><div class="ni-i">🏡</div><div class="ni-dot"></div><div class="ni-l">Hypothek</div></div>
+  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
+  <div class="ni" onclick="go('eltern',document.getElementById('sb-eltern'))"><div class="ni-i">👨‍👩‍👧</div><div class="ni-l">Familie</div></div>
+</div>
+</div>
+
+<!-- FINANZKOMPETENZ -->
+<div class="sc" id="sc-finlit">
+<div class="hd dk"><div class="hd-row"><div><div class="hd-eye wh-txt">BLKB Jugend</div><div class="hd-ttl wh">Finanzkompetenz</div><div class="hd-sub wh">Wissen das dein Leben verändert</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
+<div class="scr">
+  <div class="sp"></div>
+  <div class="ib pt fu"><span style="font-size:18px;flex-shrink:0">💡</span><p>Wer sich in Finanzdingen gut auskennt, geht erfolgreicher durchs Leben. Budgetieren, Ausgaben priorisieren und Sparen — hier lernst du wie.</p></div>
+
+  <div class="st fu">BLKB Angebote für Jugendliche</div>
+
+  <div class="card" style="padding:4px 0;margin-bottom:12px">
+    <div class="hi"><div class="hico" style="background:var(--r-l)">💳</div><div style="flex:1"><div class="hn">ProfitCard</div><div class="hs">Gratis Zolli, vergünstigte Freizeit & Theaterangebote</div></div><span style="font-size:16px;color:var(--lt)">›</span></div>
+    <div class="hi"><div class="hico" style="background:var(--ok-l)">🏦</div><div style="flex:1"><div class="hn">Jugendkonto</div><div class="hs">TWINT, E-Banking, Mobile Banking — mit Vorzugszins</div></div><span style="font-size:16px;color:var(--lt)">›</span></div>
+    <div class="hi"><div class="hico" style="background:var(--bg)">🌍</div><div style="flex:1"><div class="hn">Visa Debit Stu</div><div class="hs">Keine Jahresgebühr bis 30 · weltweit bezahlen · Cashback</div></div><span style="font-size:16px;color:var(--lt)">›</span></div>
+    <div class="hi"><div class="hico" style="background:var(--r-p)">📱</div><div style="flex:1"><div class="hn">BLKB TWINT</div><div class="hs">Die sichere Bezahl-App der Schweiz</div></div><span style="font-size:16px;color:var(--lt)">›</span></div>
+    <div class="hi"><div class="hico" style="background:#f4f5ee)">📈</div><div style="flex:1"><div class="hn">Fondssparplan</div><div class="hs">Schritt für Schritt Vermögen aufbauen — auch mit kleinen Beträgen</div></div><span style="font-size:16px;color:var(--lt)">›</span></div>
+  </div>
+
+  <div class="st fu d1">Finanzkompetenz lernen</div>
+
+  <div class="card fu d1" style="padding:0;margin-bottom:12px">
+    <div class="txi"><div class="tx-i" style="background:var(--r-p)">💰</div><div style="flex:1"><div class="tx-n">Budgetieren</div><div class="tx-d">Einnahmen & Ausgaben im Griff haben</div></div></div>
+    <div class="txi"><div class="tx-i" style="background:var(--ok-l)">🎯</div><div style="flex:1"><div class="tx-n">Sparziele setzen</div><div class="tx-d">Kurz- und mittelfristig clever sparen</div></div></div>
+    <div class="txi"><div class="tx-i" style="background:var(--bg)">📊</div><div style="flex:1"><div class="tx-n">Ausgaben priorisieren</div><div class="tx-d">Was brauche ich wirklich?</div></div></div>
+    <div class="txi"><div class="tx-i" style="background:#f4f5ee">🌱</div><div style="flex:1"><div class="tx-n">Früh investieren</div><div class="tx-d">Der Zinseszins-Effekt — dein bester Freund</div></div></div>
+  </div>
+
+  <div class="ban dk fu d2">
+    <div class="b-lbl">Wusstest du?</div>
+    <div style="font-size:16px;font-weight:700;margin-top:4px;line-height:1.4">Die BLKB druckt & bindet deine Bachelor- oder Masterarbeit kostenlos — mit dem Privatkonto Studierende!</div>
+    <div class="b-sub">Druckerei: 061 925 95 35 · druckerei@blkb.ch</div>
+  </div>
+
+  <button class="cta fu d3" onclick="go('haxx',document.getElementById('sb-haxx'))">MoneyHaxx starten →</button>
+  <button class="cta out fu d3">Mehr auf blkb.ch/jugend</button>
+  <div style="height:16px"></div>
+</div>
+<div class="bnav">
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('goals',document.getElementById('sb-goals'))"><div class="ni-i">🎯</div><div class="ni-l">Ziele</div></div>
+  <div class="ni" onclick="go('haxx',document.getElementById('sb-haxx'))"><div class="ni-i">⚡</div><div class="ni-l">Haxx</div></div>
+  <div class="ni on"><div class="ni-i">📚</div><div class="ni-dot"></div><div class="ni-l">Wissen</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+</div>
+</div>
+
+<!-- ELTERN -->
+<div class="sc" id="sc-eltern">
+<div class="hd wh">
+  <div class="hd-row">
+    <div>
+      <div id="logo-eltern" style="width:100px;margin-bottom:4px"></div>
+      <div class="hd-sub lt">Eltern-Ansicht · Kinder-Konten</div>
+    </div>
+    <button class="back dk" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button>
+  </div>
+</div>
+<div class="scr">
+  <div class="sp"></div>
+  <div class="ban red fu"><div class="b-lbl">Gesamtvermögen Familie</div><div class="b-val">CHF 34'820.–</div><div class="b-sub">2 Kinderkonten · 1 Ausbildungssparplan</div></div>
+  <div class="st fu d1">Kinder-Konten</div>
+  <div class="child fu d1" onclick="go('goals',document.getElementById('sb-goals'))">
+    <div class="cav" style="background:var(--r)">LA</div>
+    <div style="flex:1"><div class="cn">Lara, 17</div><div class="cs">Jugendkonto · App aktiv</div><div class="pt" style="margin-top:6px;width:120px"><div class="pf" style="width:62%;background:var(--r)"></div></div><div style="font-size:10px;color:var(--lt);margin-top:3px">Sparziel Japan: 62%</div></div>
+    <div><div class="cb2" style="color:var(--r)">CHF 2'480</div><div class="cb2l">Kontostand</div></div>
+  </div>
+  <div class="child fu d2">
+    <div class="cav" style="background:var(--dk)">NO</div>
+    <div style="flex:1"><div class="cn">Noah, 12</div><div class="cs">Kindersparkonto · App ab 12 aktiv</div><div class="pt" style="margin-top:6px;width:120px"><div class="pf" style="width:45%;background:var(--dk)"></div></div><div style="font-size:10px;color:var(--lt);margin-top:3px">Sparziel Lego: 45%</div></div>
+    <div><div class="cb2" style="color:var(--dk)">CHF 840</div><div class="cb2l">Kontostand</div></div>
+  </div>
+  <div class="st fu d2">Ausbildungssparplan</div>
+  <div class="card olive-t fu d3"><div class="clbl">Ausbildungsrücklage</div><div class="cval" style="color:var(--olive)">CHF 31'500.–</div><div class="csub">CHF 300/Monat · Ziel CHF 60'000</div><div class="pt"><div class="pf" style="width:52%;background:var(--olive)"></div></div></div>
+  <div class="st fu d3">Meilensteine</div>
+  <div class="card" style="padding:4px 0;margin-bottom:12px">
+    <div class="ms"><div class="ms-i" style="background:var(--r-p)">🎂</div><div class="ms-t"><div class="ms-n">Laras 18. Geburtstag</div><div class="ms-d">In 4 Monaten · Aug 2025</div></div><div style="font-size:16px;color:var(--lt)">›</div></div>
+    <div class="ms"><div class="ms-i" style="background:var(--bg)">🎒</div><div class="ms-t"><div class="ms-n">Noah Schulstart Sek</div><div class="ms-d">Aug 2026</div></div><div style="font-size:16px;color:var(--lt)">›</div></div>
+    <div class="ms"><div class="ms-i" style="background:var(--ok-l)">✅</div><div class="ms-t"><div class="ms-n">Ausbildungssparplan Noah</div><div class="ms-d">Gestartet · Jan 2023</div></div><div style="font-size:18px;color:var(--ok)">✓</div></div>
+  </div>
+  <button class="cta fu">Weiteres Kinderkonto eröffnen</button>
+  <div class="cta-n">Kostenlos · Schenkungsfunktion für Paten & Verwandte</div>
+  <button class="cta out fu">Beratungsgespräch buchen</button>
+  <div class="ib pt fu"><span style="font-size:18px;flex-shrink:0">💡</span><p>Modell nach <strong>Nordea Bank</strong>: Kinder- & Eltern-App verknüpft. <strong>VSKB/Prognos 2023</strong>: 2/3 der CH-Lehrlinge wenden sich bei Geld an die Familie.</p></div>
+  <div style="height:16px"></div>
+</div>
+<div class="bnav">
+  <div class="ni" onclick="go('home',document.getElementById('sb-home'))"><div class="ni-i">🏠</div><div class="ni-l">Home</div></div>
+  <div class="ni" onclick="go('vorsor',document.getElementById('sb-vorsor'))"><div class="ni-i">🛡️</div><div class="ni-l">3a</div></div>
+  <div class="ni" onclick="go('hypo',document.getElementById('sb-hypo'))"><div class="ni-i">🏡</div><div class="ni-l">Hypothek</div></div>
+  <div class="ni" onclick="go('budget',document.getElementById('sb-budget'))"><div class="ni-i">📊</div><div class="ni-l">Budget</div></div>
+  <div class="ni on"><div class="ni-i">👨‍👩‍👧</div><div class="ni-dot"></div><div class="ni-l">Familie</div></div>
+</div>
+</div>
+
+</div></div>
+
+<script>
+/* ── BLKB LOGO — FIX: icon-Farbe als Parameter ─────────────────────────────
+   wm  = Wortmark-Farbe  (BLKB-Schriftzug)
+   icon = Icon-Farbe      (Quadrat + Dreieck) — NEU!
+*/
+function logo(id, wm, icon) {
+  icon = icon || '#fd000d';
+  const c = document.getElementById(id);
+  if (!c) return;
+  c.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283.46 77.73"
+    style="width:100%;height:auto;display:block">
+    <path style="fill:${icon}" d="M3.18,3.18H74.67V74.55H3.18ZM0,0V77.72H77.85V0Z"/>
+    <polygon style="fill:${icon}" points="69.18 9.88 40.13 9.88 22.35 38.87 40.13 67.85 69.18 67.85 51.4 38.87 69.18 9.88"/>
+    <path style="fill:${wm}" d="M109.42,61h6.24c7.48,0,14.22-1.58,14.22-9.38,0-9-7.9-10.22-15.06-10.22h-5.4Zm0-26.4H114c8.07,0,14.89-.75,14.89-9.3,0-6.9-5.91-8.64-10.73-8.64h-8.73ZM101.1,9.87h15.72c12.06,0,20.37,3.91,20.37,14.62,0,8-4.65,12-12,13.78v.17c7.9.66,13.47,5.81,13.47,13.94,0,12.46-10.31,15.45-22.12,15.45H101.1Z"/>
+    <polygon style="fill:${wm}" points="151.08 9.87 159.39 9.87 159.39 60.52 182.5 60.52 182.5 67.83 151.08 67.83 151.08 9.87"/>
+    <polygon style="fill:${wm}" points="191.11 9.87 199.42 9.87 199.42 35.36 224.21 9.87 235.27 9.87 207.99 37.27 237.43 67.83 225.29 67.83 199.42 39.43 199.42 67.83 191.11 67.83 191.11 9.87"/>
+    <path style="fill:${wm}" d="M254.19,61h6.24c7.48,0,14.22-1.58,14.22-9.38,0-9-7.9-10.22-15-10.22h-5.41Zm0-26.4h4.57c8.07,0,14.89-.75,14.89-9.3,0-6.9-5.9-8.64-10.73-8.64h-8.73ZM245.87,9.87h15.72c12.06,0,20.37,3.91,20.37,14.62,0,8-4.65,12-12,13.78v.17c7.9.66,13.47,5.81,13.47,13.94,0,12.46-10.31,15.45-22.12,15.45H245.87Z"/>
+  </svg>`;
+}
+
+/* Logo-Platzierungen — icon-Farbe jetzt korrekt je nach Hintergrund */
+logo('logo-splash', '#ffffff', '#ffffff'); /* auf Rot  → alles weiss */
+logo('logo-home',   '#ffffff', '#ffffff'); /* auf Dunkel → alles weiss */
+logo('logo-haxx',   '#ffffff', '#ffffff'); /* auf Dunkel-Alt → alles weiss */
+logo('logo-vorsor', '#ffffff', '#ffffff'); /* auf Dunkel → alles weiss */
+logo('logo-eltern', '#20242a', '#fd000d'); /* auf Hell → original Farben */
+
+/* ── NAVIGATION ─────────────────────────────────────────────────────────── */
+let cur = 'splash';
+function go(n, b) {
+  if (cur === n) return;
+  const p = document.getElementById('sc-'+cur);
+  p.classList.add('out');
+  setTimeout(() => p.classList.remove('on','out'), 210);
+  document.getElementById('bar-'+cur).classList.remove('v');
+  document.getElementById('sc-'+n).classList.add('on');
+  document.getElementById('bar-'+n).classList.add('v');
+  cur = n;
+  document.querySelectorAll('.sb-btn').forEach(x => x.classList.remove('on'));
+  const t = document.getElementById('sb-'+n);
+  if (t) t.classList.add('on');
+}
+
+/* ── BUDGETRECHNER ──────────────────────────────────────────────────────── */
+function fmt(n) { return 'CHF ' + Math.round(n).toLocaleString('de-CH') + '.–'; }
+function calc() {
+  const l = +document.getElementById('lS').value;
+  const y = +document.getElementById('yS').value;
+  const yrs = Math.max(0, 65-(2025-y));
+  const mo = l * .1;
+  const tot = yrs > 0 ? mo*12*((Math.pow(1.05,yrs)-1)/.05) : 0;
+  const rend = tot - mo*12*yrs;
+  document.getElementById('lD').textContent = 'CHF ' + l.toLocaleString('de-CH');
+  document.getElementById('tP').textContent = 'CHF ' + Math.round(mo).toLocaleString('de-CH');
+  document.getElementById('yD').textContent = y;
+  document.getElementById('yL').textContent = yrs;
+  document.getElementById('pR').textContent = fmt(tot);
+  document.getElementById('rT').textContent = 'davon CHF ' + Math.round(rend).toLocaleString('de-CH') + ' reine Rendite 🚀';
+  ['b1','b2','b3','b4'].forEach((id,i) => {
+    document.getElementById(id).textContent = 'CHF ' + Math.round(l*[.1,.3,.15,.45][i]).toLocaleString('de-CH');
+  });
+}
+
+/* ── HYPOTHEKENRECHNER ──────────────────────────────────────────────────── */
+function calcH() {
+  const p = +document.getElementById('prS').value;
+  const ekPct = +document.getElementById('ekS').value;
+  const ek = Math.round(p*ekPct/100), hypo = p-ek;
+  const zins = Math.round(hypo*.018/12);
+  const amor = Math.round(hypo/80/12);
+  const nk = Math.round(p*.01/12);
+  const total = zins+amor+nk, minInc = total*12*3;
+  document.getElementById('prD').textContent = 'CHF '+p.toLocaleString('de-CH');
+  document.getElementById('ekD').textContent = 'CHF '+ek.toLocaleString('de-CH');
+  document.getElementById('hAmt').textContent = fmt(hypo);
+  document.getElementById('hRate').textContent = 'Monatliche Belastung: ca. CHF '+total.toLocaleString('de-CH');
+  document.getElementById('minInc').textContent = 'CHF '+Math.round(minInc).toLocaleString('de-CH');
+  document.getElementById('hr1').textContent = 'CHF '+p.toLocaleString('de-CH');
+  document.getElementById('hr2').textContent = 'CHF '+ek.toLocaleString('de-CH');
+  document.getElementById('hr3').textContent = 'CHF '+hypo.toLocaleString('de-CH');
+  document.getElementById('hr4').textContent = 'CHF '+zins.toLocaleString('de-CH')+'/Mt.';
+  document.getElementById('hr5').textContent = 'CHF '+amor.toLocaleString('de-CH')+'/Mt.';
+  document.getElementById('hr6').textContent = 'CHF '+nk.toLocaleString('de-CH')+'/Mt.';
+  const f = document.getElementById('affFill'), t = document.getElementById('affTxt');
+  const r = 150000/minInc;
+  if (r >= .75) { f.style.background='var(--ok)'; f.style.width='80%'; t.textContent='Tragbarkeit: gut ✓'; t.style.color='var(--ok)'; }
+  else if(r>=.5){ f.style.background='var(--wa)'; f.style.width='50%'; t.textContent='Tragbarkeit: grenzwertig ⚠️'; t.style.color='var(--wa)'; }
+  else { f.style.background='var(--r)'; f.style.width='25%'; t.textContent='Tragbarkeit: knapp ✗'; t.style.color='var(--r)'; }
+}
+
+calc(); calcH();
+</script>
+</body>
+</html>
