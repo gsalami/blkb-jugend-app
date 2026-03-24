@@ -37,6 +37,7 @@
 *, *::before, *::after {
   box-sizing: border-box; margin: 0; padding: 0;
   -webkit-tap-highlight-color: transparent;
+  max-width: 100%;
 }
 
 body {
@@ -59,7 +60,7 @@ body {
 .phone { width:393px; height:852px; background:#1C1C1E; border-radius:55px; padding:14px; box-shadow:0 50px 100px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.07); position:relative; flex-shrink:0; }
 .phone::before { content:''; position:absolute; top:14px; left:50%; transform:translateX(-50%); width:126px; height:37px; background:#1C1C1E; border-radius:0 0 24px 24px; z-index:10; }
 .phone::after { content:''; position:absolute; top:25px; left:50%; transform:translateX(-50%); width:10px; height:10px; background:#2A2A2C; border-radius:50%; z-index:11; }
-.ps { width:100%; height:100%; background:var(--bg); border-radius:43px; overflow:hidden; position:relative; contain:strict; }
+.ps { width:100%; height:100%; background:var(--bg); border-radius:43px; overflow:hidden; position:relative; }
 
 /* STATUS BAR */
 .bar { height:54px; display:none; align-items:flex-end; justify-content:space-between; padding:0 28px 10px; position:absolute; top:0; left:0; right:0; z-index:20; font-size:13px; font-weight:600; font-family:var(--font-book); }
@@ -71,7 +72,7 @@ body {
 .bar.bg { background:var(--bg); color:var(--dk2); }
 
 /* SCREENS */
-.sc { position:absolute; left:0; right:0; bottom:0; top:54px; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateX(22px); transition:opacity .2s ease, transform .2s cubic-bezier(.4,0,.2,1); overflow:hidden; }
+.sc { position:absolute; left:0; right:0; bottom:0; top:54px; width:100%; max-width:100%; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateX(22px); transition:opacity .2s ease, transform .2s cubic-bezier(.4,0,.2,1); overflow:hidden; box-sizing:border-box; }
 .sc.on { opacity:1; pointer-events:all; transform:none; }
 .sc.out { opacity:0; transform:translateX(-22px); }
 .scr { flex:1; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; min-height:0; height:0; }
@@ -104,7 +105,7 @@ body {
 .wmz-dot { width:8px; height:8px; background:var(--r); border-radius:50%; flex-shrink:0; }
 
 /* CARDS */
-.card { background:var(--wh); border-radius:var(--ra); border:1px solid var(--pa); padding:16px; margin:0 16px 12px; }
+.card { background:var(--wh); border-radius:var(--ra); border:1px solid var(--pa); padding:16px; margin:0 16px 12px; box-sizing:border-box; max-width:calc(100% - 32px); overflow:hidden; }
 .red-t { background:var(--r-p); border-color:rgba(253,0,13,.12); }
 .ok-t { background:var(--ok-l); border-color:rgba(22,163,74,.18); }
 .bg-t { background:var(--bg); border-color:var(--pa); }
@@ -294,10 +295,10 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 .acc-hd:active { background:var(--bg); }
 .acc-arrow { font-size:18px; color:var(--lt); transition:transform .2s; flex-shrink:0; }
 .acc-item.open .acc-arrow { transform:rotate(90deg); color:var(--r); }
-.acc-body { display:none; padding:0 16px 14px; overflow:hidden; }
+.acc-body { display:none; padding:0 16px 14px; overflow:hidden; max-width:100%; box-sizing:border-box; word-wrap:break-word; }
 .acc-item.open .acc-body { display:block; }
-.acc-body p { font-size:12.5px; color:var(--sl); line-height:1.6; }
-.acc-link { display:inline-block; margin-top:10px; font-size:12px; font-weight:700; color:var(--r); cursor:pointer; }
+.acc-body p { font-size:12.5px; color:var(--sl); line-height:1.6; word-wrap:break-word; overflow-wrap:break-word; }
+.acc-link { display:inline-block; margin-top:10px; font-size:12px; font-weight:700; color:var(--r); cursor:pointer; word-break:break-all; }
 
 /* ANIMATIONS */
 @keyframes fU { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
@@ -950,6 +951,32 @@ function calcH() {
 }
 
 calc(); calcH(); updateHaxxProgress(); renderGoalsList();
+
+/* ── BUDGET MUTIERBAR + RESET ────────────────────────────────────────────── */
+var budgetDefaults = [10, 30, 15, 45];
+function calcBudgetPcts() {
+  var l = +document.getElementById('lS').value;
+  var sum = 0;
+  for (var i=1; i<=4; i++) {
+    var inp = document.getElementById('bp'+i);
+    var pct = inp ? (parseInt(inp.value)||0) : budgetDefaults[i-1];
+    sum += pct;
+    var bc = document.getElementById('b'+i);
+    if (bc) bc.textContent = 'CHF ' + Math.round(l*pct/100).toLocaleString('de-CH');
+  }
+  var warn = document.getElementById('budget-sum-warn');
+  var sumVal = document.getElementById('budget-sum-val');
+  if (warn) warn.style.display = sum !== 100 ? 'block' : 'none';
+  if (sumVal) sumVal.textContent = sum;
+}
+function resetBudget() {
+  budgetDefaults.forEach(function(v, i) {
+    var inp = document.getElementById('bp'+(i+1));
+    if (inp) inp.value = v;
+  });
+  calcBudgetPcts();
+  showToast('Standardwerte wiederhergestellt ✅');
+} renderGoalsList();
 
 /* ── BUDGET: MUTIERBAR + RESET ──────────────────────────────────────────── */
 var budgetDefaults = [10, 30, 15, 45];
