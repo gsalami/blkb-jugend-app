@@ -671,47 +671,59 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 
   <!-- Lohn Input -->
   <div style="padding:0 16px 12px">
-    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Dein Monatslohn (netto, CHF)</div>
-    <input type="number" id="bud-lohn" value="3200" min="500" max="20000" step="100"
-      style="width:100%;border:2px solid var(--pa);border-radius:6px;padding:12px 14px;font-size:22px;font-weight:900;color:var(--r);outline:none;font-family:inherit;box-sizing:border-box"
-      oninput="calcBudget()">
+    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Monatslohn netto (CHF)</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <input type="number" id="bud-lohn" value="3200" min="500" max="20000" step="100"
+        style="flex:1;border:2px solid var(--pa);border-radius:6px;padding:12px 14px;font-size:22px;font-weight:900;color:var(--r);font-family:var(--font-bold);outline:none;width:100%"
+        oninput="calcBudget()" onfocus="this.style.borderColor='var(--r)'" onblur="this.style.borderColor='var(--pa)'">
+    </div>
+    <input type="range" id="bud-slider" min="500" max="10000" value="3200" step="100" oninput="document.getElementById('bud-lohn').value=this.value;calcBudget()">
   </div>
 
   <!-- Geburtsjahr -->
-  <div style="padding:0 16px 12px">
-    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Dein Geburtsjahr</div>
+  <div style="padding:0 16px 14px">
+    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Geburtsjahr</div>
     <div style="display:flex;align-items:center;gap:10px">
-      <input type="range" id="bud-year" min="1975" max="2010" value="2000" step="1" oninput="calcBudget()" style="flex:1">
-      <span id="bud-year-lbl" style="font-size:16px;font-weight:900;color:var(--dk);min-width:48px;text-align:right">2000</span>
+      <input type="number" id="bud-year" value="2000" min="1960" max="2010" step="1"
+        style="width:110px;border:2px solid var(--pa);border-radius:6px;padding:10px 12px;font-size:18px;font-weight:700;color:var(--dk);font-family:var(--font-bold);outline:none"
+        oninput="calcBudget()" onfocus="this.style.borderColor='var(--r)'" onblur="this.style.borderColor='var(--pa)'">
+      <span id="bud-years-left" style="font-size:13px;color:var(--md)"></span>
     </div>
   </div>
 
-  <!-- Ergebnis Banner -->
+  <!-- Pension Ergebnis -->
   <div style="margin:0 16px 14px;background:linear-gradient(135deg,var(--r),#b80009);border-radius:10px;padding:18px;color:#fff">
-    <div style="font-size:10px;opacity:.75;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px">10% investiert · 5% p.a. · Pension mit 65</div>
-    <div id="bud-result" style="font-size:36px;font-weight:900;line-height:1">CHF 0.–</div>
-    <div id="bud-rendite" style="font-size:12px;opacity:.8;margin-top:6px">davon CHF 0.– Rendite 🚀</div>
-    <div id="bud-monat" style="font-size:12px;opacity:.65;margin-top:4px">= CHF 0 / Monat zurücklegen</div>
-    <div style="font-size:10px;opacity:.45;margin-top:8px">Ø CH-Aktienmarkt 5.3% p.a. seit 1969 · Quelle: MoneyHaxx</div>
+    <div style="font-size:10px;opacity:.8;letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px">10% sparen → bei Pension (65)</div>
+    <div id="bud-pension" style="font-size:36px;font-weight:900;font-family:var(--font-bold);line-height:1">CHF 0</div>
+    <div id="bud-rendite" style="font-size:12px;opacity:.8;margin-top:6px"></div>
+    <div style="font-size:10px;opacity:.5;margin-top:4px">Ø CH-Aktienmarkt 5.3% p.a. seit 1969 · Quelle: MoneyHaxx</div>
+    <div style="display:flex;gap:16px;margin-top:12px">
+      <div>
+        <div style="font-size:10px;opacity:.7;text-transform:uppercase;letter-spacing:.5px">10% von Lohn</div>
+        <div id="bud-10pct" style="font-size:18px;font-weight:900;font-family:var(--font-bold)">CHF 320</div>
+      </div>
+      <div>
+        <div style="font-size:10px;opacity:.7;text-transform:uppercase;letter-spacing:.5px">Jahre bis Pension</div>
+        <div id="bud-jahre" style="font-size:18px;font-weight:900;font-family:var(--font-bold)">40</div>
+      </div>
+    </div>
   </div>
 
-  <!-- Budget Aufteilung -->
+  <!-- Budget Kategorien -->
   <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 20px 6px">
-    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.5px;text-transform:uppercase">Empfohlenes Budget</div>
+    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.6px;text-transform:uppercase">Budgetaufteilung</div>
     <button onclick="resetBudgetCats()" style="font-size:11px;font-weight:700;color:var(--r);background:var(--r-l);border:none;border-radius:3px;padding:4px 10px;cursor:pointer">↺ Reset</button>
   </div>
-
   <div id="bud-cats" style="margin:0 16px 12px;background:#fff;border-radius:10px;border:1px solid var(--pa);overflow:hidden"></div>
 
-  <div style="font-size:10px;color:var(--lt);text-align:center;padding:0 16px 12px;line-height:1.5">Basierend auf CH-Bundesstatistiken & Dachverband Budgetberatung Schweiz</div>
-
-  <!-- Sparziele Section -->
+  <!-- Sparziele aus Budget -->
   <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 20px 6px">
-    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.5px;text-transform:uppercase">Meine Sparziele</div>
-    <button onclick="openNewGoal()" style="font-size:11px;font-weight:700;color:var(--r);background:var(--r-l);border:none;border-radius:3px;padding:4px 10px;cursor:pointer">+ Neu</button>
+    <div style="font-size:11px;font-weight:700;color:var(--lt);letter-spacing:.6px;text-transform:uppercase">Sparziele</div>
+    <button onclick="openNewGoal()" style="font-size:11px;font-weight:700;color:#fff;background:var(--r);border:none;border-radius:3px;padding:4px 10px;cursor:pointer">+ Neu</button>
   </div>
-  <div id="bud-goals" style="margin:0 16px 14px"></div>
+  <div id="bud-goals" style="margin:0 16px 14px;background:#fff;border-radius:10px;border:1px solid var(--pa);overflow:hidden"></div>
 
+  <div style="font-size:10px;color:var(--lt);text-align:center;padding:4px 16px 16px;line-height:1.5">Alle Angaben basieren auf CH-Durchschnittszahlen (Bundesstatistiken & Dachverband Budgetberatung Schweiz)</div>
   <div style="height:16px"></div>
 </div>
 <div class="bnav">
@@ -879,22 +891,98 @@ function go(n, b) {
 }
 
 /* ── BUDGETRECHNER ──────────────────────────────────────────────────────── */
-function fmt(n) { return 'CHF ' + Math.round(n).toLocaleString('de-CH') + '.–'; }
-function calc() {
-  const l = +document.getElementById('lS').value;
-  const y = +document.getElementById('yS').value;
-  const yrs = Math.max(0, 65-(2025-y));
-  const mo = l * .1;
-  const tot = yrs > 0 ? mo*12*((Math.pow(1.05,yrs)-1)/.05) : 0;
-  const rend = tot - mo*12*yrs;
-  document.getElementById('lD').textContent = 'CHF ' + l.toLocaleString('de-CH');
-  document.getElementById('tP').textContent = 'CHF ' + Math.round(mo).toLocaleString('de-CH');
-  document.getElementById('yD').textContent = y;
-  document.getElementById('yL').textContent = yrs;
-  document.getElementById('pR').textContent = fmt(tot);
-  document.getElementById('rT').textContent = 'davon CHF ' + Math.round(rend).toLocaleString('de-CH') + ' reine Rendite 🚀';
-  calcBudgetPcts();
+/* ── BUDGETRECHNER (MoneyHaxx Style) ────────────────────────────────────── */
+var budCats = [
+  { label:'Wohnen (Miete, NK)',    color:'#20242a', pct:30, editable:true  },
+  { label:'Steuern',               color:'#4a5060', pct:15, editable:true  },
+  { label:'Krankenkasse & Vers.',  color:'#6b7280', pct:12, editable:true  },
+  { label:'Lebensmittel',          color:'#7c8947', pct:10, editable:true  },
+  { label:'Mobilität & Transport', color:'#2c5969', pct:8,  editable:true  },
+  { label:'Kommunikation',         color:'#e38121', pct:3,  editable:true  },
+  { label:'Freizeit & Ausgang',    color:'#e87c78', pct:7,  editable:true  },
+  { label:'Sparen & Investieren',  color:'#fd000d', pct:10, editable:true  },
+  { label:'Diverses / Puffer',     color:'#9ca3af', pct:5,  editable:true  }
+];
+var budCatsDefault = budCats.map(function(c){ return c.pct; });
+
+function calcBudget() {
+  var lohn = parseInt(document.getElementById('bud-lohn').value) || 3200;
+  var year = parseInt(document.getElementById('bud-year').value) || 2000;
+  var slider = document.getElementById('bud-slider');
+  if (slider) slider.value = lohn;
+
+  // Pension calc
+  var yrs = Math.max(0, 65 - (2025 - year));
+  var mo = lohn * 0.1;
+  var tot = yrs > 0 ? mo * 12 * ((Math.pow(1.05, yrs) - 1) / 0.05) : 0;
+  var rend = tot - mo * 12 * yrs;
+
+  var el = function(id){ return document.getElementById(id); };
+  if (el('bud-years-left')) el('bud-years-left').textContent = yrs + ' Jahre bis Pension';
+  if (el('bud-pension')) el('bud-pension').textContent = 'CHF ' + Math.round(tot).toLocaleString('de-CH');
+  if (el('bud-rendite')) el('bud-rendite').textContent = 'davon CHF ' + Math.round(rend).toLocaleString('de-CH') + ' reine Rendite 🚀';
+  if (el('bud-10pct')) el('bud-10pct').textContent = 'CHF ' + Math.round(mo).toLocaleString('de-CH');
+  if (el('bud-jahre')) el('bud-jahre').textContent = yrs;
+
+  renderBudgetCats(lohn);
+  renderBudgetGoals(lohn);
 }
+
+function renderBudgetCats(lohn) {
+  var el = document.getElementById('bud-cats');
+  if (!el) return;
+  var sum = budCats.reduce(function(a,b){ return a+b.pct; }, 0);
+  el.innerHTML = budCats.map(function(cat, i) {
+    var chf = Math.round(lohn * cat.pct / 100);
+    return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--pa)">' +
+      '<div style="width:10px;height:10px;border-radius:2px;background:' + cat.color + ';flex-shrink:0"></div>' +
+      '<div style="flex:1;font-size:13px;color:var(--dk2)">' + cat.label + '</div>' +
+      '<input type="number" value="' + cat.pct + '" min="0" max="100" ' +
+        'style="width:44px;border:1px solid var(--pa);border-radius:4px;padding:3px 5px;font-size:12px;font-weight:700;text-align:center;color:var(--dk)" ' +
+        'oninput="budCats[' + i + '].pct=parseInt(this.value)||0;calcBudget()">'+
+      '<span style="font-size:10px;color:var(--lt);width:16px">%</span>' +
+      '<div style="font-size:13px;font-weight:700;color:var(--dk);min-width:64px;text-align:right">CHF ' + chf.toLocaleString('de-CH') + '</div>' +
+    '</div>';
+  }).join('') +
+  '<div style="display:flex;justify-content:space-between;padding:10px 14px;background:var(--bg)">' +
+    '<span style="font-size:12px;font-weight:700;color:' + (sum===100?'var(--ok)':'var(--wa)') + '">' + (sum===100?'✅':'⚠️') + ' Total: ' + sum + '%</span>' +
+    '<span style="font-size:12px;color:var(--md)">CHF ' + Math.round(lohn).toLocaleString('de-CH') + '</span>' +
+  '</div>';
+}
+
+function renderBudgetGoals(lohn) {
+  var el = document.getElementById('bud-goals');
+  if (!el) return;
+  if (!goals || goals.length === 0) {
+    el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--lt);font-size:13px">Noch keine Sparziele — <span style="color:var(--r);cursor:pointer;font-weight:700" onclick="openNewGoal()">Jetzt erstellen →</span></div>';
+    return;
+  }
+  el.innerHTML = goals.map(function(g, i) {
+    var pct = g.amount > 0 ? Math.round(g.saved / g.amount * 100) : 0;
+    var color = pct >= 80 ? 'var(--ok)' : pct >= 50 ? 'var(--r)' : 'var(--olive)';
+    var monthly = g.months > 0 ? Math.ceil((g.amount - g.saved) / g.months) : 0;
+    return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--pa)">' +
+      '<span style="font-size:22px;flex-shrink:0">' + g.emoji + '</span>' +
+      '<div style="flex:1;min-width:0">' +
+        '<div style="font-size:13px;font-weight:600;color:var(--dk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + g.name + '</div>' +
+        '<div style="font-size:11px;color:var(--md)">CHF ' + g.saved.toLocaleString('de-CH') + ' / ' + g.amount.toLocaleString('de-CH') + (monthly?' · CHF '+monthly+'/Mt.':'') + '</div>' +
+        '<div style="height:3px;background:var(--pa);border-radius:2px;margin-top:4px"><div style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:2px"></div></div>' +
+      '</div>' +
+      '<button onclick="deleteGoal(' + i + ')" style="background:var(--r-l);border:none;border-radius:50%;width:24px;height:24px;font-size:12px;cursor:pointer;color:var(--r);flex-shrink:0">✕</button>' +
+    '</div>';
+  }).join('') +
+  '<div style="padding:10px 14px;border-top:1px solid var(--pa)">' +
+    '<button onclick="openNewGoal()" style="width:100%;background:var(--r);color:#fff;border:none;border-radius:4px;padding:10px;font-size:13px;font-weight:700;cursor:pointer">+ Neues Ziel erstellen</button>' +
+  '</div>';
+}
+
+function resetBudgetCats() {
+  budCats.forEach(function(cat, i){ cat.pct = budCatsDefault[i]; });
+  calcBudget();
+  showToast('Standardwerte wiederhergestellt ✅');
+}
+
+
 
 /* ── HYPOTHEKENRECHNER ──────────────────────────────────────────────────── */
 function calcH() {
@@ -1055,8 +1143,8 @@ function renderBudgetGoals(l) {
   }).join('');
 }
 
-function calcBudgetPcts() { calcBudget(); }
-function resetBudget() { resetBudgetCats(); } renderGoalsList();
+
+ renderGoalsList();
 
 /* ── BUDGET: MUTIERBAR + RESET ──────────────────────────────────────────── */
 var budgetDefaults = [10, 30, 15, 45];
