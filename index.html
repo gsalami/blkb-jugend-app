@@ -1042,26 +1042,29 @@ function openHaxx(idx) {
   document.getElementById('hd-haxx-title').textContent = h.title;
   const doneAll = haxxDone[idx];
   const scr = document.getElementById('haxx-detail-scr');
-  scr.innerHTML = `
-    <div class="sp"></div>
-    <div class="haxx-emoji fu">${h.icon}</div>
-    <div class="haxx-regel fu d1">${h.regel}</div>
-    <div class="haxx-body fu d2">${h.body.replace(/\n\n/g,'</p><p style="margin-top:10px">')}</div>
-    <div class="haxx-example fu d2">
-      <div class="haxx-example-t">Rechenbeispiel</div>
-      ${h.beispiel.map(r => `<div class="haxx-example-row"><span>${r[0]}</span><span style="font-weight:700;color:var(--dk)">${r[1]}</span></div>`).join('')}
-    </div>
-    <div class="st" style="margin-top:4px">So umsetzt du es</div>
-    <div class="haxx-steps fu d3">
-      ${h.steps.map((s,i) => `<div class="haxx-step"><div class="haxx-step-nr">${i+1}</div><div><div class="haxx-step-t">${s.t}</div><div class="haxx-step-s">${s.s}</div></div></div>`).join('')}
-    </div>
-    <button class="haxx-done-btn${doneAll ? ' done' : ''} fu d4" id="btn-complete-haxx" onclick="completeHaxx(${idx})">${doneAll ? '✅ Bereits abgeschlossen' : '✅ Hack abschliessen'}</button>
-    <div class="haxx-nav fu d5">
-      ${idx > 0 ? `<button class="haxx-nav-btn" onclick="openHaxx(${idx-1})">‹ Hack ${idx}</button>` : '<div></div>'}
-      ${idx < 5 ? `<button class="haxx-nav-btn" onclick="openHaxx(${idx+1})">Hack ${idx+2} ›</button>` : '<div></div>'}
-    </div>
-    <div style="height:16px"></div>
-  `;
+  var beispielRows = h.beispiel.map(function(r) {
+    return '<div class="haxx-example-row"><span>' + r[0] + '</span><span style="font-weight:700;color:var(--dk)">' + r[1] + '</span></div>';
+  }).join('');
+  var stepRows = h.steps.map(function(s, si) {
+    return '<div class="haxx-step"><div class="haxx-step-nr">' + (si+1) + '</div><div><div class="haxx-step-t">' + s.t + '</div><div class="haxx-step-s">' + s.s + '</div></div></div>';
+  }).join('');
+  var prevBtn = idx > 0 ? '<button class="haxx-nav-btn" onclick="openHaxx(' + (idx-1) + ')">&#8249; Hack ' + idx + '</button>' : '<div></div>';
+  var nextBtn = idx < 5 ? '<button class="haxx-nav-btn" onclick="openHaxx(' + (idx+1) + ')">Hack ' + (idx+2) + ' &#8250;</button>' : '<div></div>';
+  var doneLabel = doneAll ? '&#10003; Bereits abgeschlossen' : '&#10003; Hack abschliessen';
+  var doneCls = doneAll ? 'haxx-done-btn done fu d4' : 'haxx-done-btn fu d4';
+  var bodyHtml = h.body.replace(/\n\n/g, '</p><p style="margin-top:10px">');
+
+  scr.innerHTML =
+    '<div class="sp"></div>' +
+    '<div class="haxx-emoji fu">' + h.icon + '</div>' +
+    '<div class="haxx-regel fu d1">' + h.regel + '</div>' +
+    '<div class="haxx-body fu d2"><p>' + bodyHtml + '</p></div>' +
+    '<div class="haxx-example fu d2"><div class="haxx-example-t">Rechenbeispiel</div>' + beispielRows + '</div>' +
+    '<div class="st" style="margin-top:4px">So setzt du es um</div>' +
+    '<div class="haxx-steps fu d3">' + stepRows + '</div>' +
+    '<button class="' + doneCls + '" id="btn-complete-haxx" onclick="completeHaxx(' + idx + ')">' + doneLabel + '</button>' +
+    '<div class="haxx-nav fu d5">' + prevBtn + nextBtn + '</div>' +
+    '<div style="height:16px"></div>';
   go('haxx-detail', null);
 }
 
