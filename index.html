@@ -60,7 +60,7 @@ body {
 .phone { width:393px; height:852px; background:#1C1C1E; border-radius:55px; padding:14px; box-shadow:0 50px 100px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.07); position:relative; flex-shrink:0; }
 .phone::before { content:''; position:absolute; top:14px; left:50%; transform:translateX(-50%); width:126px; height:37px; background:#1C1C1E; border-radius:0 0 24px 24px; z-index:10; }
 .phone::after { content:''; position:absolute; top:25px; left:50%; transform:translateX(-50%); width:10px; height:10px; background:#2A2A2C; border-radius:50%; z-index:11; }
-.ps { width:100%; height:100%; background:var(--bg); border-radius:43px; overflow:hidden; position:relative; }
+.ps { width:100%; height:100%; background:var(--bg); border-radius:43px; overflow:hidden; position:relative; isolation:isolate; transform:translateZ(0); }
 
 /* STATUS BAR */
 .bar { height:54px; display:none; align-items:flex-end; justify-content:space-between; padding:0 28px 10px; position:absolute; top:0; left:0; right:0; z-index:20; font-size:13px; font-weight:600; font-family:var(--font-book); }
@@ -72,9 +72,9 @@ body {
 .bar.bg { background:var(--bg); color:var(--dk2); }
 
 /* SCREENS */
-.sc { position:absolute; left:0; right:0; bottom:0; top:54px; width:100%; max-width:100%; display:flex; flex-direction:column; opacity:0; pointer-events:none; transform:translateX(22px); transition:opacity .2s ease, transform .2s cubic-bezier(.4,0,.2,1); overflow:hidden; box-sizing:border-box; }
-.sc.on { opacity:1; pointer-events:all; transform:none; }
-.sc.out { opacity:0; transform:translateX(-22px); }
+.sc { position:absolute; left:0; right:0; bottom:0; top:54px; width:100%; max-width:100%; display:flex; flex-direction:column; opacity:0; pointer-events:none; clip-path:inset(0); transition:opacity .2s ease; overflow:hidden; box-sizing:border-box; }
+.sc.on { opacity:1; pointer-events:all; }
+.sc.out { opacity:0; }
 .scr { flex:1; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; scrollbar-width:none; min-height:0; height:0; width:100%; max-width:100%; }
 .scr::-webkit-scrollbar { display:none; }
 
@@ -866,15 +866,17 @@ logo('logo-vorsor', '#ffffff', '#ffffff'); /* auf Dunkel → alles weiss */
 let cur = 'splash';
 function go(n, b) {
   if (cur === n) return;
-  const p = document.getElementById('sc-'+cur);
-  p.classList.add('out');
-  setTimeout(() => p.classList.remove('on','out'), 210);
-  document.getElementById('bar-'+cur).classList.remove('v');
-  document.getElementById('sc-'+n).classList.add('on');
-  document.getElementById('bar-'+n).classList.add('v');
+  var p = document.getElementById('sc-'+cur);
+  if (p) { p.classList.remove('on'); p.classList.add('out'); setTimeout(function(){ p.classList.remove('out'); }, 200); }
+  var bCur = document.getElementById('bar-'+cur);
+  if (bCur) bCur.classList.remove('v');
+  var ns = document.getElementById('sc-'+n);
+  if (ns) ns.classList.add('on');
+  var bn = document.getElementById('bar-'+n);
+  if (bn) bn.classList.add('v');
   cur = n;
-  document.querySelectorAll('.sb-btn').forEach(x => x.classList.remove('on'));
-  const t = document.getElementById('sb-'+n);
+  document.querySelectorAll('.sb-btn').forEach(function(x){ x.classList.remove('on'); });
+  var t = document.getElementById('sb-'+n);
   if (t) t.classList.add('on');
 }
 
