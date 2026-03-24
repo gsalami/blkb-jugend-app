@@ -271,6 +271,17 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 
 .src { font-size:10px; color:var(--lt); text-align:center; padding:8px 16px 4px; font-family:var(--font-book); }
 
+/* ACCORDION */
+.acc-item { border-bottom:1px solid var(--pa); }
+.acc-hd { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; cursor:pointer; transition:background .12s; gap:8px; }
+.acc-hd:active { background:var(--bg); }
+.acc-arrow { font-size:18px; color:var(--lt); transition:transform .2s; flex-shrink:0; }
+.acc-item.open .acc-arrow { transform:rotate(90deg); color:var(--r); }
+.acc-body { display:none; padding:0 16px 14px; }
+.acc-item.open .acc-body { display:block; animation:fU .2s ease both; }
+.acc-body p { font-size:12.5px; color:var(--sl); line-height:1.6; }
+.acc-link { display:inline-block; margin-top:10px; font-size:12px; font-weight:700; color:var(--r); cursor:pointer; }
+
 /* ANIMATIONS */
 @keyframes fU { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
 .fu { animation:fU .3s ease both; }
@@ -571,38 +582,120 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; h
 
 <!-- FINANZKOMPETENZ -->
 <div class="sc" id="sc-finlit">
-<div class="hd dk"><div class="hd-row"><div><div class="hd-eye wh-txt">BLKB Jugend</div><div class="hd-ttl wh">Finanzkompetenz</div><div class="hd-sub wh">Wissen das dein Leben verändert</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
+<div class="hd dk"><div class="hd-row"><div><div class="hd-eye wh-txt">BLKB Jugend</div><div class="hd-ttl wh">Finanzkompetenz</div><div class="hd-sub wh">Sicher ins Finanzleben starten</div></div><button class="back wh" onclick="go('home',document.getElementById('sb-home'))">← Zurück</button></div></div>
 <div class="scr">
   <div class="sp"></div>
-  <div class="ib pt fu"><span style="font-size:18px;flex-shrink:0">💡</span><p>Wer sich in Finanzdingen gut auskennt, geht erfolgreicher durchs Leben. Budgetieren, Ausgaben priorisieren und Sparen — hier lernst du wie.</p></div>
 
-  <div class="st fu">BLKB Angebote für Jugendliche</div>
-
-  <div class="card" style="padding:4px 0;margin-bottom:12px">
-    <div class="hi"><div class="hico" style="background:var(--r-l)">💳</div><div style="flex:1"><div class="hn">ProfitCard</div><div class="hs">Gratis Zolli, vergünstigte Freizeit & Theaterangebote</div></div><span style="font-size:16px;color:var(--lt)">›</span></div>
-    <div class="hi"><div class="hico" style="background:var(--ok-l)">🏦</div><div style="flex:1"><div class="hn">Jugendkonto</div><div class="hs">TWINT, E-Banking, Mobile Banking — mit Vorzugszins</div></div><span style="font-size:16px;color:var(--lt)">›</span></div>
-    <div class="hi"><div class="hico" style="background:var(--bg)">🌍</div><div style="flex:1"><div class="hn">Visa Debit Stu</div><div class="hs">Keine Jahresgebühr bis 30 · weltweit bezahlen · Cashback</div></div><span style="font-size:16px;color:var(--lt)">›</span></div>
-    <div class="hi"><div class="hico" style="background:var(--r-p)">📱</div><div style="flex:1"><div class="hn">BLKB TWINT</div><div class="hs">Die sichere Bezahl-App der Schweiz</div></div><span style="font-size:16px;color:var(--lt)">›</span></div>
-    <div class="hi"><div class="hico" style="background:#f4f5ee)">📈</div><div style="flex:1"><div class="hn">Fondssparplan</div><div class="hs">Schritt für Schritt Vermögen aufbauen — auch mit kleinen Beträgen</div></div><span style="font-size:16px;color:var(--lt)">›</span></div>
+  <div class="card red-t fu" style="margin-bottom:12px">
+    <div style="font-size:13px;color:var(--dk);line-height:1.55">Die BLKB begleitet junge Menschen vom ersten Franken an. Mit kostenlosen Konten, Karten und Angeboten, die den Einstieg in die Finanzwelt leicht und verständlich machen.</div>
   </div>
 
-  <div class="st fu d1">Finanzkompetenz lernen</div>
+  <div class="st fu">BLKB Angebote — tippe zum Erweitern</div>
 
-  <div class="card fu d1" style="padding:0;margin-bottom:12px">
-    <div class="txi"><div class="tx-i" style="background:var(--r-p)">💰</div><div style="flex:1"><div class="tx-n">Budgetieren</div><div class="tx-d">Einnahmen & Ausgaben im Griff haben</div></div></div>
-    <div class="txi"><div class="tx-i" style="background:var(--ok-l)">🎯</div><div style="flex:1"><div class="tx-n">Sparziele setzen</div><div class="tx-d">Kurz- und mittelfristig clever sparen</div></div></div>
-    <div class="txi"><div class="tx-i" style="background:var(--bg)">📊</div><div style="flex:1"><div class="tx-n">Ausgaben priorisieren</div><div class="tx-d">Was brauche ich wirklich?</div></div></div>
-    <div class="txi"><div class="tx-i" style="background:#f4f5ee">🌱</div><div style="flex:1"><div class="tx-n">Früh investieren</div><div class="tx-d">Der Zinseszins-Effekt — dein bester Freund</div></div></div>
+  <!-- Accordion Items -->
+  <div class="card" style="padding:0;margin-bottom:12px">
+
+    <div class="acc-item">
+      <div class="acc-hd" onclick="toggleAcc(this)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="hico" style="background:var(--r-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">💳</div>
+          <div><div class="hn">ProfitCard</div><div class="hs">Gratis Zolli & vergünstigte Freizeitangebote</div></div>
+        </div>
+        <span class="acc-arrow">›</span>
+      </div>
+      <div class="acc-body">
+        <p>Kostenlos in den Basler Zolli oder mit der Luftseilbahn auf die Wasserfallen? Mit der ProfitCard erhalten Kinder und Jugendliche viele Vorteile: Gratiseintritte, vergünstigte Theater- und Freizeitangebote und vieles mehr.</p>
+        <a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Mehr erfahren →</a>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd" onclick="toggleAcc(this)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="hico" style="background:var(--ok-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🏦</div>
+          <div><div class="hn">Jugendkonto</div><div class="hs">TWINT, E-Banking & Vorzugszins</div></div>
+        </div>
+        <span class="acc-arrow">›</span>
+      </div>
+      <div class="acc-body">
+        <p>Jugendkonten eröffnen jungen Menschen den Weg zu TWINT, E-Banking und Mobile Banking — mit zahlreichen Vorteilen und attraktiven Vergünstigungen. Das Sparkonto Jugend mit Vorzugszins ist ideal, um kurz- und mittelfristige Sparziele clever zu erreichen.</p>
+        <a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Konto eröffnen →</a>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd" onclick="toggleAcc(this)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="hico" style="background:var(--bg);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🌍</div>
+          <div><div class="hn">Visa Debit Stu</div><div class="hs">Keine Jahresgebühr bis 30 · weltweit bezahlen</div></div>
+        </div>
+        <span class="acc-arrow">›</span>
+      </div>
+      <div class="acc-body">
+        <p>Für Jugendliche, junge Erwachsene und Studierende: keine Jahresgebühr (bis 25 bzw. 30 Jahre) und weltweit kontaktlos bezahlen, Bargeld beziehen und online einkaufen. Mit der Stu App zudem von Cashback und attraktiven Partnervergünstigungen profitieren.</p>
+        <a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Karte beantragen →</a>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd" onclick="toggleAcc(this)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="hico" style="background:var(--r-p);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">📱</div>
+          <div><div class="hn">BLKB TWINT</div><div class="hs">Die sichere Bezahl-App der Schweiz</div></div>
+        </div>
+        <span class="acc-arrow">›</span>
+      </div>
+      <div class="acc-body">
+        <p>BLKB TWINT bietet in einer App alles, was man braucht, um sich durch den Tag zu bewegen. Mit BLKB TWINT wird digitales Bezahlen nahezu überall möglich: einfach einrichten und los geht's.</p>
+        <a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">TWINT einrichten →</a>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-hd" onclick="toggleAcc(this)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="hico" style="background:#f4f5ee;width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">📈</div>
+          <div><div class="hn">Fondssparplan</div><div class="hs">Schritt für Schritt Vermögen aufbauen</div></div>
+        </div>
+        <span class="acc-arrow">›</span>
+      </div>
+      <div class="acc-body">
+        <p>Mit dem BLKB-Fondssparplan lässt sich Schritt für Schritt Vermögen aufbauen, auch mit kleinen Beträgen. Es wird regelmässig Geld investiert, ohne Kontoführungsgebühren, und das angelegte Kapital bleibt jederzeit flexibel verfügbar.</p>
+        <p style="margin-top:6px;font-size:11px;color:var(--lt)">Für unter 18-Jährige: Eröffnung durch gesetzliche Vertretung.</p>
+        <a class="acc-link" href="https://www.blkb.ch/privatpersonen/konten/jugend.html" target="_blank">Fondssparplan starten →</a>
+      </div>
+    </div>
+
+    <div class="acc-item" style="border-bottom:none">
+      <div class="acc-hd" onclick="toggleAcc(this)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="hico" style="background:var(--wa-l);width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0">🎓</div>
+          <div><div class="hn">Finanzkompetenz</div><div class="hs">Budgetieren, Sparen, Investieren lernen</div></div>
+        </div>
+        <span class="acc-arrow">›</span>
+      </div>
+      <div class="acc-body">
+        <p>Wer sich in Finanzdingen gut auskennt, geht erfolgreicher durchs Leben und gerät weniger schnell in eine finanzielle Schieflage. Budgetieren, Ausgaben priorisieren und Sparen müssen aber zuerst gelernt sein.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">
+          <span style="background:var(--r-l);color:var(--r-h);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">💰 Budgetieren</span>
+          <span style="background:var(--ok-l);color:#166534;font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🎯 Sparziele</span>
+          <span style="background:var(--bg);color:var(--dk2);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">📊 Ausgaben</span>
+          <span style="background:#f4f5ee;color:var(--olive);font-size:11px;font-weight:700;padding:4px 10px;border-radius:2px">🌱 Investieren</span>
+        </div>
+        <a class="acc-link" onclick="go('haxx',document.getElementById('sb-haxx'))">MoneyHaxx starten →</a>
+      </div>
+    </div>
+
   </div>
 
-  <div class="ban dk fu d2">
-    <div class="b-lbl">Wusstest du?</div>
-    <div style="font-size:16px;font-weight:700;margin-top:4px;line-height:1.4">Die BLKB druckt & bindet deine Bachelor- oder Masterarbeit kostenlos — mit dem Privatkonto Studierende!</div>
-    <div class="b-sub">Druckerei: 061 925 95 35 · druckerei@blkb.ch</div>
+  <div class="ban dk fu" style="margin-bottom:12px">
+    <div class="b-lbl">💡 Schon gewusst?</div>
+    <div style="font-size:14px;font-weight:700;margin-top:4px;line-height:1.4">Die BLKB druckt & bindet deine Bachelor- oder Masterarbeit kostenlos!</div>
+    <div class="b-sub" style="margin-top:6px">Mit dem Privatkonto Studierende · Drahtkamm- oder Thermobindung</div>
+    <div style="margin-top:10px;font-size:12px;color:rgba(255,255,255,.6)">📞 061 925 95 35 · druckerei@blkb.ch</div>
   </div>
 
-  <button class="cta fu d3" onclick="go('haxx',document.getElementById('sb-haxx'))">MoneyHaxx starten →</button>
-  <button class="cta out fu d3">Mehr auf blkb.ch/jugend</button>
+  <button class="cta fu" onclick="go('haxx',document.getElementById('sb-haxx'))">MoneyHaxx starten →</button>
   <div style="height:16px"></div>
 </div>
 <div class="bnav">
@@ -755,6 +848,16 @@ function calcH() {
 }
 
 calc(); calcH();
+
+/* ── ACCORDION ──────────────────────────────────────────────────────────── */
+function toggleAcc(hd) {
+  const item = hd.parentElement;
+  const isOpen = item.classList.contains('open');
+  // Alle schliessen
+  document.querySelectorAll('.acc-item.open').forEach(i => i.classList.remove('open'));
+  // Dieses öffnen falls es zu war
+  if (!isOpen) item.classList.add('open');
+}
 </script>
 </body>
 </html>
